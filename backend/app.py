@@ -10,6 +10,7 @@ from flask import request, jsonify
 from models.db_models import AssessmentHistory
 
 app = Flask(__name__)
+
 # Bật CORS cho phép toàn bộ phương thức và origin
 CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
@@ -17,6 +18,19 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'your-secret-key-mediwise'
 
 db.init_app(app)
+
+# Thêm route trang chủ để tránh lỗi 404 khi truy cập trực tiếp link Render
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        "status": "success",
+        "message": "Chào mừng đến với MediWise API Server!",
+        "endpoints": {
+            "history": "/api/user/history",
+            "auth": "/api/auth",
+            "admin": "/api/admin"
+        }
+    }), 200
 
 # Đăng ký Blueprint chuẩn tiền tố
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
@@ -62,6 +76,7 @@ def direct_user_history():
     except Exception as e:
         print(f"Lỗi trực tiếp tại app.py: {e}")
         return jsonify([]), 200
+
 @app.errorhandler(Exception)
 def handle_exception(e):
     return jsonify({"error": "Lỗi hệ thống từ Server", "message": str(e)}), 500
