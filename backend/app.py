@@ -12,7 +12,7 @@ from models.db_models import AssessmentHistory
 app = Flask(__name__)
 
 # Bật CORS cho phép toàn bộ phương thức và origin
-CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "https://mediwise-system-1.onrender.com"}})
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'your-secret-key-mediwise'
