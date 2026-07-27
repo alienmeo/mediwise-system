@@ -8,6 +8,8 @@ from routes.check_routes import check_bp
 import json
 from flask import request, jsonify
 from models.db_models import AssessmentHistory
+from flask import Flask, send_from_directory
+import os
 
 app = Flask(__name__)
 
