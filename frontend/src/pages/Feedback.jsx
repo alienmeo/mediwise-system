@@ -24,7 +24,7 @@ export default function Feedback() {
   const fetchFeedbacks = async () => {
     try {
       setLoading(true);
-      const res = await api.get('/api/feedbacks');
+      const res = await api.get('/feedbacks');
       if (res.data) {
         setFeedbacks(res.data);
       }
@@ -43,7 +43,7 @@ export default function Feedback() {
   const handleDelete = async (id) => {
     if (window.confirm('Bạn có chắc chắn muốn xóa đánh giá này không?')) {
       try {
-        await api.delete(`/api/feedbacks/${id}`);
+        await api.delete(`/feedbacks/${id}`);
         setFeedbacks(prev => prev.filter(item => item.id !== id));
       } catch (err) {
         alert('Có lỗi xảy ra khi xóa!');
@@ -63,7 +63,7 @@ export default function Feedback() {
   const handleSaveEdit = async () => {
     if (!editingFeedback) return;
     try {
-      await api.put(`/api/feedbacks/${editingFeedback.id}`, {
+      await api.put(`/feedbacks/${editingFeedback.id}`, {
         rating: editRating,
         comment: editComment
       });
