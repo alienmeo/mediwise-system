@@ -12,13 +12,13 @@ const CheckPage = () => {
 
   // Lấy danh sách Thực phẩm & Thuốc từ Backend
   useEffect(() => {
-    fetch('http://localhost:5000/api/data-options')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.allergens) setAllergens(data.allergens);
-        if (data.drugs) setDrugs(data.drugs);
-      })
-      .catch((err) => console.error('Lỗi kết nối Backend:', err));
+    api.get('/api/data-options')
+  .then((res) => {
+    const data = res.data;
+    if (data.allergens) setAllergens(data.allergens);
+    if (data.drugs) setDrugs(data.drugs);
+  })
+  .catch((err) => console.error('Lỗi kết nối Backend:', err));
   }, []);
 
   const handleSubmit = async (e) => {
