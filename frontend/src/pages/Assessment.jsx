@@ -13,7 +13,7 @@ const CheckPage = () => {
 
   // Lấy danh sách Thực phẩm & Thuốc từ Backend
   useEffect(() => {
-    api.get('/api/data-options')
+    api.get('/data-options')
       .then((res) => {
         const data = res.data;
         if (data.allergens) setAllergens(data.allergens);
@@ -33,7 +33,7 @@ const CheckPage = () => {
     setError('');
 
     try {
-      const response = await api.post('/api/check-allergy', {
+      const response = await api.post('/check-allergy', {
         food_name: selectedFood,
         drug_name: selectedDrug,
       });
