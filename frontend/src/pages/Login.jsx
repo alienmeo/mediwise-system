@@ -51,7 +51,7 @@ export default function Login({ isRegisterMode = false }) {
     try {
       if (isRegister) {
         // --- LUỒNG ĐĂNG KÝ ---
-        const regRes = await api.post('/api/auth/register', {
+        const regRes = await api.post('/auth/register', {
           username: inputValue,
           email: email.trim(),
           password: inputPassword
@@ -77,7 +77,7 @@ export default function Login({ isRegisterMode = false }) {
           password: inputPassword
         };
 
-        const res = await api.post('/api/auth/login', loginPayload);
+        const res = await api.post('auth/login', loginPayload);
 
         if (res.data?.token) {
           localStorage.setItem('mediwise_token', res.data.token);
