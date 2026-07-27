@@ -14,12 +14,12 @@ const CheckPage = () => {
   // Lấy danh sách Thực phẩm & Thuốc từ Backend
   useEffect(() => {
     api.get('/api/data-options')
-  .then((res) => {
-    const data = res.data;
-    if (data.allergens) setAllergens(data.allergens);
-    if (data.drugs) setDrugs(data.drugs);
-  })
-  .catch((err) => console.error('Lỗi kết nối Backend:', err));
+      .then((res) => {
+        const data = res.data;
+        if (data.allergens) setAllergens(data.allergens);
+        if (data.drugs) setDrugs(data.drugs);
+      })
+      .catch((err) => console.error('Lỗi kết nối Backend:', err));
   }, []);
 
   const handleSubmit = async (e) => {
@@ -33,33 +33,24 @@ const CheckPage = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/check-allergy', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          food_name: selectedFood,
-          drug_name: selectedDrug,
-        }),
+      const response = await api.post('/api/check-allergy', {
+        food_name: selectedFood,
+        drug_name: selectedDrug,
       });
 
-      const resData = await response.json();
+      const resData = response.data;
       setLoading(false);
 
-      if (response.ok) {
-        // Chuyển hướng sang trang kết quả và truyền kèm dữ liệu API trả về
-        navigate('/result', {
-          state: {
-            result: resData.data || resData,
-          },
-        });
-      } else {
-        setError(resData.error || 'Có lỗi xảy ra khi kiểm tra!');
-      }
+      // Chuyển hướng sang trang kết quả và truyền kèm dữ liệu API trả về
+      navigate('/result', {
+        state: {
+          result: resData.data || resData,
+        },
+      });
     } catch (err) {
       setLoading(false);
-      setError('Không thể kết nối đến máy chủ Flask!');
+      const errorMsg = err.response?.data?.error || 'Không thể kết nối đến máy chủ!';
+      setError(errorMsg);
     }
   };
 
