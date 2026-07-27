@@ -20,11 +20,11 @@ export default function Feedback() {
   const [editRating, setEditRating] = useState(5);
   const [editComment, setEditComment] = useState('');
 
-  // 1. Gọi API lấy danh sách từ Backend
+  // 1. Gọi API lấy danh sách từ Backend (Đã thêm /api/)
   const fetchFeedbacks = async () => {
     try {
       setLoading(true);
-      const res = await api.get('/feedbacks');
+      const res = await api.get('/api/feedbacks');
       if (res.data) {
         setFeedbacks(res.data);
       }
@@ -43,7 +43,7 @@ export default function Feedback() {
   const handleDelete = async (id) => {
     if (window.confirm('Bạn có chắc chắn muốn xóa đánh giá này không?')) {
       try {
-        await api.delete(`/feedbacks/${id}`);
+        await api.delete(`/api/feedbacks/${id}`);
         setFeedbacks(prev => prev.filter(item => item.id !== id));
       } catch (err) {
         alert('Có lỗi xảy ra khi xóa!');
@@ -63,7 +63,7 @@ export default function Feedback() {
   const handleSaveEdit = async () => {
     if (!editingFeedback) return;
     try {
-      await api.put(`/feedbacks/${editingFeedback.id}`, {
+      await api.put(`/api/feedbacks/${editingFeedback.id}`, {
         rating: editRating,
         comment: editComment
       });
@@ -199,17 +199,7 @@ export default function Feedback() {
               </div>
             ) : (
               filteredFeedbacks.map((item) => {
-                // =========================================================
-                // ĐIỀU KIỆN HIỂN THỊ NÚT SỬA / XÓA
-                // Đổi thành true nếu bạn muốn hiển thị cho TẤT CẢ bài viết:
-                // const isOwner = true; 
-                // =========================================================
-                const userLoginName = (currentUser.username || '').trim().toLowerCase();
-                const itemAuthorName = (item.username || '').trim().toLowerCase();
-                
-                const isOwner = true; // Bật true để luôn hiện nút Sửa/Xóa cho mọi nhận xét
-                // Hoặc kiểm tra quyền chính chủ/admin:
-                // const isOwner = userLoginName && (userLoginName === itemAuthorName || currentUser.role === 'admin');
+                const isOwner = true; 
 
                 return (
                   <div key={item.id} className="bg-white rounded-[24px] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.03)] space-y-3">
@@ -240,13 +230,13 @@ export default function Feedback() {
                               onClick={() => handleOpenEdit(item)}
                               className="px-3 py-1 bg-sky-50 text-sky-600 rounded-lg hover:bg-sky-100 transition-all cursor-pointer"
                             >
-                               Sửa
+                              Sửa
                             </button>
                             <button 
                               onClick={() => handleDelete(item.id)}
                               className="px-3 py-1 bg-rose-50 text-rose-500 rounded-lg hover:bg-rose-100 transition-all cursor-pointer"
                             >
-                               Xóa
+                              Xóa
                             </button>
                           </div>
                         )}
