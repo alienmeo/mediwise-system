@@ -127,12 +127,10 @@ def force_wipe_history():
         html_content = f"<h1 style='color: red; font-family: sans-serif;'>LỖI: {str(e)}</h1>"
         return make_response(html_content, 500)
 @app.route('/api/user/profile', methods=['GET', 'PUT', 'OPTIONS'])
-@app.route('/api/profile', methods=['GET', 'PUT', 'OPTIONS'])
-def direct_user_profile():
+def direct_user_profile_fixed():
     if request.method == 'OPTIONS':
         return '', 200
     try:
-        # Lấy token từ Header Authorization do Axios gửi lên
         token = None
         auth_header = request.headers.get('Authorization', '')
         if auth_header.startswith("Bearer "):
@@ -141,7 +139,6 @@ def direct_user_profile():
         if not token:
             return jsonify({'message': 'Thiếu mã xác thực'}), 401
 
-        # Giải mã token thủ công bằng SECRET_KEY
         data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
         user_id = data.get('user_id')
 
@@ -165,5 +162,5 @@ def direct_user_profile():
             return jsonify({'message': 'Cập nhật hồ sơ thành công!'}), 200
 
     except Exception as e:
-        print(f"Lỗi tại /api/user/profile: {e}")
+        print(f"Lỗi profile: {e}")
         return jsonify({'message': f'Lỗi hệ thống: {str(e)}'}), 500
