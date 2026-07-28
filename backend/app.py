@@ -87,3 +87,13 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True, port=5000)
+# Route dọn sạch lịch sử cũ trên Render
+@app.route('/api/clean-all-history-now', methods=['GET'])
+def clean_history_now():
+    try:
+        AssessmentHistory.query.delete()
+        db.session.commit()
+        return "Đã xóa sạch toàn bộ lịch sử cũ thành công!", 200
+    except Exception as e:
+        db.session.rollback()
+        return f"Lỗi: {e}", 500
