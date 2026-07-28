@@ -105,8 +105,17 @@ def update_user_feedback(current_user, feedback_id):
         if not feedback:
             return jsonify({'message': 'Không tìm thấy đánh giá cần sửa!'}), 404
 
-        # (Tùy chọn) Kiểm tra xem đánh giá có phải của chính user này không (tránh việc sửa đánh giá của người khác)
-        if feedback.user_id and feedback.user_id != current_user.id and getattr(current_user, 'role', 'user') != 'admin':
+        # Lấy user_id an toàn bất chấp current_user là object hay dict
+        user_id = getattr(current_user, 'id', None)
+        if not user_id and isinstance(current_user, dict):
+            user_id = current_user.get('id')
+            
+        user_role = getattr(current_user, 'role', None)
+        if not user_role and isinstance(current_user, dict):
+            user_role = current_user.get('role', 'user')
+
+        # Kiểm tra quyền sở hữu an toàn
+        if feedback.user_id and feedback.user_id != user_id and user_role != 'admin':
             return jsonify({'message': 'Bạn không có quyền chỉnh sửa đánh giá này!'}), 403
 
         data = request.get_json() or {}
@@ -117,8 +126,6 @@ def update_user_feedback(current_user, feedback_id):
             feedback.rating = int(rating)
         if comment is not None:
             feedback.comment = comment.strip()
-            # Nếu database của bạn dùng cột 'content' thay vì 'comment', hãy mở dòng dưới:
-            # feedback.content = comment.strip()
 
         db.session.commit()
 
