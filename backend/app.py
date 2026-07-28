@@ -91,10 +91,9 @@ if __name__ == '__main__':
 @app.route('/api/force-wipe-history', methods=['GET'])
 def force_wipe_history():
     try:
-        # Xóa toàn bộ dữ liệu bảng lịch sử
-        db.session.query(AssessmentHistory).delete()
+        num_rows = db.session.query(AssessmentHistory).delete()
         db.session.commit()
-        return jsonify({"status": "success", "message": "Đã xóa sạch toàn bộ lịch sử thành công!"}), 200
+        return f"ĐÃ XÓA THÀNH CÔNG {num_rows} BẢN GHI LỊCH SỬ TRÊN SERVER!", 200
     except Exception as e:
         db.session.rollback()
-        return jsonify({"status": "error", "message": str(e)}), 500
+        return f"LỖI: {str(e)}", 500
