@@ -12,7 +12,7 @@ def get_user_history(current_user):
         if not user_id and isinstance(current_user, dict):
             user_id = current_user.get('id')
         if not user_id:
-            user_id = 1 # Fallback tạm thời nếu không bắt được user
+            return jsonify([]), 200
 
         # Truy vấn lịch sử từ database
         histories = AssessmentHistory.query.filter_by(user_id=int(user_id)).order_by(AssessmentHistory.created_at.desc()).all()
