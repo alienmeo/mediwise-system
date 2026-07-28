@@ -6,10 +6,11 @@ from routes.auth_routes import auth_bp
 from routes.admin_routes import admin_bp
 from routes.check_routes import check_bp
 import json
-from flask import request, jsonify
-from models.db_models import AssessmentHistory
 from flask import Flask, send_from_directory
 from flask_jwt_extended import jwt_required, get_jwt_identity
+import jwt
+from flask import request, jsonify, current_app
+from models.db_models import AssessmentHistory, User
 import os
 
 app = Flask(__name__)
@@ -43,15 +44,28 @@ app.register_blueprint(check_bp, url_prefix='/api')
 
 # Đưa trực tiếp API lịch sử vào app.py để tránh mọi lỗi định tuyến Blueprint/CORS
 @app.route('/api/user/history', methods=['GET', 'OPTIONS'])
-@jwt_required()
 def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
     try:
-        user_id = get_jwt_identity()
-        # Lấy tạm toàn bộ lịch sử gần nhất trong database để hiển thị ngay lên web cho bạn
-        histories = (AssessmentHistory.query.filter_by(user_id=user_id).order_by(AssessmentHistory.created_at.desc()).all()
-)
+        # Lấy token từ Header Authorization
+        token = None
+        auth_header = request.headers.get('Authorization', '')
+        if auth_header.startswith("Bearer "):
+            token = auth_header.split(" ")[1]
+
+        if not token:
+            return jsonify({'message': 'Thiếu mã xác thực'}), 401
+
+        # Giải mã token thủ công bằng SECRET_KEY của ứng dụng
+        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+        user_id = data.get('user_id')
+
+        if not user_id:
+            return jsonify({'message': 'Token không hợp lệ'}), 401
+
+        # Truy vấn lịch sử từ database
+        histories = AssessmentHistory.query.filter_by(user_id=user_id).order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
         for h in histories:
@@ -79,6 +93,11 @@ def direct_user_history():
             })
             
         return jsonify(history_list), 200
+        
+    except jwt.ExpiredSignatureError:
+        return jsonify({'message': 'Phiên đăng nhập đã hết hạn'}), 401
+    except jwt.InvalidTokenError:
+        return jsonify({'message': 'Mã token không hợp lệ'}), 401
     except Exception as e:
         print(f"Lỗi trực tiếp tại app.py: {e}")
         return jsonify([]), 200
