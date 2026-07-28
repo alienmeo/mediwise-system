@@ -9,6 +9,7 @@ import json
 from flask import request, jsonify
 from models.db_models import AssessmentHistory
 from flask import Flask, send_from_directory
+from flask_jwt_extended import jwt_required, get_jwt_identity
 import os
 
 app = Flask(__name__)
@@ -42,12 +43,15 @@ app.register_blueprint(check_bp, url_prefix='/api')
 
 # Đưa trực tiếp API lịch sử vào app.py để tránh mọi lỗi định tuyến Blueprint/CORS
 @app.route('/api/user/history', methods=['GET', 'OPTIONS'])
+@jwt_required()
 def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
     try:
+        user_id = get_jwt_identity()
         # Lấy tạm toàn bộ lịch sử gần nhất trong database để hiển thị ngay lên web cho bạn
-        histories = AssessmentHistory.query.order_by(AssessmentHistory.created_at.desc()).all()
+        histories = (AssessmentHistory.query.filter_by(user_id=user_id).order_by(AssessmentHistory.created_at.desc()).all()
+)
         
         history_list = []
         for h in histories:
