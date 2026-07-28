@@ -126,3 +126,44 @@ def force_wipe_history():
         db.session.rollback()
         html_content = f"<h1 style='color: red; font-family: sans-serif;'>LỖI: {str(e)}</h1>"
         return make_response(html_content, 500)
+@app.route('/api/user/profile', methods=['GET', 'PUT', 'OPTIONS'])
+def handle_user_profile():
+    if request.method == 'OPTIONS':
+        return '', 200
+    try:
+        # Lấy token từ Header Authorization
+        token = None
+        auth_header = request.headers.get('Authorization', '')
+        if auth_header.startswith("Bearer "):
+            token = auth_header.split(" ")[1]
+
+        if not token:
+            return jsonify({'message': 'Thiếu mã xác thực'}), 401
+
+        # Giải mã token lấy user_id
+        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+        user_id = data.get('user_id')
+
+        user = db.session.get(User, user_id)
+        if not user:
+            return jsonify({'message': 'Không tìm thấy người dùng'}), 404
+
+        if request.method == 'GET':
+            return jsonify({
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'role': getattr(user, 'role', 'user')
+            }), 200
+
+        # Xử lý cập nhật profile nếu frontend gửi phương thức PUT
+        elif request.method == 'PUT':
+            req_data = request.get_json() or {}
+            if 'username' in req_data:
+                user.username = req_data['username']
+            db.session.commit()
+            return jsonify({'message': 'Cập nhật hồ sơ thành công!'}), 200
+
+    except Exception as e:
+        print(f"Lỗi tại /api/user/profile: {e}")
+        return jsonify({'message': f'Lỗi hệ thống: {str(e)}'}), 500
