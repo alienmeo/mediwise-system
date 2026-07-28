@@ -88,4 +88,5 @@ if __name__ == '__main__':
         db.create_all()
         AssessmentHistory.query.delete()
         db.session.commit()
+        print("ĐÃ XÓA SẠCH DỮ LIỆU LỊCH SỬ CŨ!")
     app.run(debug=True, port=5000)
