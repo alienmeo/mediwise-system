@@ -127,11 +127,12 @@ def force_wipe_history():
         html_content = f"<h1 style='color: red; font-family: sans-serif;'>LỖI: {str(e)}</h1>"
         return make_response(html_content, 500)
 @app.route('/api/user/profile', methods=['GET', 'PUT', 'OPTIONS'])
-def handle_user_profile():
+@app.route('/api/profile', methods=['GET', 'PUT', 'OPTIONS'])
+def direct_user_profile():
     if request.method == 'OPTIONS':
         return '', 200
     try:
-        # Lấy token từ Header Authorization
+        # Lấy token từ Header Authorization do Axios gửi lên
         token = None
         auth_header = request.headers.get('Authorization', '')
         if auth_header.startswith("Bearer "):
@@ -140,11 +141,11 @@ def handle_user_profile():
         if not token:
             return jsonify({'message': 'Thiếu mã xác thực'}), 401
 
-        # Giải mã token lấy user_id
+        # Giải mã token thủ công bằng SECRET_KEY
         data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
         user_id = data.get('user_id')
 
-        user = db.session.get(User, user_id)
+        user = db.session.get(User, user_id) if hasattr(db.session, 'get') else User.query.get(user_id)
         if not user:
             return jsonify({'message': 'Không tìm thấy người dùng'}), 404
 
@@ -156,7 +157,6 @@ def handle_user_profile():
                 'role': getattr(user, 'role', 'user')
             }), 200
 
-        # Xử lý cập nhật profile nếu frontend gửi phương thức PUT
         elif request.method == 'PUT':
             req_data = request.get_json() or {}
             if 'username' in req_data:
