@@ -86,7 +86,15 @@ def handle_exception(e):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-        AssessmentHistory.query.delete()
-        db.session.commit()
-        print("ĐÃ XÓA SẠCH DỮ LIỆU LỊCH SỬ CŨ!")
     app.run(debug=True, port=5000)
+
+@app.route('/api/force-wipe-history', methods=['GET'])
+def force_wipe_history():
+    try:
+        # Ép xóa toàn bộ bảng lịch sử không cần điều kiện
+        num_rows_deleted = db.session.query(AssessmentHistory).delete()
+        db.session.commit()
+        return f"Đã xóa vĩnh viễn {num_rows_deleted} dòng lịch sử rác trên server thành công!", 200
+    except Exception as e:
+        db.session.rollback()
+        return f"Lỗi: {str(e)}", 500
