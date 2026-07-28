@@ -88,12 +88,16 @@ if __name__ == '__main__':
         db.create_all()
     app.run(debug=True, port=5000)
 
+from flask import make_response
+
 @app.route('/api/force-wipe-history', methods=['GET'])
 def force_wipe_history():
     try:
         num_rows = db.session.query(AssessmentHistory).delete()
         db.session.commit()
-        return f"ĐÃ XÓA THÀNH CÔNG {num_rows} BẢN GHI LỊCH SỬ TRÊN SERVER!", 200
+        html_content = f"<h1 style='color: green; font-family: sans-serif;'>ĐÃ XÓA THÀNH CÔNG {num_rows} BẢN GHI LỊCH SỬ TRÊN SERVER!</h1>"
+        return make_response(html_content, 200)
     except Exception as e:
         db.session.rollback()
-        return f"LỖI: {str(e)}", 500
+        html_content = f"<h1 style='color: red; font-family: sans-serif;'>LỖI: {str(e)}</h1>"
+        return make_response(html_content, 500)
