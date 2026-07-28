@@ -44,6 +44,7 @@ app.register_blueprint(check_bp, url_prefix='/api')
 
 # Đưa trực tiếp API lịch sử vào app.py để tránh mọi lỗi định tuyến Blueprint/CORS
 @app.route('/api/user/history', methods=['GET', 'OPTIONS'])
+@app.route('/api/history', methods=['GET', 'OPTIONS'])
 def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
@@ -92,6 +93,7 @@ def direct_user_history():
                 "details": details_obj
             })
             
+        # ĐẶT LỆNH RETURN RA NGOÀI VÒNG LẶP FOR
         return jsonify(history_list), 200
         
     except jwt.ExpiredSignatureError:
