@@ -138,3 +138,34 @@ def update_user_feedback(current_user, feedback_id):
         db.session.rollback()
         print(f"Lỗi cập nhật feedback: {e}")
         return jsonify({"status": "error", "message": f"Lỗi hệ thống: {str(e)}"}), 500
+def delete_user_feedback(current_user, feedback_id):
+    try:
+        feedback = db.session.get(Feedback, feedback_id)
+        if not feedback:
+            return jsonify({'message': 'Không tìm thấy đánh giá cần xóa!'}), 404
+
+        # Lấy user_id và role an toàn
+        user_id = getattr(current_user, 'id', None)
+        if not user_id and isinstance(current_user, dict):
+            user_id = current_user.get('id')
+            
+        user_role = getattr(current_user, 'role', None)
+        if not user_role and isinstance(current_user, dict):
+            user_role = current_user.get('role', 'user')
+
+        # Kiểm tra quyền xóa (chỉ chủ nhân đánh giá hoặc admin mới được xóa)
+        if feedback.user_id and feedback.user_id != user_id and user_role != 'admin':
+            return jsonify({'message': 'Bạn không có quyền xóa đánh giá này!'}), 403
+
+        db.session.delete(feedback)
+        db.session.commit()
+
+        return jsonify({
+            "status": "success",
+            "message": "Xóa đánh giá thành công!"
+        }), 200
+
+    except Exception as e:
+        db.session.rollback()
+        print(f"Lỗi xóa feedback: {e}")
+        return jsonify({"status": "error", "message": f"Lỗi hệ thống: {str(e)}"}), 500

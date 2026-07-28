@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from controllers.user_controller import get_user_history, send_user_feedback, get_public_feedbacks, update_user_feedback
+from controllers.user_controller import get_user_history, send_user_feedback, get_public_feedbacks, update_user_feedback, delete_user_feedback
 from controllers.auth_controller import token_required
 
 user_bp = Blueprint('user', __name__)
@@ -30,3 +30,9 @@ def update_feed(current_user, feedback_id):
     if request.method == 'OPTIONS':
         return '', 200
     return update_user_feedback(current_user, feedback_id)
+@user_bp.route('/feedbacks/<int:feedback_id>', methods=['DELETE', 'OPTIONS'])
+@token_required
+def delete_feed(current_user, feedback_id):
+    if request.method == 'OPTIONS':
+        return '', 200
+    return delete_user_feedback(current_user, feedback_id)
