@@ -87,11 +87,19 @@ def get_public_feedbacks(current_user):
         feedbacks = Feedback.query.order_by(Feedback.created_at.desc()).all()
         output = []
         for f in feedbacks:
+            # Lấy tên an toàn hơn, tránh chết chương trình nếu quan hệ user chưa chuẩn
+            uname = "Ẩn danh"
+            try:
+                if f.user:
+                    uname = getattr(f.user, 'username', None) or getattr(f.user, 'name', None) or "Người dùng"
+            except Exception:
+                pass
+
             output.append({
                 'id': f.id,
-                'username': f.user.username if f.user else "Ẩn danh",
+                'username': uname,
                 'rating': f.rating,
-                'comment': f.comment or f.content,
+                'comment': f.comment or getattr(f, 'content', ''),
                 'created_at': f.created_at.strftime('%Y-%m-%d %H:%M:%S') if f.created_at else ""
             })
         return jsonify(output), 200
