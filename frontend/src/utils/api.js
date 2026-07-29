@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // Dùng IP chuẩn 127.0.0.1 để Flask nhận đúng
+  baseURL: 'http://mediwise-system.onrender/api', // Dùng IP chuẩn 127.0.0.1 để Flask nhận đúng
   headers: {
     'Content-Type': 'application/json',
   },
