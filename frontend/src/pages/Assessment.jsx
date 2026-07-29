@@ -12,7 +12,7 @@ const CheckPage = () => {
 
   // Lấy danh sách Thực phẩm & Thuốc từ Backend
   useEffect(() => {
-    fetch('http://localhost:5000/api/data-options')
+    fetch('https://localhost:5000/api/data-options')
       .then((res) => res.json())
       .then((data) => {
         if (data.allergens) setAllergens(data.allergens);
