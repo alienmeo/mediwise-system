@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../utils/api';
 
 const CheckPage = () => {
   const navigate = useNavigate();
@@ -13,9 +12,9 @@ const CheckPage = () => {
 
   // Lấy danh sách Thực phẩm & Thuốc từ Backend
   useEffect(() => {
-    api.get('/data-options')
-      .then((res) => {
-        const data = res.data;
+    fetch('http://localhost:5000/api/data-options')
+      .then((res) => res.json())
+      .then((data) => {
         if (data.allergens) setAllergens(data.allergens);
         if (data.drugs) setDrugs(data.drugs);
       })
@@ -33,24 +32,33 @@ const CheckPage = () => {
     setError('');
 
     try {
-      const response = await api.post('/check-allergy', {
-        food_name: selectedFood,
-        drug_name: selectedDrug,
+      const response = await fetch('http://localhost:5000/api/check-allergy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          food_name: selectedFood,
+          drug_name: selectedDrug,
+        }),
       });
 
-      const resData = response.data;
+      const resData = await response.json();
       setLoading(false);
 
-      // Chuyển hướng sang trang kết quả và truyền kèm dữ liệu API trả về
-      navigate('/result', {
-        state: {
-          result: resData.data || resData,
-        },
-      });
+      if (response.ok) {
+        // Chuyển hướng sang trang kết quả và truyền kèm dữ liệu API trả về
+        navigate('/result', {
+          state: {
+            result: resData.data || resData,
+          },
+        });
+      } else {
+        setError(resData.error || 'Có lỗi xảy ra khi kiểm tra!');
+      }
     } catch (err) {
       setLoading(false);
-      const errorMsg = err.response?.data?.error || 'Không thể kết nối đến máy chủ!';
-      setError(errorMsg);
+      setError('Không thể kết nối đến máy chủ Flask!');
     }
   };
 

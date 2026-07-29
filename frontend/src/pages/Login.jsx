@@ -69,24 +69,28 @@ export default function Login({ isRegisterMode = false }) {
           setTimeout(() => navigate('/login'), 1500);
         }
 
-      } else {
-        // --- LUỒNG ĐĂNG NHẬP ---
-        const loginPayload = {
-          username: inputValue,
-          email: inputValue,
-          password: inputPassword
-        };
+      // --- Trong Login.jsx -> hàm handleSubmit ---
+} else {
+  // --- LUỒNG ĐĂNG NHẬP ---
+  // Gửi chung giá trị nhập vào cho cả username và email
+  // Để Backend tự kiểm tra khớp với trường nào trong Database
+  const loginPayload = {
+    username: inputValue,
+    email: inputValue,
+    password: inputPassword
+  };
 
-        const res = await api.post('auth/login', loginPayload);
+  const res = await api.post('/auth/login', loginPayload);
 
-        if (res.data?.token) {
-          localStorage.setItem('mediwise_token', res.data.token);
-          if (res.data.user) {
-            localStorage.setItem('user', JSON.stringify(res.data.user));
-          }
-          navigate('/dashboard');
-        }
-      }
+  if (res.data?.token) {
+    localStorage.setItem('mediwise_token', res.data.token);
+    if (res.data.user) {
+      // Lưu toàn bộ thông tin user trả về từ Backend vào LocalStorage
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+    }
+    navigate('/dashboard');
+  }
+}
     } catch (err) {
       const backendError = err.response?.data?.message || err.response?.data?.error;
       if (backendError) {
