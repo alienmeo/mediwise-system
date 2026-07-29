@@ -44,8 +44,21 @@ def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
     try:
-        # Lấy tạm toàn bộ lịch sử gần nhất trong database để hiển thị ngay lên web cho bạn
-        histories = AssessmentHistory.query.order_by(AssessmentHistory.created_at.desc()).all()
+        # Lấy user_id từ Token hoặc Header (hoặc xác thực tùy theo hệ thống auth của bạn)
+        # Ví dụ lấy thông tin user từ token hoặc header X-User-Id / X-Username tùy cấu trúc app của bạn:
+        # Ở đây ta giả sử lấy user_id từ query params hoặc header, hoặc nếu bạn dùng Flask-JWT-Extended:
+        
+        from flask_jwt_extended import jwt_required, get_jwt_identity
+        # Nếu app của bạn dùng JWT, hãy mở dòng decorator @jwt_required() ở trên route này.
+        
+        # Tạm thời để an toàn, nếu chưa dùng JWT chuẩn ở đây, ta có thể lọc theo user_id được gửi lên từ request headers:
+        user_id = request.headers.get('X-User-Id')
+        
+        if not user_id:
+            # Nếu không tìm thấy định danh user, trả về mảng rỗng thay vì lộ dữ liệu chung
+            return jsonify([]), 200
+
+        histories = AssessmentHistory.query.filter_by(user_id=int(user_id)).order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
         for h in histories:
