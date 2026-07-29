@@ -62,3 +62,4 @@ class Feedback(db.Model):
     
     # Quan hệ liên kết với User (nếu bảng User có backref hoặc relationship tương ứng)
     user = db.relationship('User', backref=db.backref('feedbacks', lazy=True))
+

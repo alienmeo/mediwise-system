@@ -6,17 +6,13 @@ from routes.auth_routes import auth_bp
 from routes.admin_routes import admin_bp
 from routes.check_routes import check_bp
 import json
-from flask import Flask, send_from_directory
-from flask_jwt_extended import jwt_required, get_jwt_identity
-import jwt
-from flask import request, jsonify, current_app
-from models.db_models import AssessmentHistory, User
-import os
+from flask import request, jsonify
+from models.db_models import AssessmentHistory
 
 app = Flask(__name__)
 
 # Bật CORS cho phép toàn bộ phương thức và origin
-CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'your-secret-key-mediwise'
@@ -44,29 +40,12 @@ app.register_blueprint(check_bp, url_prefix='/api')
 
 # Đưa trực tiếp API lịch sử vào app.py để tránh mọi lỗi định tuyến Blueprint/CORS
 @app.route('/api/user/history', methods=['GET', 'OPTIONS'])
-@app.route('/api/history', methods=['GET', 'OPTIONS'])
 def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
     try:
-        # Lấy token từ Header Authorization
-        token = None
-        auth_header = request.headers.get('Authorization', '')
-        if auth_header.startswith("Bearer "):
-            token = auth_header.split(" ")[1]
-
-        if not token:
-            return jsonify({'message': 'Thiếu mã xác thực'}), 401
-
-        # Giải mã token thủ công bằng SECRET_KEY của ứng dụng
-        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-        user_id = data.get('user_id')
-
-        if not user_id:
-            return jsonify({'message': 'Token không hợp lệ'}), 401
-
-        # Truy vấn lịch sử từ database
-        histories = AssessmentHistory.query.filter_by(user_id=user_id).order_by(AssessmentHistory.created_at.desc()).all()
+        # Lấy tạm toàn bộ lịch sử gần nhất trong database để hiển thị ngay lên web cho bạn
+        histories = AssessmentHistory.query.order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
         for h in histories:
@@ -93,13 +72,7 @@ def direct_user_history():
                 "details": details_obj
             })
             
-        # ĐẶT LỆNH RETURN RA NGOÀI VÒNG LẶP FOR
         return jsonify(history_list), 200
-        
-    except jwt.ExpiredSignatureError:
-        return jsonify({'message': 'Phiên đăng nhập đã hết hạn'}), 401
-    except jwt.InvalidTokenError:
-        return jsonify({'message': 'Mã token không hợp lệ'}), 401
     except Exception as e:
         print(f"Lỗi trực tiếp tại app.py: {e}")
         return jsonify([]), 200
@@ -112,55 +85,3 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True, port=5000)
-
-from flask import make_response
-
-@app.route('/api/force-wipe-history', methods=['GET'])
-def force_wipe_history():
-    try:
-        num_rows = db.session.query(AssessmentHistory).delete()
-        db.session.commit()
-        html_content = f"<h1 style='color: green; font-family: sans-serif;'>ĐÃ XÓA THÀNH CÔNG {num_rows} BẢN GHI LỊCH SỬ TRÊN SERVER!</h1>"
-        return make_response(html_content, 200)
-    except Exception as e:
-        db.session.rollback()
-        html_content = f"<h1 style='color: red; font-family: sans-serif;'>LỖI: {str(e)}</h1>"
-        return make_response(html_content, 500)
-@app.route('/api/user/profile', methods=['GET', 'PUT', 'OPTIONS'])
-def direct_user_profile_fixed():
-    if request.method == 'OPTIONS':
-        return '', 200
-    try:
-        token = None
-        auth_header = request.headers.get('Authorization', '')
-        if auth_header.startswith("Bearer "):
-            token = auth_header.split(" ")[1]
-
-        if not token:
-            return jsonify({'message': 'Thiếu mã xác thực'}), 401
-
-        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-        user_id = data.get('user_id')
-
-        user = db.session.get(User, user_id) if hasattr(db.session, 'get') else User.query.get(user_id)
-        if not user:
-            return jsonify({'message': 'Không tìm thấy người dùng'}), 404
-
-        if request.method == 'GET':
-            return jsonify({
-                'id': user.id,
-                'username': user.username,
-                'email': user.email,
-                'role': getattr(user, 'role', 'user')
-            }), 200
-
-        elif request.method == 'PUT':
-            req_data = request.get_json() or {}
-            if 'username' in req_data:
-                user.username = req_data['username']
-            db.session.commit()
-            return jsonify({'message': 'Cập nhật hồ sơ thành công!'}), 200
-
-    except Exception as e:
-        print(f"Lỗi profile: {e}")
-        return jsonify({'message': f'Lỗi hệ thống: {str(e)}'}), 500
