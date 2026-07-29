@@ -200,10 +200,12 @@ export default function Feedback() {
             ) : (
               filteredFeedbacks.map((item) => {
                 // KIỂM TRA QUYỀN CHÍNH CHỦ HOẶC ADMIN
-                const userLoginName = (currentUser.username || currentUser.name || currentUser.email || currentUser.account || '').trim().toLowerCase();
+                const currentUserName = currentUser.username || currentUser.name || currentUser.fullName || currentUser.account || '';
+                const userLoginName = currentUserName.trim().toLowerCase();
                 const itemAuthorName = (item.username || item.author || '').trim().toLowerCase();
 
-                const isOwner = userLoginName && (userLoginName === itemAuthorName || currentUser.role === 'admin');
+                // Kiểm tra: Phải đăng nhập VÀ (là chủ bài viết HOẶC là admin)
+                const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || currentUser.role === 'admin');
 
                 return (
                   <div key={item.id} className="bg-white rounded-[24px] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.03)] space-y-3">
