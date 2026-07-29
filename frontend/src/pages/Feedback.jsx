@@ -105,7 +105,7 @@ export default function Feedback() {
               onClick={() => navigate('/dashboard')} 
               className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer"
             >
-              Trang chủ Dashboard
+              Về lại trang chủ
             </button>
             <button 
               onClick={() => navigate('/history')} 
