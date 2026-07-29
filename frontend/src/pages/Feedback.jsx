@@ -201,13 +201,16 @@ export default function Feedback() {
               filteredFeedbacks.map((item) => {
                 console.log("currentUser hiện tại:", currentUser);
                 console.log("Tên tác giả bài viết:", item.username);
-                // KIỂM TRA QUYỀN CHÍNH CHỦ HOẶC ADMIN
-                const currentUserName = currentUser.username || currentUser.name || currentUser.fullName || currentUser.account || '';
-                const userLoginName = currentUserName.trim().toLowerCase();
-                const itemAuthorName = (item.username || item.author || '').trim().toLowerCase();
+                // Tự động tìm mọi ngóc ngách có chứa thông tin user
+              const userObj = currentUser.data || currentUser.user || currentUser;
+              const userLoginName = (userObj.username || userObj.name || userObj.fullName || userObj.account || userObj.email || '').trim().toLowerCase();
+              const itemAuthorName = (item.username || item.author || '').trim().toLowerCase();
 
-                // Kiểm tra: Phải đăng nhập VÀ (là chủ bài viết HOẶC là admin)
-                const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || currentUser.role === 'admin');
+// Nếu không tìm thấy tên từ object, thử lấy trực tiếp từ chuỗi localStorage gốc nếu có
+              const rawStorageStr = localStorage.getItem('mediwise_user') || localStorage.getItem('user') || '';
+              const finalLoginName = userLoginName || (rawStorageStr.includes('{') ? '' : rawStorageStr.trim().toLowerCase());
+
+              const isOwner = finalLoginName !== '' && (finalLoginName === itemAuthorName || userObj.role === 'admin');
 
                 return (
                   <div key={item.id} className="bg-white rounded-[24px] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.03)] space-y-3">
