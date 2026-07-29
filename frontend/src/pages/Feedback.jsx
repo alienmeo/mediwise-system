@@ -199,6 +199,8 @@ export default function Feedback() {
               </div>
             ) : (
               filteredFeedbacks.map((item) => {
+                console.log("currentUser hiện tại:", currentUser);
+                console.log("Tên tác giả bài viết:", item.username);
                 // KIỂM TRA QUYỀN CHÍNH CHỦ HOẶC ADMIN
                 const currentUserName = currentUser.username || currentUser.name || currentUser.fullName || currentUser.account || '';
                 const userLoginName = currentUserName.trim().toLowerCase();
