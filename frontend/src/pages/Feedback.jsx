@@ -199,17 +199,11 @@ export default function Feedback() {
               </div>
             ) : (
               filteredFeedbacks.map((item) => {
-                // =========================================================
-                // ĐIỀU KIỆN HIỂN THỊ NÚT SỬA / XÓA
-                // Đổi thành true nếu bạn muốn hiển thị cho TẤT CẢ bài viết:
-                // const isOwner = true; 
-                // =========================================================
+                // KIỂM TRA QUYỀN CHÍNH CHỦ HOẶC ADMIN
                 const userLoginName = (currentUser.username || '').trim().toLowerCase();
                 const itemAuthorName = (item.username || '').trim().toLowerCase();
                 
-                const isOwner = true; // Bật true để luôn hiện nút Sửa/Xóa cho mọi nhận xét
-                // Hoặc kiểm tra quyền chính chủ/admin:
-                // const isOwner = userLoginName && (userLoginName === itemAuthorName || currentUser.role === 'admin');
+                const isOwner = userLoginName && (userLoginName === itemAuthorName || currentUser.role === 'admin');
 
                 return (
                   <div key={item.id} className="bg-white rounded-[24px] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.03)] space-y-3">
@@ -233,7 +227,7 @@ export default function Feedback() {
                           ))}
                         </div>
 
-                        {/* NÚT SỬA & XÓA */}
+                        {/* NÚT SỬA & XÓA (Chỉ hiện khi đúng là chủ bài viết hoặc admin) */}
                         {isOwner && (
                           <div className="flex space-x-2 text-xs font-bold">
                             <button 
