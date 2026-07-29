@@ -202,15 +202,26 @@ export default function Feedback() {
                 console.log("currentUser hiện tại:", currentUser);
                 console.log("Tên tác giả bài viết:", item.username);
                 // Tự động tìm mọi ngóc ngách có chứa thông tin user
-              const userObj = currentUser.data || currentUser.user || currentUser;
-              const userLoginName = (userObj.username || userObj.name || userObj.fullName || userObj.account || userObj.email || '').trim().toLowerCase();
-              const itemAuthorName = (item.username || item.author || '').trim().toLowerCase();
+              let currentUser = {};
+try {
+  const rawData = localStorage.getItem('mediwise_user') || 
+                  localStorage.getItem('user') || 
+                  localStorage.getItem('userInfo') || 
+                  localStorage.getItem('currentUser') || '{}';
+  currentUser = JSON.parse(rawData);
+} catch (e) {
+  currentUser = {};
+}
 
-// Nếu không tìm thấy tên từ object, thử lấy trực tiếp từ chuỗi localStorage gốc nếu có
-              const rawStorageStr = localStorage.getItem('mediwise_user') || localStorage.getItem('user') || '';
-              const finalLoginName = userLoginName || (rawStorageStr.includes('{') ? '' : rawStorageStr.trim().toLowerCase());
+// 2. Lấy tên user đang đăng nhập (hoặc nếu lưu trực tiếp chuỗi tên)
+const rawStorageStr = localStorage.getItem('mediwise_user') || localStorage.getItem('user') || '';
+const userObj = currentUser.data || currentUser.user || currentUser;
+const userLoginName = (userObj.username || userObj.name || userObj.fullName || userObj.account || userObj.email || (typeof currentUser === 'string' ? currentUser : '') || rawStorageStr).trim().toLowerCase();
 
-              const isOwner = finalLoginName !== '' && (finalLoginName === itemAuthorName || userObj.role === 'admin');
+const itemAuthorName = (item.username || item.author || '').trim().toLowerCase();
+
+// 3. Điều kiện hiển thị nút (Chính chủ hoặc Admin)
+const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || userObj.role === 'admin');
 
                 return (
                   <div key={item.id} className="bg-white rounded-[24px] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.03)] space-y-3">
