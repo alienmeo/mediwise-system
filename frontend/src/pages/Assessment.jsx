@@ -12,7 +12,7 @@ const CheckPage = () => {
 
   // Lấy danh sách Thực phẩm & Thuốc từ Backend
   useEffect(() => {
-    fetch('https://localhost:5000/api/data-options')
+    fetch('https://mediwise-system.onrender.com/api/data-options')
       .then((res) => res.json())
       .then((data) => {
         if (data.allergens) setAllergens(data.allergens);
@@ -32,7 +32,7 @@ const CheckPage = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/check-allergy', {
+      const response = await fetch('https://mediwise-system.onrender.com/api/check-allergy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
