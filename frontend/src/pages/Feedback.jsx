@@ -8,8 +8,21 @@ import brandTextImg from './title.png';
 export default function Feedback() {
   const navigate = useNavigate();
 
-  // Lấy thông tin tài khoản hiện tại từ LocalStorage
-  const currentUser = JSON.parse(localStorage.getItem('mediwise_user') || '{}');
+  // 1. Đọc thông tin user chuẩn xác MỘT LẦN DUY NHẤT ở đầu component
+  const currentUser = (() => {
+    try {
+      const rawData = localStorage.getItem('mediwise_user') || 
+                      localStorage.getItem('user') || 
+                      localStorage.getItem('userInfo') || '{}';
+      return JSON.parse(rawData);
+    } catch (e) {
+      return {};
+    }
+  })();
+
+  // Lấy tên user đăng nhập an toàn
+  const userObj = currentUser.data || currentUser.user || currentUser;
+  const userLoginName = (userObj.username || userObj.name || userObj.fullName || userObj.account || userObj.email || '').trim().toLowerCase();
 
   const [feedbacks, setFeedbacks] = useState([]);
   const [filterRating, setFilterRating] = useState(0);
@@ -20,7 +33,7 @@ export default function Feedback() {
   const [editRating, setEditRating] = useState(5);
   const [editComment, setEditComment] = useState('');
 
-  // 1. Gọi API lấy danh sách từ Backend
+  // 2. Gọi API lấy danh sách từ Backend
   const fetchFeedbacks = async () => {
     try {
       setLoading(true);
@@ -39,7 +52,7 @@ export default function Feedback() {
     fetchFeedbacks();
   }, []);
 
-  // 2. Xử lý Xóa Đánh giá (DELETE)
+  // 3. Xử lý Xóa Đánh giá (DELETE)
   const handleDelete = async (id) => {
     if (window.confirm('Bạn có chắc chắn muốn xóa đánh giá này không?')) {
       try {
@@ -52,14 +65,14 @@ export default function Feedback() {
     }
   };
 
-  // 3. Mở Modal Chỉnh sửa
+  // 4. Mở Modal Chỉnh sửa
   const handleOpenEdit = (item) => {
     setEditingFeedback(item);
     setEditRating(item.rating);
     setEditComment(item.comment);
   };
 
-  // 4. Lưu Chỉnh sửa (PUT)
+  // 5. Lưu Chỉnh sửa (PUT)
   const handleSaveEdit = async () => {
     if (!editingFeedback) return;
     try {
@@ -68,14 +81,13 @@ export default function Feedback() {
         comment: editComment
       });
 
-      // Cập nhật lại danh sách trên UI
       setFeedbacks(prev => prev.map(item => 
         item.id === editingFeedback.id 
           ? { ...item, rating: editRating, comment: editComment }
           : item
       ));
 
-      setEditingFeedback(null); // Đóng Modal
+      setEditingFeedback(null);
     } catch (err) {
       alert('Có lỗi xảy ra khi cập nhật!');
       console.error(err);
@@ -92,7 +104,7 @@ export default function Feedback() {
 
   return (
     <div className="flex min-h-screen bg-[#f8fafc]">
-      {/* 1. SIDEBAR BÊN TRÁI */}
+      {/* SIDEBAR BÊN TRÁI */}
       <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col shrink-0">
         <div className="space-y-10">
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
@@ -101,35 +113,23 @@ export default function Feedback() {
           </div>
 
           <nav className="space-y-4">
-            <button 
-              onClick={() => navigate('/dashboard')} 
-              className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer"
-            >
+            <button onClick={() => navigate('/dashboard')} className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer">
               Về lại trang chủ
             </button>
-            <button 
-              onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer"
-            >
+            <button onClick={() => navigate('/history')} className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer">
               Xem lại kết quả gần nhất
             </button>
-            <button 
-              onClick={() => navigate('/FeedbackPage')} 
-              className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer"
-            >
+            <button onClick={() => navigate('/FeedbackPage')} className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer">
               Tự gửi đánh giá
             </button>
-            <button 
-              onClick={() => navigate('/profile')} 
-              className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer"
-            >
+            <button onClick={() => navigate('/profile')} className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer">
               Hồ sơ cá nhân
             </button>
           </nav>
         </div>
       </aside>
 
-      {/* 2. MAIN CONTENT BÊN PHẢI */}
+      {/* MAIN CONTENT BÊN PHẢI */}
       <main className="flex-1 flex flex-col">
         <header className="h-24 px-10 flex items-center justify-between border-b border-transparent">
           <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
@@ -199,29 +199,10 @@ export default function Feedback() {
               </div>
             ) : (
               filteredFeedbacks.map((item) => {
-                console.log("currentUser hiện tại:", currentUser);
-                console.log("Tên tác giả bài viết:", item.username);
-                // Tự động tìm mọi ngóc ngách có chứa thông tin user
-              let currentUser = {};
-try {
-  const rawData = localStorage.getItem('mediwise_user') || 
-                  localStorage.getItem('user') || 
-                  localStorage.getItem('userInfo') || 
-                  localStorage.getItem('currentUser') || '{}';
-  currentUser = JSON.parse(rawData);
-} catch (e) {
-  currentUser = {};
-}
-
-// 2. Lấy tên user đang đăng nhập (hoặc nếu lưu trực tiếp chuỗi tên)
-const rawStorageStr = localStorage.getItem('mediwise_user') || localStorage.getItem('user') || '';
-const userObj = currentUser.data || currentUser.user || currentUser;
-const userLoginName = (userObj.username || userObj.name || userObj.fullName || userObj.account || userObj.email || (typeof currentUser === 'string' ? currentUser : '') || rawStorageStr).trim().toLowerCase();
-
-const itemAuthorName = (item.username || item.author || '').trim().toLowerCase();
-
-// 3. Điều kiện hiển thị nút (Chính chủ hoặc Admin)
-const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || userObj.role === 'admin');
+                const itemAuthorName = (item.username || item.author || '').trim().toLowerCase();
+                
+                // Kiểm tra điều kiện chính chủ hoặc admin
+                const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || userObj.role === 'admin');
 
                 return (
                   <div key={item.id} className="bg-white rounded-[24px] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.03)] space-y-3">
@@ -252,13 +233,13 @@ const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || use
                               onClick={() => handleOpenEdit(item)}
                               className="px-3 py-1 bg-sky-50 text-sky-600 rounded-lg hover:bg-sky-100 transition-all cursor-pointer"
                             >
-                               Sửa
+                              Sửa
                             </button>
                             <button 
                               onClick={() => handleDelete(item.id)}
                               className="px-3 py-1 bg-rose-50 text-rose-500 rounded-lg hover:bg-rose-100 transition-all cursor-pointer"
                             >
-                               Xóa
+                              Xóa
                             </button>
                           </div>
                         )}
@@ -274,7 +255,7 @@ const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || use
         </section>
       </main>
 
-      {/* 3. MODAL CHỈNH SỬA ĐÁNH GIÁ */}
+      {/* MODAL CHỈNH SỬA ĐÁNH GIÁ */}
       {editingFeedback && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-3xl p-6 w-full max-w-md space-y-4 shadow-2xl">
