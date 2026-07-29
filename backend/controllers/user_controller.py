@@ -7,14 +7,16 @@ from models.db_models import db, Feedback
 # Nhận trực tiếp current_user từ file route truyền sang
 def get_user_history(current_user):
     try:
-        # Lấy user_id an toàn tuyệt đối bất chấp kiểu dữ liệu
+        # Lấy user_id an toàn từ current_user
         user_id = getattr(current_user, 'id', None)
         if not user_id and isinstance(current_user, dict):
             user_id = current_user.get('id')
+            
+        # NẾU KHÔNG CÓ USER ID THÌ TRẢ VỀ MẢNG RỖNG NGAY LẬP TỨC (Không được gán bừa bằng 1)
         if not user_id:
-            user_id = 1 # Fallback tạm thời nếu không bắt được user
+            return jsonify([]), 200
 
-        # Truy vấn lịch sử từ database
+        # Truy vấn lịch sử chính xác theo ID của user đó
         histories = AssessmentHistory.query.filter_by(user_id=int(user_id)).order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
