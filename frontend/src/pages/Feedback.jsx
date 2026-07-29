@@ -200,9 +200,9 @@ export default function Feedback() {
             ) : (
               filteredFeedbacks.map((item) => {
                 // KIỂM TRA QUYỀN CHÍNH CHỦ HOẶC ADMIN
-                const userLoginName = (currentUser.username || '').trim().toLowerCase();
-                const itemAuthorName = (item.username || '').trim().toLowerCase();
-                
+                const userLoginName = (currentUser.username || currentUser.name || currentUser.email || currentUser.account || '').trim().toLowerCase();
+                const itemAuthorName = (item.username || item.author || '').trim().toLowerCase();
+
                 const isOwner = userLoginName && (userLoginName === itemAuthorName || currentUser.role === 'admin');
 
                 return (
