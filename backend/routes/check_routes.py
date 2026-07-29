@@ -70,21 +70,29 @@ def check_allergy():
 
         # Lưu lịch sử
         try:
+            # 1. Thử lấy user_id từ session
             user_id = session.get('user_id')
-            if not user_id:
-                first_user = User.query.first()
-                user_id = first_user.id if first_user else 1
 
-            new_history = AssessmentHistory(
-                user_id=user_id,
-                drug_name=drug_name,
-                risk_level=risk_val,
-                result_json=json.dumps(response_data, ensure_ascii=False)
-            )
-            db.session.add(new_history)
-            db.session.commit()
+            # 2. Nếu không có trong session, thử lấy từ request headers (nếu frontend truyền lên qua header)
+            if not user_id:
+                user_id = request.headers.get('X-User-Id')
+
+            # 3. Tuyệt đối KHÔNG gán fallback về 1 hay first_user nữa để tránh ghi nhầm lịch sử sang tài khoản khác!
+            if user_id:
+                new_history = AssessmentHistory(
+                    user_id=int(user_id),
+                    drug_name=drug_name,
+                    risk_level=risk_val,
+                    result_json=json.dumps(response_data, ensure_ascii=False)
+                )
+                db.session.add(new_history)
+                db.session.commit()
+            else:
+                print("Không tìm thấy user_id hợp lệ để lưu lịch sử tra cứu.")
+                
         except Exception as db_err:
             print(f"Lỗi lưu lịch sử: {db_err}")
+            db.session.rollback()
 
         return jsonify(response_data), 200
 
