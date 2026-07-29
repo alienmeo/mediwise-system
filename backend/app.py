@@ -81,6 +81,31 @@ def direct_user_history():
 def handle_exception(e):
     return jsonify({"error": "Lỗi hệ thống từ Server", "message": str(e)}), 500
 
+@app.route('/api/feedbacks/<int:feedback_id>', methods=['DELETE', 'OPTIONS'])
+def direct_delete_feedback(feedback_id):
+    if request.method == 'OPTIONS':
+        return '', 200
+    try:
+        # Giả sử model lưu feedback của bạn tên là Feedback (nếu tên khác bạn thay thế vào nhé)
+        # Ví dụ: feedback = Feedback.query.get(feedback_id)
+        
+        # Ở đây mình viết mẫu code truy vấn chuẩn cho Flask-SQLAlchemy:
+        # (Bạn nhớ import model Feedback của bạn ở đầu file app.py nhé)
+        from models.db_models import Feedback # Hoặc model tương ứng của bạn
+        
+        feedback = Feedback.query.get(feedback_id)
+        if not feedback:
+            return jsonify({"error": "Không tìm thấy đánh giá cần xóa"}), 404
+            
+        db.session.delete(feedback)
+        db.session.commit()
+        
+        return jsonify({"status": "success", "message": "Đã xóa đánh giá thành công"}), 200
+    except Exception as e:
+        print(f"Lỗi khi xóa feedback: {e}")
+        db.session.rollback()
+        return jsonify({"error": "Lỗi server khi xóa", "message": str(e)}), 500
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
