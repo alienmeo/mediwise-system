@@ -9,8 +9,19 @@ export default function History() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem('mediwise_user') || '{}');
-    const userId = currentUser.id || currentUser.user_id;
+    // Thử lấy theo 'mediwise_user', nếu không có thì thử các key phổ biến khác như 'user', 'account'
+    const savedUser = localStorage.getItem('mediwise_user') || localStorage.getItem('user');
+    const currentUser = savedUser ? JSON.parse(savedUser) : {};
+    
+    // Lấy id bất chấp tên thuộc tính bên trong object (id, user_id, _id)
+    const userId = currentUser.id || currentUser.user_id || currentUser._id;
+
+    // Nếu vẫn không tìm thấy userId, ta có thể dùng tạm giá trị hoặc dừng gọi API để tránh lỗi 400
+    if (!userId) {
+      console.warn("Không tìm thấy userId trong localStorage để gọi API lịch sử!");
+      setLoading(false);
+      return;
+    }
 
     api.get('/user/history', {
       headers: {
