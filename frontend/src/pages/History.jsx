@@ -12,23 +12,21 @@ export default function History() {
     const savedUser = localStorage.getItem('mediwise_user') || localStorage.getItem('user');
     const currentUser = savedUser ? JSON.parse(savedUser) : {};
     
-    console.log("Object currentUser hiện tại:", currentUser);
-
-    // Lấy username, nếu không có thì lấy phần trước dấu @ của email làm định danh
-    let identifier = currentUser.username;
+    // Ưu tiên lấy username, nếu không có thì lấy phần trước dấu '@' của email làm định danh
+    let identifier = currentUser.username || currentUser.id || currentUser.user_id;
     if (!identifier && currentUser.email) {
-      identifier = currentUser.email.split('@')[0];
+      identifier = currentUser.email.split('@')[0]; // Lấy chữ 'abcde' từ 'abcde@gmail.com'
     }
 
     if (!identifier) {
-      console.warn("Không tìm thấy thông tin định danh trong localStorage!");
+      console.warn("Không tìm thấy thông tin định danh người dùng!");
       setLoading(false);
       return;
     }
 
     api.get('/user/history', {
       headers: {
-        'X-Username': identifier // Hoặc tùy chỉnh theo header phía Backend đang bắt
+        'X-Username': identifier // Hoặc 'X-User-Id' tùy theo backend của bạn đang bắt
       }
     })
       .then(res => setHistories(res.data))
