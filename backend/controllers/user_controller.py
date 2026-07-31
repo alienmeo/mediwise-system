@@ -4,17 +4,19 @@ from models.db_models import AssessmentHistory
 from flask import request, jsonify
 from models.db_models import db, Feedback
 
-# Nhận trực tiếp current_user từ file route truyền sang
 def get_user_history(current_user):
     try:
         # Lấy user_id an toàn tuyệt đối bất chấp kiểu dữ liệu
         user_id = getattr(current_user, 'id', None)
         if not user_id and isinstance(current_user, dict):
             user_id = current_user.get('id')
+            
+        # KHÔNG DÙNG FALLBACK GÁN CỨNG (user_id = 1) NỮA
         if not user_id:
-            user_id = 1 # Fallback tạm thời nếu không bắt được user
+            # Nếu không tìm thấy user, trả về mảng rỗng thay vì lấy nhầm dữ liệu của người khác
+            return jsonify([]), 200
 
-        # Truy vấn lịch sử từ database
+        # Truy vấn lịch sử từ database theo đúng user_id thực tế
         histories = AssessmentHistory.query.filter_by(user_id=int(user_id)).order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
@@ -47,7 +49,7 @@ def get_user_history(current_user):
 
     except Exception as e:
         print(f"LỖI TẠI GET_USER_HISTORY: {e}")
-        return jsonify([]), 200 # Trả về mảng rỗng thay vì lỗi 500 để web không bị crash
+        return jsonify([]), 200
 def send_user_feedback(current_user):
     try:
         data = request.get_json() or {}
