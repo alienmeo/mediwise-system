@@ -44,8 +44,14 @@ def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
     try:
-        # Lấy tạm toàn bộ lịch sử gần nhất trong database để hiển thị ngay lên web cho bạn
-        histories = AssessmentHistory.query.order_by(AssessmentHistory.created_at.desc()).all()
+        # Lấy user_id từ query string (Ví dụ: /api/user/history?user_id=2)
+        user_id = request.args.get('user_id')
+        
+        if not user_id:
+            return jsonify({"error": "Thiếu thông tin người dùng"}), 400
+
+        # Truy vấn lịch sử theo đúng user_id đó
+        histories = AssessmentHistory.query.filter_by(user_id=int(user_id)).order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
         for h in histories:
@@ -76,7 +82,6 @@ def direct_user_history():
     except Exception as e:
         print(f"Lỗi trực tiếp tại app.py: {e}")
         return jsonify([]), 200
-
 @app.errorhandler(Exception)
 def handle_exception(e):
     return jsonify({"error": "Lỗi hệ thống từ Server", "message": str(e)}), 500
