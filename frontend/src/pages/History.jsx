@@ -12,28 +12,26 @@ export default function History() {
     const savedUser = localStorage.getItem('mediwise_user') || localStorage.getItem('user');
     const currentUser = savedUser ? JSON.parse(savedUser) : {};
     
-    // In ra để kiểm tra xem object user đang có những trường dữ liệu nào
     console.log("Object currentUser hiện tại:", currentUser);
 
-    // Thêm các khả năng tên trường có thể xuất hiện (ví dụ: uid, code, account_id...)
-    const userId = currentUser.id || currentUser.user_id || currentUser._id || currentUser.uid;
+    // Lấy trực tiếp username từ object
+    const username = currentUser.username;
 
-    if (!userId) {
-      console.warn("Không tìm thấy userId trong localStorage!");
+    if (!username) {
+      console.warn("Không tìm thấy username trong localStorage!");
       setLoading(false);
       return;
     }
 
     api.get('/user/history', {
       headers: {
-        'X-User-Id': userId
+        'X-Username': username
       }
     })
       .then(res => setHistories(res.data))
       .catch(err => console.error("Lỗi khi tải lịch sử:", err))
       .finally(() => setLoading(false));
   }, []);
-
   const formatRiskLabel = (lvl) => {
     if (!lvl) return 'Thấp';
     const level = lvl.toUpperCase();
