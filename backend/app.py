@@ -44,14 +44,20 @@ def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
     try:
-        # Lấy user_id từ query string (Ví dụ: /api/user/history?user_id=2)
-        user_id = request.args.get('user_id')
+        # Lấy username từ Header do Frontend gửi lên
+        username = request.headers.get('X-Username')
         
-        if not user_id:
+        if not username:
             return jsonify({"error": "Thiếu thông tin người dùng"}), 400
 
-        # Truy vấn lịch sử theo đúng user_id đó
-        histories = AssessmentHistory.query.filter_by(user_id=int(user_id)).order_by(AssessmentHistory.created_at.desc()).all()
+        # Nếu trong database bảng AssessmentHistory của bạn lưu bằng username thay vì user_id:
+        # (Hoặc bạn có thể query tìm user trước rồi lấy id của user đó ra để query history)
+        from models.db_models import User
+        user = User.query.filter_by(username=username).first()
+        if not user:
+            return jsonify([]), 200
+
+        histories = AssessmentHistory.query.filter_by(user_id=user.id).order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
         for h in histories:
