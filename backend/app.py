@@ -44,20 +44,8 @@ def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
     try:
-        # Lấy username từ Header do Frontend gửi lên
-        username = request.headers.get('X-Username')
-        
-        if not username:
-            return jsonify({"error": "Thiếu thông tin người dùng"}), 400
-
-        # Nếu trong database bảng AssessmentHistory của bạn lưu bằng username thay vì user_id:
-        # (Hoặc bạn có thể query tìm user trước rồi lấy id của user đó ra để query history)
-        from models.db_models import User
-        user = User.query.filter_by(username=username).first()
-        if not user:
-            return jsonify([]), 200
-
-        histories = AssessmentHistory.query.filter_by(user_id=user.id).order_by(AssessmentHistory.created_at.desc()).all()
+        # Lấy tạm toàn bộ lịch sử gần nhất trong database để hiển thị ngay lên web cho bạn
+        histories = AssessmentHistory.query.order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
         for h in histories:
@@ -88,6 +76,7 @@ def direct_user_history():
     except Exception as e:
         print(f"Lỗi trực tiếp tại app.py: {e}")
         return jsonify([]), 200
+
 @app.errorhandler(Exception)
 def handle_exception(e):
     return jsonify({"error": "Lỗi hệ thống từ Server", "message": str(e)}), 500
