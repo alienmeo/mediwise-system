@@ -9,30 +9,13 @@ export default function History() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('mediwise_user') || localStorage.getItem('user');
-    const currentUser = savedUser ? JSON.parse(savedUser) : {};
-    
-    // Ưu tiên lấy username, nếu không có thì lấy phần trước dấu '@' của email làm định danh
-    let identifier = currentUser.username || currentUser.id || currentUser.user_id;
-    if (!identifier && currentUser.email) {
-      identifier = currentUser.email.split('@')[0]; // Lấy chữ 'abcde' từ 'abcde@gmail.com'
-    }
-
-    if (!identifier) {
-      console.warn("Không tìm thấy thông tin định danh người dùng!");
-      setLoading(false);
-      return;
-    }
-
-    api.get('/user/history', {
-      headers: {
-        'X-Username': identifier // Hoặc 'X-User-Id' tùy theo backend của bạn đang bắt
-      }
-    })
+    api.get('/user/history')
       .then(res => setHistories(res.data))
-      .catch(err => console.error("Lỗi khi tải lịch sử:", err))
+      .catch(err => console.error(err))
       .finally(() => setLoading(false));
   }, []);
+
+  // 1. Hàm chuyển đổi chữ tiếng Anh sang tiếng Việt
   const formatRiskLabel = (lvl) => {
     if (!lvl) return 'Thấp';
     const level = lvl.toUpperCase();
@@ -41,17 +24,20 @@ export default function History() {
     return 'Thấp';
   };
 
+  // 2. Hàm phân màu sắc tương ứng cho nhãn
   const badgeColor = (lvl) => {
     const level = lvl ? lvl.toUpperCase() : '';
-    if (level === 'CRITICAL' || level === 'HIGH') return 'bg-red-100 text-red-700 border-red-200';
-    if (level === 'MEDIUM') return 'bg-amber-100 text-amber-700 border-amber-200';
-    return 'bg-green-100 text-green-700 border-green-200';
+
+    if (level === 'CRITICAL' || level === 'HIGH') return 'bg-red-100 text-red-700 border-red-200'; // Đỏ cho Cao
+    if (level === 'MEDIUM') return 'bg-amber-100 text-amber-700 border-amber-200'; // Vàng cho Trung bình
+    return 'bg-green-100 text-green-700 border-green-200'; // Xanh cho Thấp
   };
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-4xl mx-auto space-y-6">
         
+        {/* Phần tiêu đề và nút quay lại trang chủ */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-4">
           <h2 className="text-2xl font-black text-gray-800 tracking-tight">
             Sổ tay lịch sử tra cứu dị ứng chéo
@@ -81,6 +67,7 @@ export default function History() {
                   </p>
                 </div>
                 
+                {/* Sử dụng hàm formatRiskLabel để hiển thị tiếng Việt */}
                 <span className={`px-4 py-2 rounded-xl text-xs font-bold border ${badgeColor(h.risk_level)} shadow-sm shrink-0`}>
                   {formatRiskLabel(h.risk_level)}
                 </span>
