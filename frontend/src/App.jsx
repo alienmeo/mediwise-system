@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Wiki from './pages/Wiki'; // Import component Wiki vừa tạo
+
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -13,20 +13,6 @@ import DashboardAdmin from './pages/admin/DashboardAdmin';
 // Import 2 trang đánh giá đúng vai trò:
 import FeedbackPage from './pages/FeedbackPage'; // Trang Tự đánh giá cá nhân
 import Feedback from './pages/Feedback';         // Trang Tổng hợp đánh giá cộng đồng
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* Thêm Route cho Wiki */}
-        <Route path="/wiki" element={<Wiki />} />
-      </Routes>
-    </Router>
-  );
-}
-
-export default App;
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('mediwise_token');
