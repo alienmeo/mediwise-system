@@ -14,18 +14,21 @@ export default function History() {
     
     console.log("Object currentUser hiện tại:", currentUser);
 
-    // Lấy trực tiếp username từ object
-    const username = currentUser.username;
+    // Lấy username, nếu không có thì lấy phần trước dấu @ của email làm định danh
+    let identifier = currentUser.username;
+    if (!identifier && currentUser.email) {
+      identifier = currentUser.email.split('@')[0];
+    }
 
-    if (!username) {
-      console.warn("Không tìm thấy username trong localStorage!");
+    if (!identifier) {
+      console.warn("Không tìm thấy thông tin định danh trong localStorage!");
       setLoading(false);
       return;
     }
 
     api.get('/user/history', {
       headers: {
-        'X-Username': username
+        'X-Username': identifier // Hoặc tùy chỉnh theo header phía Backend đang bắt
       }
     })
       .then(res => setHistories(res.data))
