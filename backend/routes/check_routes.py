@@ -44,7 +44,7 @@ def check_allergy():
                 'drug_name': case.drug_name,
                 'risk_level': risk_val, 
                 'dangerous_components': case.food_name,
-                'cross_components': cross_text, # Chỉ hiển thị khi có nguy cơ
+                'cross_components': cross_text, 
                 'warning_message': case.warning_message,
                 'details': {
                     'recommendations': case.warning_message,
@@ -59,7 +59,7 @@ def check_allergy():
                 'drug_name': drug_name,
                 'risk_level': risk_val,
                 'dangerous_components': 'Không phát hiện',
-                'cross_components': 'Không phát hiện', # Đổi thành không phát hiện khi nguy cơ thấp
+                'cross_components': 'Không phát hiện',
                 'warning_message': f"Chưa ghi nhận tương tác dị ứng chéo giữa '{food_name}' và '{drug_name}'.",
                 'details': {
                     'recommendations': f"Chưa ghi nhận tương tác dị ứng chéo giữa '{food_name}' và '{drug_name}'.",
@@ -68,22 +68,22 @@ def check_allergy():
                 }
             }
 
-        # Lưu lịch sử
+        # Lưu lịch sử (Đã vá lỗi: Chỉ lưu khi xác định đúng user_id, tuyệt đối không gán bừa về user đầu tiên)
         try:
             user_id = session.get('user_id')
-            if not user_id:
-                first_user = User.query.first()
-                user_id = first_user.id if first_user else 1
-
-            new_history = AssessmentHistory(
-                user_id=user_id,
-                drug_name=drug_name,
-                risk_level=risk_val,
-                result_json=json.dumps(response_data, ensure_ascii=False)
-            )
-            db.session.add(new_history)
-            db.session.commit()
+            
+            # Nếu request có gửi kèm token xác thực hoặc xác định được user hợp lệ qua header/session thì mới tiến hành lưu
+            if user_id:
+                new_history = AssessmentHistory(
+                    user_id=user_id,
+                    drug_name=drug_name,
+                    risk_level=risk_val,
+                    result_json=json.dumps(response_data, ensure_ascii=False)
+                )
+                db.session.add(new_history)
+                db.session.commit()
         except Exception as db_err:
+            db.session.rollback()
             print(f"Lỗi lưu lịch sử: {db_err}")
 
         return jsonify(response_data), 200

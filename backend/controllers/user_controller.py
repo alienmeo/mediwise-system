@@ -7,14 +7,17 @@ from models.db_models import db, Feedback
 # Nhận trực tiếp current_user từ file route truyền sang
 def get_user_history(current_user):
     try:
-        # Lấy user_id an toàn tuyệt đối bất chấp kiểu dữ liệu
+        # Lấy user_id an toàn từ đối tượng current_user (do decorator @token_required truyền sang)
         user_id = getattr(current_user, 'id', None)
         if not user_id and isinstance(current_user, dict):
             user_id = current_user.get('id')
+            
+        # KHẮC PHỤC LỖI: Nếu không xác thực được user, trả về mảng rỗng ngay lập tức.
+        # Tuyệt đối không gán giá trị mặc định (như user_id = 1) để tránh làm lộ lịch sử của người khác.
         if not user_id:
-            user_id = 1 # Fallback tạm thời nếu không bắt được user
+            return jsonify([]), 200
 
-        # Truy vấn lịch sử từ database
+        # Truy vấn lịch sử độc lập chỉ lấy riêng của user_id này
         histories = AssessmentHistory.query.filter_by(user_id=int(user_id)).order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
@@ -47,7 +50,7 @@ def get_user_history(current_user):
 
     except Exception as e:
         print(f"LỖI TẠI GET_USER_HISTORY: {e}")
-        return jsonify([]), 200 # Trả về mảng rỗng thay vì lỗi 500 để web không bị crash
+        return jsonify([]), 200 # Trả về mảng rỗng thay vì lỗi 500 để giao diện web không bị treo/crash
 def send_user_feedback(current_user):
     try:
         data = request.get_json() or {}
