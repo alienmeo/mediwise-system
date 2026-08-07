@@ -36,24 +36,22 @@ def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
     try:
-        # Tự động trích xuất user_id từ Token gửi lên trong Header (Bearer Token)
         user_id = None
         auth_header = request.headers.get('Authorization')
         if auth_header and auth_header.startswith('Bearer '):
             token = auth_header.split(" ")[1]
-            import jwt
             try:
+                import jwt
                 payload = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
                 user_id = payload.get('sub') or payload.get('id')
-            except Exception:
-                pass
+            except Exception as jwt_err:
+                print(f"Lỗi giải mã token lịch sử: {jwt_err}")
 
-        # Nếu không có token, lấy user đầu tiên làm fallback tạm thời
+        # Nếu không bắt được token, lấy user đầu tiên làm fallback an toàn
         if not user_id:
             first_user = User.query.first()
             user_id = first_user.id if first_user else 1
 
-        # Chỉ lọc và lấy lịch sử thuộc về đúng user_id đang đăng nhập
         histories = AssessmentHistory.query.filter_by(user_id=user_id).order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
@@ -83,9 +81,8 @@ def direct_user_history():
             
         return jsonify(history_list), 200
     except Exception as e:
-        print(f"Lỗi lấy lịch sử: {str(e)}")
+        print(f"Lỗi tổng quan lấy lịch sử: {str(e)}")
         return jsonify({'error': str(e)}), 500
-
 
 @app.route('/')
 def index():
