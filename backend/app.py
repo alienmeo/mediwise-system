@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from models.db_models import db
 from routes.user_routes import user_bp
@@ -6,13 +6,20 @@ from routes.auth_routes import auth_bp
 from routes.admin_routes import admin_bp
 from routes.check_routes import check_bp
 import json
-from flask import request, jsonify
 from models.db_models import AssessmentHistory
 
 app = Flask(__name__)
 
 # Bật CORS cho phép toàn bộ phương thức và origin
 CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
+
+# Bổ sung middleware để ép trả về đầy đủ header CORS cho mọi request (kể cả preflight OPTIONS)
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Username'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+    return response
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'your-secret-key-mediwise'
@@ -92,12 +99,8 @@ def direct_delete_feedback(feedback_id):
         if not feedback:
             return jsonify({"error": "Không tìm thấy đánh giá cần xóa"}), 404
             
-        # Lấy thông tin username người gửi yêu cầu từ Header (hoặc query params nếu cần)
-        # Frontend có thể truyền username lên qua headers để backend kiểm tra
         requester_username = request.headers.get('X-Username', '').strip().lower()
         
-        # Nếu truyền lên đúng username và không phải chính chủ (đồng thời cũng không phải admin nếu có cơ chế)
-        # Ta có thể chặn ở đây. (Ở đây ta so sánh trực tiếp với feedback.username)
         if requester_username and feedback.username:
             if requester_username != feedback.username.strip().lower():
                 return jsonify({"error": "Bạn không có quyền xóa đánh giá của người khác!"}), 403
