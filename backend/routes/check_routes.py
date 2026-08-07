@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from models.db_models import db, Allergen, Drug, AllergyCase, AssessmentHistory, User
-from controllers.auth_controller import token_required  # Import decorator xác thực token của bạn
+from controllers.auth_controller import token_required  # Import decorator xác thực token
 import json
 
 check_bp = Blueprint('check_bp', __name__)
@@ -15,8 +15,8 @@ def get_options():
     })
 
 @check_bp.route('/check-allergy', methods=['POST'])
-@token_required  # Thêm decorator này để nhận diện đúng tài khoản đang đăng nhập
-def check_allergy(current_user): # Nhận tham số current_user từ token
+@token_required  # Yêu cầu bắt buộc có token để phân biệt tài khoản test và ab
+def check_allergy(current_user): # Nhận tham số current_user từ token xác thực
     try:
         data = request.get_json() or {}
         food_name = data.get('food_name')
@@ -73,7 +73,7 @@ def check_allergy(current_user): # Nhận tham số current_user từ token
         # Lưu lịch sử gắn đúng với ID của tài khoản đang đăng nhập
         try:
             new_history = AssessmentHistory(
-                user_id=current_user.id,  # Lấy trực tiếp ID từ token của người dùng hiện tại
+                user_id=current_user.id,  # Gán chính xác ID của tài khoản hiện tại (test hoặc ab)
                 drug_name=drug_name,
                 risk_level=risk_val,
                 result_json=json.dumps(response_data, ensure_ascii=False)
