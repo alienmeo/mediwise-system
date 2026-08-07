@@ -1,5 +1,6 @@
-from flask import Blueprint, request, jsonify, session
+from flask import Blueprint, request, jsonify
 from models.db_models import db, Allergen, Drug, AllergyCase, AssessmentHistory, User
+from controllers.auth_controller import token_required  # Import decorator xác thực token của bạn
 import json
 
 check_bp = Blueprint('check_bp', __name__)
@@ -14,7 +15,8 @@ def get_options():
     })
 
 @check_bp.route('/check-allergy', methods=['POST'])
-def check_allergy():
+@token_required  # Thêm decorator này để nhận diện đúng tài khoản đang đăng nhập
+def check_allergy(current_user): # Nhận tham số current_user từ token
     try:
         data = request.get_json() or {}
         food_name = data.get('food_name')
@@ -44,7 +46,7 @@ def check_allergy():
                 'drug_name': case.drug_name,
                 'risk_level': risk_val, 
                 'dangerous_components': case.food_name,
-                'cross_components': cross_text, # Chỉ hiển thị khi có nguy cơ
+                'cross_components': cross_text,
                 'warning_message': case.warning_message,
                 'details': {
                     'recommendations': case.warning_message,
@@ -59,7 +61,7 @@ def check_allergy():
                 'drug_name': drug_name,
                 'risk_level': risk_val,
                 'dangerous_components': 'Không phát hiện',
-                'cross_components': 'Không phát hiện', # Đổi thành không phát hiện khi nguy cơ thấp
+                'cross_components': 'Không phát hiện',
                 'warning_message': f"Chưa ghi nhận tương tác dị ứng chéo giữa '{food_name}' và '{drug_name}'.",
                 'details': {
                     'recommendations': f"Chưa ghi nhận tương tác dị ứng chéo giữa '{food_name}' và '{drug_name}'.",
@@ -68,15 +70,10 @@ def check_allergy():
                 }
             }
 
-        # Lưu lịch sử
+        # Lưu lịch sử gắn đúng với ID của tài khoản đang đăng nhập
         try:
-            user_id = session.get('user_id')
-            if not user_id:
-                first_user = User.query.first()
-                user_id = first_user.id if first_user else 1
-
             new_history = AssessmentHistory(
-                user_id=user_id,
+                user_id=current_user.id,  # Lấy trực tiếp ID từ token của người dùng hiện tại
                 drug_name=drug_name,
                 risk_level=risk_val,
                 result_json=json.dumps(response_data, ensure_ascii=False)
