@@ -6,12 +6,16 @@ check_bp = Blueprint('check_bp', __name__)
 
 @check_bp.route('/data-options', methods=['GET'])
 def get_options():
-    allergens = Allergen.query.all()
-    drugs = Drug.query.all()
-    return jsonify({
-        'allergens': [{'id': a.id, 'name': a.name} for a in allergens],
-        'drugs': [{'id': d.id, 'name': d.name} for d in drugs]
-    })
+    try:
+        allergens = Allergen.query.all()
+        drugs = Drug.query.all()
+        return jsonify({
+            'allergens': [{'id': a.id, 'name': a.name} for a in allergens],
+            'drugs': [{'id': d.id, 'name': d.name} for d in drugs]
+        })
+    except Exception as e:
+        print(f"Lỗi data-options: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
 @check_bp.route('/check-allergy', methods=['POST'])
 def check_allergy():
@@ -68,13 +72,12 @@ def check_allergy():
                 }
             }
 
-        # Tự động nhận diện user từ Token hoặc lấy user mặc định để lưu lịch sử mượt mà
+        # Lưu lịch sử với khối bắt lỗi chi tiết
         try:
             user_id = None
             auth_header = request.headers.get('Authorization')
             if auth_header and auth_header.startswith('Bearer '):
                 token = auth_header.split(" ")[1]
-                # Giải mã token lấy user nếu hệ thống của bạn dùng JWT
                 import jwt
                 from flask import current_app
                 try:
@@ -83,10 +86,11 @@ def check_allergy():
                 except Exception:
                     pass
 
-            # Nếu không bắt được user từ token, lấy user đầu tiên làm mặc định
             if not user_id:
                 first_user = User.query.first()
                 user_id = first_user.id if first_user else 1
+
+            print(f"Đang tiến hành lưu lịch sử cho user_id={user_id}, drug={drug_name}")
 
             new_history = AssessmentHistory(
                 user_id=user_id,
@@ -96,8 +100,11 @@ def check_allergy():
             )
             db.session.add(new_history)
             db.session.commit()
+            print("Lưu lịch sử thành công vào database!")
+            
         except Exception as db_err:
-            print(f"Lỗi lưu lịch sử: {db_err}")
+            db.session.rollback() # Hoàn tác transaction nếu lỗi để tránh treo DB
+            print(f"CHI TIẾT LỖI KHI LƯU LỊCH SỬ: {str(db_err)}")
 
         return jsonify(response_data), 200
 
