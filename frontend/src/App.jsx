@@ -12,7 +12,7 @@ import DashboardAdmin from './pages/admin/DashboardAdmin';
 
 // Import 2 trang đánh giá đúng vai trò:
 import FeedbackPage from './pages/FeedbackPage'; // Trang Tự đánh giá cá nhân
-import Feedback from './pages/Feedback';         // Trang Tổng hợp đánh giá cộng đồng
+import Feedback from './pages/Feedback';        // Trang Tổng hợp đánh giá cộng đồng
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('mediwise_token');
