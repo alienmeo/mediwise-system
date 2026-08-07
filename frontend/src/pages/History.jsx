@@ -9,7 +9,7 @@ export default function History() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/history')
+    api.get('/user/history')
       .then(res => setHistories(res.data))
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
