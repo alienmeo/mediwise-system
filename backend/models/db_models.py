@@ -22,27 +22,27 @@ class Allergen(db.Model):
     description = db.Column(db.Text, nullable=True)
 
 class Drug(db.Model):
-    __tablename__ = 'drugs' # Giữ nguyên tên bảng hiện tại của bạn
+    __tablename__ = 'drugs'
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    # Thêm cột active_ingredient để lưu rõ chất chiết xuất (ví dụ: Dầu cá, Glucosamine, Chitosan...)
     active_ingredient = db.Column(db.String(255), nullable=True)
     
 class DrugComponent(db.Model):
     __tablename__ = 'drug_components'
     id = db.Column(db.Integer, primary_key=True)
     drug_id = db.Column(db.Integer, db.ForeignKey('drugs.id'), nullable=False)
-    ingredient_name = db.Column(db.String(255), nullable=False) # Tên chất cụ thể (VD: Glucosamine, Chitin...)
-    description = db.Column(db.String(255), nullable=True)     # Mô tả chi tiết nếu cần
+    ingredient_name = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(255), nullable=True)
 
 class AllergyCase(db.Model):
     __tablename__ = 'allergy_cases'
     id = db.Column(db.Integer, primary_key=True)
     food_name = db.Column(db.String(100), nullable=False)
     drug_name = db.Column(db.String(100), nullable=False)
-    risk_level = db.Column(db.String(20), nullable=False)  # High, Medium, Low
+    risk_level = db.Column(db.String(20), nullable=False)
     warning_message = db.Column(db.Text, nullable=False)
+
 class AssessmentHistory(db.Model):
     __tablename__ = 'assessment_history'
     id = db.Column(db.Integer, primary_key=True)
@@ -51,6 +51,10 @@ class AssessmentHistory(db.Model):
     risk_level = db.Column(db.String(50), nullable=False)
     result_json = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    
+    # Bổ sung quan hệ kết nối ngược lại với User để dễ dàng truy vấn
+    user = db.relationship('User', backref=db.backref('histories', lazy=True))
+
 class Feedback(db.Model):
     __tablename__ = 'feedback'
     
@@ -60,6 +64,4 @@ class Feedback(db.Model):
     comment = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     
-    # Quan hệ liên kết với User (nếu bảng User có backref hoặc relationship tương ứng)
     user = db.relationship('User', backref=db.backref('feedbacks', lazy=True))
-
