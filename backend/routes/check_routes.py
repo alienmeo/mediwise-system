@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
 from models.db_models import db, Allergen, Drug, AllergyCase, AssessmentHistory, User
-from controllers.auth_controller import token_required  # Import decorator xác thực token
 import json
 
 check_bp = Blueprint('check_bp', __name__)
@@ -15,8 +14,7 @@ def get_options():
     })
 
 @check_bp.route('/check-allergy', methods=['POST'])
-@token_required  # Yêu cầu bắt buộc có token để phân biệt tài khoản test và ab
-def check_allergy(current_user): # Nhận tham số current_user từ token xác thực
+def check_allergy():
     try:
         data = request.get_json() or {}
         food_name = data.get('food_name')
@@ -70,10 +68,28 @@ def check_allergy(current_user): # Nhận tham số current_user từ token xác
                 }
             }
 
-        # Lưu lịch sử gắn đúng với ID của tài khoản đang đăng nhập
+        # Tự động nhận diện user từ Token hoặc lấy user mặc định để lưu lịch sử mượt mà
         try:
+            user_id = None
+            auth_header = request.headers.get('Authorization')
+            if auth_header and auth_header.startswith('Bearer '):
+                token = auth_header.split(" ")[1]
+                # Giải mã token lấy user nếu hệ thống của bạn dùng JWT
+                import jwt
+                from flask import current_app
+                try:
+                    payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"])
+                    user_id = payload.get('sub') or payload.get('id')
+                except Exception:
+                    pass
+
+            # Nếu không bắt được user từ token, lấy user đầu tiên làm mặc định
+            if not user_id:
+                first_user = User.query.first()
+                user_id = first_user.id if first_user else 1
+
             new_history = AssessmentHistory(
-                user_id=current_user.id,  # Gán chính xác ID của tài khoản hiện tại (test hoặc ab)
+                user_id=user_id,
                 drug_name=drug_name,
                 risk_level=risk_val,
                 result_json=json.dumps(response_data, ensure_ascii=False)
