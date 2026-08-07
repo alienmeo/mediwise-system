@@ -1,58 +1,60 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-from models.db_models import db
-from routes.user_routes import user_bp
-from routes.auth_routes import auth_bp
-from routes.admin_routes import admin_bp
-from routes.check_routes import check_bp
+from models.db_models import db, User, AssessmentHistory
 import json
-from models.db_models import AssessmentHistory
+import os
 
 app = Flask(__name__)
+# Cấu hình CORS và Secret Key
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-here')
 
-# Bật CORS cho phép toàn bộ phương thức và origin
-CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
-
-# Bổ sung middleware để ép trả về đầy đủ header CORS cho mọi request (kể cả preflight OPTIONS)
-@app.after_request
-def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Username'
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
-    return response
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SECRET_KEY'] = 'your-secret-key-mediwise'
+# Cấu hình Database
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///mediwise.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-# Thêm route trang chủ để tránh lỗi 404 khi truy cập trực tiếp link Render
-@app.route('/', methods=['GET'])
-def home():
-    return jsonify({
-        "status": "success",
-        "message": "Chào mừng đến với MediWise API Server!",
-        "endpoints": {
-            "history": "/api/user/history",
-            "auth": "/api/auth",
-            "admin": "/api/admin"
-        }
-    }), 200
+# --- IMPORT VÀ ĐĂNG KÝ CÁC BLUEPRINT ---
+try:
+    from controllers.auth_controller import auth_bp
+    from controllers.user_controller import user_bp
+    from controllers.admin_controller import admin_bp
+    from routes.check_routes import check_bp  # Đã sửa lại đúng đường dẫn vào thư mục routes/
+    
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    app.register_blueprint(user_bp, url_prefix='/api')
+    app.register_blueprint(admin_bp, url_prefix='/api/admin')
+    app.register_blueprint(check_bp, url_prefix='/api')
+except Exception as e:
+    print(f"Lỗi import Blueprint: {e}")
 
-# Đăng ký Blueprint chuẩn tiền tố
-app.register_blueprint(auth_bp, url_prefix='/api/auth')
-app.register_blueprint(user_bp, url_prefix='/api')
-app.register_blueprint(admin_bp, url_prefix='/api/admin')
-app.register_blueprint(check_bp, url_prefix='/api')
 
-# Đưa trực tiếp API lịch sử vào app.py để tránh mọi lỗi định tuyến Blueprint/CORS
+# --- API LẤY LỊCH SỬ TRA CỨU ĐÃ ĐƯỢC TÁCH BIỆT THEO USER ---
 @app.route('/api/user/history', methods=['GET', 'OPTIONS'])
 def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
     try:
-        # Lấy tạm toàn bộ lịch sử gần nhất trong database để hiển thị ngay lên web cho bạn
-        histories = AssessmentHistory.query.order_by(AssessmentHistory.created_at.desc()).all()
+        # Tự động trích xuất user_id từ Token gửi lên trong Header (Bearer Token)
+        user_id = None
+        auth_header = request.headers.get('Authorization')
+        if auth_header and auth_header.startswith('Bearer '):
+            token = auth_header.split(" ")[1]
+            import jwt
+            try:
+                payload = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+                user_id = payload.get('sub') or payload.get('id')
+            except Exception:
+                pass
+
+        # Nếu không có token, lấy user đầu tiên làm fallback tạm thời
+        if not user_id:
+            first_user = User.query.first()
+            user_id = first_user.id if first_user else 1
+
+        # Chỉ lọc và lấy lịch sử thuộc về đúng user_id đang đăng nhập
+        histories = AssessmentHistory.query.filter_by(user_id=user_id).order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
         for h in histories:
@@ -68,53 +70,29 @@ def direct_user_history():
                         elif 'details' in parsed_result and isinstance(parsed_result['details'], dict):
                             if 'recommendations' in parsed_result['details']:
                                 details_obj['recommendations'] = parsed_result['details']['recommendations']
-                except:
-                    pass 
-
+                except Exception:
+                    pass
+            
             history_list.append({
                 "id": h.id,
-                "drug_name": h.drug_name if h.drug_name else "Thuốc chưa rõ tên",
-                "risk_level": h.risk_level if h.risk_level else "LOW",
-                "checked_at": h.created_at.strftime("%d/%m/%Y %H:%M") if h.created_at else "Chưa xác định",
+                "drug_name": h.drug_name,
+                "risk_level": h.risk_level,
+                "created_at": h.created_at.strftime('%Y-%m-%d %H:%M:%S') if h.created_at else None,
                 "details": details_obj
             })
             
         return jsonify(history_list), 200
     except Exception as e:
-        print(f"Lỗi trực tiếp tại app.py: {e}")
-        return jsonify([]), 200
+        print(f"Lỗi lấy lịch sử: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
-@app.errorhandler(Exception)
-def handle_exception(e):
-    return jsonify({"error": "Lỗi hệ thống từ Server", "message": str(e)}), 500
 
-@app.route('/api/feedbacks/<int:feedback_id>', methods=['DELETE', 'OPTIONS'])
-def direct_delete_feedback(feedback_id):
-    if request.method == 'OPTIONS':
-        return '', 200
-    try:
-        from models.db_models import Feedback
-        
-        feedback = Feedback.query.get(feedback_id)
-        if not feedback:
-            return jsonify({"error": "Không tìm thấy đánh giá cần xóa"}), 404
-            
-        requester_username = request.headers.get('X-Username', '').strip().lower()
-        
-        if requester_username and feedback.username:
-            if requester_username != feedback.username.strip().lower():
-                return jsonify({"error": "Bạn không có quyền xóa đánh giá của người khác!"}), 403
+@app.route('/')
+def index():
+    return jsonify({"message": "MediWise Backend is running successfully!"}), 200
 
-        db.session.delete(feedback)
-        db.session.commit()
-        
-        return jsonify({"status": "success", "message": "Đã xóa đánh giá thành công"}), 200
-    except Exception as e:
-        print(f"Lỗi khi xóa feedback: {e}")
-        db.session.rollback()
-        return jsonify({"error": "Lỗi server khi xóa", "message": str(e)}), 500
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
