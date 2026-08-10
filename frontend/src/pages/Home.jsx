@@ -13,12 +13,13 @@ export default function Home() {
       {/* Khối Logo & Slogan */}
       <div className="text-center space-y-4 max-w-lg mb-8 flex flex-col items-center">
         
-        {/* Biểu tượng Logo */}
+        {/* Biểu tượng Logo - ĐÃ ĐƯỢC PHÓNG TO */}
         <div className="flex justify-center mb-2">
           <img 
             src={logoImg} 
             alt="Mediwise Icon" 
-            className="w-32 h-32 object-contain filter drop-shadow-md transition-transform duration-300 hover:scale-105"
+            // THAY ĐỔI W-32 H-32 THÀNH W-48 H-48 (HOẶC LỚN HƠN NỮA TUỲ Ý)
+            className="w-48 h-48 object-contain filter drop-shadow-md transition-transform duration-300 hover:scale-105"
           />
         </div>
 
