@@ -10,15 +10,14 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#76b4c9] via-[#468093] to-[#204a5c]">
       
-      {/* Khối Logo & Slogan */}
-      <div className="text-center space-y-4 max-w-lg mb-8 flex flex-col items-center">
+      {/* Khối Logo & Slogan (Căn giữa, khoảng cách dưới giữ nguyên) */}
+      <div className="text-center space-y-4 max-w-lg mb-12 flex flex-col items-center">
         
-        {/* Biểu tượng Logo - ĐÃ ĐƯỢC PHÓNG TO */}
+        {/* Biểu tượng Logo */}
         <div className="flex justify-center mb-2">
           <img 
             src={logoImg} 
             alt="Mediwise Icon" 
-            // THAY ĐỔI W-32 H-32 THÀNH W-48 H-48 (HOẶC LỚN HƠN NỮA TUỲ Ý)
             className="w-48 h-48 object-contain filter drop-shadow-md transition-transform duration-300 hover:scale-105"
           />
         </div>
@@ -38,11 +37,11 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Cụm chức năng chuyển hướng */}
-      <div className="w-full max-w-sm space-y-6 text-center">
+      {/* Cụm chức năng chuyển hướng (ĐIỀU CHỈNH KHOẢNG CÁCH TẠI ĐÂY) */}
+      <div className="w-full max-w-sm space-y-8 text-center"> {/* Tăng space-y từ 6 lên 8 */}
         
         {/* Khối 1: Đăng ký */}
-        <div className="space-y-2">
+        <div className="space-y-4"> {/* Tăng space-y từ 2 lên 4 để đẩy chữ ra xa nút */}
           <p className="text-cyan-100/90 font-medium text-sm tracking-wide">
             Bạn là người mới ?
           </p>
@@ -55,7 +54,7 @@ export default function Home() {
         </div>
 
         {/* Khối 2: Đăng nhập */}
-        <div className="space-y-2 pt-2">
+        <div className="space-y-4"> {/* Tăng space-y từ 2 lên 4 */}
           <p className="text-cyan-100/90 font-medium text-sm tracking-wide">
             Bạn đã có tài khoản ?
           </p>
