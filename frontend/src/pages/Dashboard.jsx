@@ -12,17 +12,17 @@ export default function Dashboard() {
     <div className="flex min-h-screen bg-[#f4f7fc]">
       
       {/* 1. SIDEBAR BÊN TRÁI */}
-      <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
+      <aside className="w-80 bg-white border-r border-gray-100 px-3 py-6 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
         <div className="space-y-12">
           
-          {/* Brand Logo Header: To hơn và xích sát lề trái */}
-          <div className="flex items-center justify-start space-x-1 cursor-pointer w-full overflow-hidden -ml-2" onClick={() => navigate('/')}>
+          {/* Brand Logo Header: Dịch sát hẳn sang lề trái */}
+          <div className="flex items-center justify-start space-x-1 cursor-pointer w-full overflow-hidden -ml-3" onClick={() => navigate('/')}>
             <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
-            <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[200px] shrink-0" />
+            <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0" />
           </div>
 
           {/* Navigation Buttons */}
-          <nav className="space-y-4">
+          <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/Assessment')} 
               className="w-full py-4 px-6 rounded-full bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-left transition-all text-sm flex items-center space-x-3 shadow-md cursor-pointer"
@@ -56,7 +56,7 @@ export default function Dashboard() {
         </div>
 
         {/* Nút Back ở góc dưới sidebar */}
-        <div>
+        <div className="px-3">
           <button 
             onClick={() => navigate(-1)}
             className="w-12 h-12 rounded-2xl bg-[#144064] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
