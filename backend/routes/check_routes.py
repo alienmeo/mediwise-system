@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from models.db_models import db, Allergen, Drug, AllergyCase, AssessmentHistory, User
 import json
 
@@ -6,16 +6,12 @@ check_bp = Blueprint('check_bp', __name__)
 
 @check_bp.route('/data-options', methods=['GET'])
 def get_options():
-    try:
-        allergens = Allergen.query.all()
-        drugs = Drug.query.all()
-        return jsonify({
-            'allergens': [{'id': a.id, 'name': a.name} for a in allergens],
-            'drugs': [{'id': d.id, 'name': d.name} for d in drugs]
-        })
-    except Exception as e:
-        print(f"Lỗi data-options: {str(e)}")
-        return jsonify({'error': str(e)}), 500
+    allergens = Allergen.query.all()
+    drugs = Drug.query.all()
+    return jsonify({
+        'allergens': [{'id': a.id, 'name': a.name} for a in allergens],
+        'drugs': [{'id': d.id, 'name': d.name} for d in drugs]
+    })
 
 @check_bp.route('/check-allergy', methods=['POST'])
 def check_allergy():
@@ -48,7 +44,7 @@ def check_allergy():
                 'drug_name': case.drug_name,
                 'risk_level': risk_val, 
                 'dangerous_components': case.food_name,
-                'cross_components': cross_text,
+                'cross_components': cross_text, # Chỉ hiển thị khi có nguy cơ
                 'warning_message': case.warning_message,
                 'details': {
                     'recommendations': case.warning_message,
@@ -63,7 +59,7 @@ def check_allergy():
                 'drug_name': drug_name,
                 'risk_level': risk_val,
                 'dangerous_components': 'Không phát hiện',
-                'cross_components': 'Không phát hiện',
+                'cross_components': 'Không phát hiện', # Đổi thành không phát hiện khi nguy cơ thấp
                 'warning_message': f"Chưa ghi nhận tương tác dị ứng chéo giữa '{food_name}' và '{drug_name}'.",
                 'details': {
                     'recommendations': f"Chưa ghi nhận tương tác dị ứng chéo giữa '{food_name}' và '{drug_name}'.",
@@ -72,25 +68,12 @@ def check_allergy():
                 }
             }
 
-        # Lưu lịch sử với khối bắt lỗi chi tiết
+        # Lưu lịch sử
         try:
-            user_id = None
-            auth_header = request.headers.get('Authorization')
-            if auth_header and auth_header.startswith('Bearer '):
-                token = auth_header.split(" ")[1]
-                import jwt
-                from flask import current_app
-                try:
-                    payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"])
-                    user_id = payload.get('sub') or payload.get('id')
-                except Exception:
-                    pass
-
+            user_id = session.get('user_id')
             if not user_id:
                 first_user = User.query.first()
                 user_id = first_user.id if first_user else 1
-
-            print(f"Đang tiến hành lưu lịch sử cho user_id={user_id}, drug={drug_name}")
 
             new_history = AssessmentHistory(
                 user_id=user_id,
@@ -100,11 +83,8 @@ def check_allergy():
             )
             db.session.add(new_history)
             db.session.commit()
-            print("Lưu lịch sử thành công vào database!")
-            
         except Exception as db_err:
-            db.session.rollback() # Hoàn tác transaction nếu lỗi để tránh treo DB
-            print(f"CHI TIẾT LỖI KHI LƯU LỊCH SỬ: {str(db_err)}")
+            print(f"Lỗi lưu lịch sử: {db_err}")
 
         return jsonify(response_data), 200
 
