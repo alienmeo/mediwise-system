@@ -24,11 +24,11 @@ export default function Home() {
         {/* 2. Cả khối bên dưới được kéo chồng lên viền dưới của logo bằng -mt-14 */}
         <div className="flex flex-col items-center w-full space-y-2.5 -mt-14">
           
-          {/* Tên thương hiệu (Đã bỏ đổ bóng) */}
+          {/* Tên thương hiệu (Đã thêm viền trắng nổi bật quanh chữ) */}
           <img 
             src={brandTextImg} 
             alt="Mediwise" 
-            className="h-auto w-full max-w-xs object-contain"
+            className="h-auto w-full max-w-xs object-contain filter drop-shadow-[0_0_2px_rgba(255,255,255,1)] drop-shadow-[0_0_2px_rgba(255,255,255,1)]"
           />
 
           {/* Slogan */}
