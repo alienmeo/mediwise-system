@@ -1,14 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import logoImg from './logo.png'; 
-import brandTextImg from './title.png'; 
-
 export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-gradient-to-b from-[#6ba4b8] via-[#4d8b9e] to-[#285d70]">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#76b4c9] via-[#468093] to-[#204a5c]">
       
       {/* Khối Logo & Slogan */}
       <div className="text-center space-y-4 max-w-lg mb-8 flex flex-col items-center">
