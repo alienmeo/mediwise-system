@@ -8,7 +8,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-gradient-to-r from-pink-200 via-purple-100 to-sky-200">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-gradient-to-b from-[#6ba4b8] via-[#4d8b9e] to-[#285d70]">
       
       {/* Khối Logo & Slogan */}
       <div className="text-center space-y-4 max-w-lg mb-8 flex flex-col items-center">
@@ -22,17 +22,17 @@ export default function Home() {
           />
         </div>
 
-        {/* Hình ảnh tên thương hiệu Mediwise */}
+        {/* Hình ảnh tên thương hiệu */}
         <div className="flex justify-center w-full">
           <img 
             src={brandTextImg} 
             alt="Mediwise" 
-            className="h-auto w-full max-w-sm object-contain filter drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]"
+            className="h-auto w-full max-w-sm object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
           />
         </div>
 
         {/* Slogan */}
-        <p className="text-xl sm:text-2xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide pt-2">
+        <p className="text-lg sm:text-xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide pt-1">
           An toàn hôm nay - vững vàng ngày mai
         </p>
       </div>
@@ -40,27 +40,27 @@ export default function Home() {
       {/* Cụm chức năng chuyển hướng */}
       <div className="w-full max-w-sm space-y-6 text-center">
         
-        {/* Khối 1: Đăng ký (MÀU XANH PASTEL DỊU) */}
+        {/* Khối 1: Đăng ký */}
         <div className="space-y-2">
-          <p className="text-pink-600/90 font-semibold text-sm">
+          <p className="text-cyan-100/90 font-medium text-sm tracking-wide">
             Bạn là người mới ?
           </p>
           <button 
             onClick={() => navigate('/register')}
-            className="w-full py-3.5 px-6 rounded-full bg-sky-300/90 hover:bg-sky-400 text-sky-950 font-bold text-base shadow-sm active:scale-95 transition-all duration-200 border-b-2 border-sky-400/40"
+            className="w-full py-3.5 px-6 rounded-full bg-[#407d8e] hover:bg-[#356877] text-white font-semibold text-base shadow-lg active:scale-95 transition-all duration-200 border border-cyan-300/30"
           >
             Đăng kí tài khoản
           </button>
         </div>
 
-        {/* Khối 2: Đăng nhập (MÀU HỒNG PASTEL DỊU) */}
+        {/* Khối 2: Đăng nhập */}
         <div className="space-y-2 pt-2">
-          <p className="text-pink-600/90 font-semibold text-sm">
+          <p className="text-cyan-100/90 font-medium text-sm tracking-wide">
             Bạn đã có tài khoản ?
           </p>
           <button 
             onClick={() => navigate('/login')}
-            className="w-full py-3.5 px-6 rounded-full bg-pink-300/90 hover:bg-pink-400 text-pink-950 font-bold text-base shadow-sm active:scale-95 transition-all duration-200 border-b-2 border-pink-400/40"
+            className="w-full py-3.5 px-6 rounded-full bg-[#1b4353] hover:bg-[#143340] text-white font-semibold text-base shadow-lg active:scale-95 transition-all duration-200 border border-cyan-400/20"
           >
             Đăng nhập ngay
           </button>
