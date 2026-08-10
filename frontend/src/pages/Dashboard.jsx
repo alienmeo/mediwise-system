@@ -15,10 +15,10 @@ export default function Dashboard() {
       <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col justify-between shrink-0 shadow-sm">
         <div className="space-y-12">
           
-          {/* Brand Logo Header: Cho logo to hơn và xích gần lại nhau */}
-          <div className="flex items-center space-x-1 cursor-pointer" onClick={() => navigate('/')}>
-            <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain" />
-            <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain" />
+          {/* Brand Logo Header: Kéo chữ tiêu đề xích sát vào logo icon */}
+          <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
+            <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
+            <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain -ml-2 shrink-0" />
           </div>
 
           {/* Navigation Buttons */}
