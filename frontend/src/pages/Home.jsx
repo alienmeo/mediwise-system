@@ -8,7 +8,6 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    // Đã thay đổi background gradient ở đây
     <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#1c5c7a] via-[#76a9c1] to-[#d0e6f0]">
       
       {/* Khối tổng thể căn giữa */}
@@ -24,11 +23,11 @@ export default function Home() {
         {/* 2. Cả khối bên dưới được kéo chồng lên viền dưới của logo bằng -mt-14 */}
         <div className="flex flex-col items-center w-full space-y-2.5 -mt-14">
           
-          {/* Tên thương hiệu */}
+          {/* Tên thương hiệu (Đã xóa bỏ đổ bóng) */}
           <img 
             src={brandTextImg} 
             alt="Mediwise" 
-            className="h-auto w-full max-w-xs object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+            className="h-auto w-full max-w-xs object-contain"
           />
 
           {/* Slogan */}
