@@ -76,7 +76,7 @@ export default function Dashboard() {
           
           {/* ALG Wiki Button */}
           <button 
-            onClick={() => navigate('/wikipage')}
+            onClick={() => navigate('/wiki')}
             className="bg-[#144064] hover:bg-[#0f324f] text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-md transition-all flex flex-col items-center justify-center cursor-pointer leading-tight"
           >
             <span>ALG</span>
