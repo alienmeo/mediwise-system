@@ -124,23 +124,23 @@ export default function Dashboard() {
             </p>
           </div>
 
-          {/* Card 1: Kiểm tra nguy cơ (Icon Khiên 3D) */}
+          {/* Card 1: Kiểm tra nguy cơ (Icon Khiên 3D đậm màu) */}
           <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-b from-[#eaf2fc] to-[#d4e5fc] flex items-center justify-center shrink-0 shadow-inner border border-blue-100 p-2">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-sm">
-                  <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" fill="url(#shieldGrad1)" stroke="#1a5282" strokeWidth="0.5" strokeLinejoin="round"/>
-                  <path d="M12 20.5C12 20.5 18.5 17 18.5 11.5V6.2L12 3.8L5.5 6.2V11.5C5.5 17 12 20.5 12 20.5Z" fill="url(#innerGrad1)" stroke="#60a5fa" strokeWidth="0.8"/>
-                  <path d="M12 7.5C14.2 7.5 15.5 8.3 16 9.5C16 12 14.5 14.2 12 15.5C9.5 14.2 8 12 8 9.5C8.5 8.3 9.8 7.5 12 7.5Z" fill="#144064" opacity="0.9"/>
-                  <path d="M10.2 12.2L11.5 13.5L14.2 10.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-b from-[#cfe2fc] to-[#a6ccfa] flex items-center justify-center shrink-0 shadow-inner border border-blue-200 p-2">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-md">
+                  <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" fill="url(#shieldGradDark)" stroke="#0d2c46" strokeWidth="0.8" strokeLinejoin="round"/>
+                  <path d="M12 20.5C12 20.5 18.5 17 18.5 11.5V6.2L12 3.8L5.5 6.2V11.5C5.5 17 12 20.5 12 20.5Z" fill="url(#innerGradDark)" stroke="#3b82f6" strokeWidth="1"/>
+                  <path d="M12 7.5C14.2 7.5 15.5 8.3 16 9.5C16 12 14.5 14.2 12 15.5C9.5 14.2 8 12 8 9.5C8.5 8.3 9.8 7.5 12 7.5Z" fill="#0d2c46" opacity="0.95"/>
+                  <path d="M10.2 12.2L11.5 13.5L14.2 10.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <defs>
-                    <linearGradient id="shieldGrad1" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#3b82f6"/>
-                      <stop offset="1" stopColor="#1e3a8a"/>
+                    <linearGradient id="shieldGradDark" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#144064"/>
+                      <stop offset="1" stopColor="#0a2236"/>
                     </linearGradient>
-                    <linearGradient id="innerGrad1" x1="12" y1="3.8" x2="12" y2="20.5" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#60a5fa"/>
-                      <stop offset="1" stopColor="#1d4ed8"/>
+                    <linearGradient id="innerGradDark" x1="12" y1="3.8" x2="12" y2="20.5" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#2563eb"/>
+                      <stop offset="1" stopColor="#1e3a8a"/>
                     </linearGradient>
                   </defs>
                 </svg>
@@ -163,17 +163,17 @@ export default function Dashboard() {
             </button>
           </div>
 
-          {/* Card 2: Lịch sử kiểm tra (Icon Đồng hồ / Lịch sử 3D) */}
+          {/* Card 2: Lịch sử kiểm tra (Icon Đồng hồ 3D đậm màu) */}
           <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-b from-[#eaf2fc] to-[#d4e5fc] flex items-center justify-center shrink-0 shadow-inner border border-blue-100 p-2.5">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-sm">
-                  <circle cx="12" cy="12" r="9" fill="url(#clockGrad)" stroke="#1a5282" strokeWidth="0.8"/>
-                  <path d="M12 7V12L15 14.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-b from-[#cfe2fc] to-[#a6ccfa] flex items-center justify-center shrink-0 shadow-inner border border-blue-200 p-2.5">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-md">
+                  <circle cx="12" cy="12" r="9" fill="url(#clockGradDark)" stroke="#0d2c46" strokeWidth="1"/>
+                  <path d="M12 7V12L15 14.5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                   <defs>
-                    <linearGradient id="clockGrad" x1="12" y1="3" x2="12" y2="21" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#3b82f6"/>
-                      <stop offset="1" stopColor="#1e3a8a"/>
+                    <linearGradient id="clockGradDark" x1="12" y1="3" x2="12" y2="21" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#144064"/>
+                      <stop offset="1" stopColor="#0a2236"/>
                     </linearGradient>
                   </defs>
                 </svg>
