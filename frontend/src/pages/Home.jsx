@@ -10,17 +10,18 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#76b4c9] via-[#468093] to-[#204a5c]">
       
-      {/* Khối tổng thể gom chung logo và các nút để căn giữa tuyệt đối */}
+      {/* Khối tổng thể căn giữa màn hình */}
       <div className="flex flex-col items-center text-center max-w-sm w-full space-y-6">
         
         {/* Khối Logo & Slogan */}
-        <div className="flex flex-col items-center space-y-2 w-full">
-          {/* Biểu tượng Logo */}
+        <div className="flex flex-col items-center space-y-3 w-full">
+          
+          {/* Biểu tượng Logo (Đã phóng to to rõ) */}
           <div className="flex justify-center">
             <img 
               src={logoImg} 
               alt="Mediwise Icon" 
-              className="w-48 h-48 object-contain filter drop-shadow-lg transition-transform duration-300 hover:scale-105"
+              className="w-60 h-60 object-contain filter drop-shadow-xl transition-transform duration-300 hover:scale-105"
             />
           </div>
 
@@ -40,7 +41,7 @@ export default function Home() {
         </div>
 
         {/* Cụm chức năng chuyển hướng */}
-        <div className="w-full space-y-4 pt-2">
+        <div className="w-full space-y-4 pt-1">
           
           {/* Khối 1: Đăng ký */}
           <div className="space-y-1.5">
@@ -49,7 +50,7 @@ export default function Home() {
             </p>
             <button 
               onClick={() => navigate('/register')}
-              className="w-full py-3 px-6 rounded-full bg-[#407d8e] hover:bg-[#356877] text-white font-semibold text-base shadow-lg active:scale-95 transition-all duration-200 border border-cyan-300/30"
+              className="w-full py-3.5 px-6 rounded-full bg-[#407d8e] hover:bg-[#356877] text-white font-semibold text-base shadow-lg active:scale-95 transition-all duration-200 border border-cyan-300/30"
             >
               Đăng kí tài khoản
             </button>
@@ -62,7 +63,7 @@ export default function Home() {
             </p>
             <button 
               onClick={() => navigate('/login')}
-              className="w-full py-3 px-6 rounded-full bg-[#1b4353] hover:bg-[#143340] text-white font-semibold text-base shadow-lg active:scale-95 transition-all duration-200 border border-cyan-400/20"
+              className="w-full py-3.5 px-6 rounded-full bg-[#1b4353] hover:bg-[#143340] text-white font-semibold text-base shadow-lg active:scale-95 transition-all duration-200 border border-cyan-400/20"
             >
               Đăng nhập ngay
             </button>
