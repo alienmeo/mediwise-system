@@ -9,8 +9,9 @@ import Profile from './pages/Profile';
 import Result from './pages/Result';
 import History from './pages/History';
 import DashboardAdmin from './pages/admin/DashboardAdmin';
+import Wiki from './pages/Wiki'; // Import trang Wiki vừa tạo
 
-// Import 2 trang đánh giá đúng vai trò:
+// Import các trang đánh giá:
 import FeedbackPage from './pages/FeedbackPage'; // Trang Tự đánh giá cá nhân
 import Feedback from './pages/Feedback';        // Trang Tổng hợp đánh giá cộng đồng
 
@@ -35,10 +36,13 @@ export default function App() {
         <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         
-        {/* 1. Trang TỰ ĐÁNH GIÁ CÁ NHÂN (FeedbackPage) */}
+        {/* Trang Wiki */}
+        <Route path="/wiki" element={<ProtectedRoute><Wiki /></ProtectedRoute>} />
+        
+        {/* Trang TỰ ĐÁNH GIÁ CÁ NHÂN (FeedbackPage) */}
         <Route path="/FeedbackPage" element={<ProtectedRoute><FeedbackPage /></ProtectedRoute>} />
         
-        {/* 2. Trang TỔNG HỢP TẤT CẢ ĐÁNH GIÁ (Feedback) */}
+        {/* Trang TỔNG HỢP TẤT CẢ ĐÁNH GIÁ (Feedback) */}
         <Route path="/feedback" element={<ProtectedRoute><Feedback /></ProtectedRoute>} />
         
         {/* Admin Route */}
