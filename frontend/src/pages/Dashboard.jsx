@@ -12,13 +12,13 @@ export default function Dashboard() {
     <div className="flex min-h-screen bg-[#f4f7fc]">
       
       {/* 1. SIDEBAR BÊN TRÁI */}
-      <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col justify-between shrink-0 shadow-sm">
+      <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
         <div className="space-y-12">
           
-          {/* Brand Logo Header: Kéo chữ tiêu đề xích sát vào logo icon */}
-          <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
-            <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
-            <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain -ml-2 shrink-0" />
+          {/* Brand Logo Header: Giới hạn không gian container để không bị tràn lề */}
+          <div className="flex items-center space-x-2 cursor-pointer w-full overflow-hidden" onClick={() => navigate('/')}>
+            <img src={logoImg} alt="Aellergis Logo" className="h-12 w-auto object-contain shrink-0" />
+            <img src={brandTextImg} alt="Aellergis" className="h-8 w-auto object-contain max-w-[150px] shrink" />
           </div>
 
           {/* Navigation Buttons */}
