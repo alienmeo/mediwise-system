@@ -8,8 +8,8 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    // Đã cập nhật background gradient chuẩn theo hình mẫu mới
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-gradient-to-r from-[#163853] via-[#468093] to-[#7ac2cb]">
+    // Đã đổi lại background thành hiệu ứng tỏa sáng từ tâm (radial gradient) giống mẫu
+    <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#76b5c5] via-[#3a7287] to-[#123147]">
       
       {/* Khối tổng thể căn giữa */}
       <div className="flex flex-col items-center text-center max-w-sm w-full">
