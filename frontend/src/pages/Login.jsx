@@ -162,7 +162,7 @@ export default function Login({ isRegisterMode = false }) {
               type="password"
               disabled={loading}
               className="w-full px-5 py-4 bg-gray-50/80 border border-gray-300 rounded-2xl outline-none focus:border-cyan-600 focus:ring-2 focus:ring-cyan-100 text-gray-800 placeholder-gray-400 text-sm transition-all disabled:opacity-60"
-              placeholder="────────" 
+              placeholder=". . . . . ." 
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
