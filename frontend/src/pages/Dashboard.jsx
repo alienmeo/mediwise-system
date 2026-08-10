@@ -15,10 +15,10 @@ export default function Dashboard() {
       <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col justify-between shrink-0 shadow-sm">
         <div className="space-y-12">
           
-          {/* Brand Logo Header */}
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/')}>
-            <img src={logoImg} alt="Aellergis Logo" className="h-12 w-auto object-contain" />
-            <img src={brandTextImg} alt="Aellergis" className="h-9 w-auto object-contain" />
+          {/* Brand Logo Header: Cho logo to hơn và xích gần lại nhau */}
+          <div className="flex items-center space-x-1 cursor-pointer" onClick={() => navigate('/')}>
+            <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain" />
+            <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain" />
           </div>
 
           {/* Navigation Buttons */}
@@ -74,7 +74,7 @@ export default function Dashboard() {
         {/* Top Navbar */}
         <header className="h-28 px-10 flex items-center justify-end space-x-4">
           
-          {/* ALG Wiki Button -> Chuyển hướng sang trang wikipage */}
+          {/* ALG Wiki Button */}
           <button 
             onClick={() => navigate('/wikipage')}
             className="bg-[#144064] hover:bg-[#0f324f] text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-md transition-all flex flex-col items-center justify-center cursor-pointer leading-tight"
@@ -120,7 +120,7 @@ export default function Dashboard() {
               Chào mừng bạn đã quay lại!
             </h1>
             <p className="text-gray-500 font-medium mt-1 text-sm">
-              MediWise mong rằng mỗi ngày trôi qua bạn sẽ trở nên khoẻ mạnh hơn.
+              Aellergis mong rằng mỗi ngày trôi qua bạn sẽ trở nên khoẻ mạnh hơn.
             </p>
           </div>
 
