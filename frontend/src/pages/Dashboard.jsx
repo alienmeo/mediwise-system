@@ -15,10 +15,10 @@ export default function Dashboard() {
       <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
         <div className="space-y-12">
           
-          {/* Brand Logo Header: Tăng kích thước to hơn nhưng khít lề sidebar */}
-          <div className="flex items-center space-x-2 cursor-pointer w-full overflow-hidden pr-2" onClick={() => navigate('/')}>
-            <img src={logoImg} alt="Aellergis Logo" className="h-14 w-auto object-contain shrink-0" />
-            <img src={brandTextImg} alt="Aellergis" className="h-10 w-auto object-contain max-w-[170px] shrink" />
+          {/* Brand Logo Header: To hơn và xích sát lề trái */}
+          <div className="flex items-center justify-start space-x-1 cursor-pointer w-full overflow-hidden -ml-2" onClick={() => navigate('/')}>
+            <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
+            <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[200px] shrink-0" />
           </div>
 
           {/* Navigation Buttons */}
