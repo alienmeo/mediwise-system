@@ -8,7 +8,8 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#76b4c9] via-[#468093] to-[#204a5c]">
+    // Đã thay đổi background gradient ở đây
+    <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#1c5c7a] via-[#76a9c1] to-[#d0e6f0]">
       
       {/* Khối tổng thể căn giữa */}
       <div className="flex flex-col items-center text-center max-w-sm w-full">
@@ -20,7 +21,7 @@ export default function Home() {
           className="w-72 h-72 object-contain filter drop-shadow-2xl transition-transform duration-300 hover:scale-105"
         />
 
-        {/* 2. Cả khối bên dưới được kéo chồng lên viền dưới của logo bằng -mt-14 hoặc -mt-16 */}
+        {/* 2. Cả khối bên dưới được kéo chồng lên viền dưới của logo bằng -mt-14 */}
         <div className="flex flex-col items-center w-full space-y-2.5 -mt-14">
           
           {/* Tên thương hiệu */}
