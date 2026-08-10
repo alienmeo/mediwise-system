@@ -124,12 +124,25 @@ export default function Dashboard() {
             </p>
           </div>
 
-          {/* Card 1: Kiểm tra nguy cơ */}
+          {/* Card 1: Kiểm tra nguy cơ (Icon Khiên 3D) */}
           <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-9 h-9">
-                  <path fillRule="evenodd" d="M12 1.5c-1.92 0-3.72.56-5.23 1.53-.9.59-1.28 1.72-.88 2.69.96 2.34 2.28 4.46 3.89 6.22 1.09 1.2 2.3 2.24 3.6 3.12 1.3-.88 2.51-1.92 3.6-3.12 1.61-1.76 2.93-3.88 3.89-6.22.4-.97.02-2.1-.88-2.69A9.974 9.974 0 0012 1.5zm0 14.25c-3.14 0-6.14 1.15-8.48 3.23-.48.42-.77 1.03-.77 1.67 0 1.25 1.01 2.25 2.25 2.25h14c1.24 0 2.25-1.01 2.25-2.25 0-.64-.29-1.25-.77-1.67-2.34-2.08-5.34-3.23-8.48-3.23z" clipRule="evenodd" />
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-b from-[#eaf2fc] to-[#d4e5fc] flex items-center justify-center shrink-0 shadow-inner border border-blue-100 p-2">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-sm">
+                  <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" fill="url(#shieldGrad1)" stroke="#1a5282" strokeWidth="0.5" strokeLinejoin="round"/>
+                  <path d="M12 20.5C12 20.5 18.5 17 18.5 11.5V6.2L12 3.8L5.5 6.2V11.5C5.5 17 12 20.5 12 20.5Z" fill="url(#innerGrad1)" stroke="#60a5fa" strokeWidth="0.8"/>
+                  <path d="M12 7.5C14.2 7.5 15.5 8.3 16 9.5C16 12 14.5 14.2 12 15.5C9.5 14.2 8 12 8 9.5C8.5 8.3 9.8 7.5 12 7.5Z" fill="#144064" opacity="0.9"/>
+                  <path d="M10.2 12.2L11.5 13.5L14.2 10.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  <defs>
+                    <linearGradient id="shieldGrad1" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#3b82f6"/>
+                      <stop offset="1" stopColor="#1e3a8a"/>
+                    </linearGradient>
+                    <linearGradient id="innerGrad1" x1="12" y1="3.8" x2="12" y2="20.5" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#60a5fa"/>
+                      <stop offset="1" stopColor="#1d4ed8"/>
+                    </linearGradient>
+                  </defs>
                 </svg>
               </div>
               <div className="space-y-1">
@@ -150,13 +163,19 @@ export default function Dashboard() {
             </button>
           </div>
 
-          {/* Card 2: Lịch sử kiểm tra */}
+          {/* Card 2: Lịch sử kiểm tra (Icon Đồng hồ / Lịch sử 3D) */}
           <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-9 h-9">
-                  <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h9a1.5 1.5 0 001.5-1.5V5.25a1.5 1.5 0 00-1.5-1.5h-9zM6 2.25A3 3 0 003 5.25v13.5a3 3 0 003 3h9a3 3 0 003-3V5.25a3 3 0 00-3-3H6z" clipRule="evenodd" />
-                  <path d="M7.5 8.25a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM7.5 12a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM7.5 15.75a.75.75 0 01.75-.75h4.5a.75.75 0 010 1.5h-4.5a.75.75 0 01-.75-.75z" />
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-b from-[#eaf2fc] to-[#d4e5fc] flex items-center justify-center shrink-0 shadow-inner border border-blue-100 p-2.5">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-sm">
+                  <circle cx="12" cy="12" r="9" fill="url(#clockGrad)" stroke="#1a5282" strokeWidth="0.8"/>
+                  <path d="M12 7V12L15 14.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <defs>
+                    <linearGradient id="clockGrad" x1="12" y1="3" x2="12" y2="21" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#3b82f6"/>
+                      <stop offset="1" stopColor="#1e3a8a"/>
+                    </linearGradient>
+                  </defs>
                 </svg>
               </div>
               <div className="space-y-1">
