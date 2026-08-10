@@ -9,66 +9,100 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex min-h-screen bg-[#f8fafc]">
+    <div className="flex min-h-screen bg-[#f4f7fc]">
       
       {/* 1. SIDEBAR BÊN TRÁI */}
-      <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col shrink-0">
-        <div className="space-y-10">
+      <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col justify-between shrink-0 shadow-sm">
+        <div className="space-y-12">
           
           {/* Brand Logo Header */}
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/')}>
-            <img src={logoImg} alt="Mediwise Logo" className="h-14 w-auto object-contain" />
-            <img src={brandTextImg} alt="Mediwise" className="h-10 w-auto object-contain" />
+            <img src={logoImg} alt="Aellergis Logo" className="h-12 w-auto object-contain" />
+            <img src={brandTextImg} alt="Aellergis" className="h-9 w-auto object-contain" />
           </div>
 
-          {/* Navigation Buttons  */}
+          {/* Navigation Buttons */}
           <nav className="space-y-4">
             <button 
-  onClick={() => navigate('/feedback')} 
-  className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer"
->
-  Đánh giá của người dùng
-</button>
+              onClick={() => navigate('/Assessment')} 
+              className="w-full py-4 px-6 rounded-full bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-left transition-all text-sm flex items-center space-x-3 shadow-md cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 shrink-0">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+              <span>Bắt đầu khảo sát mới</span>
+            </button>
+
+            <button 
+              onClick={() => navigate('/feedback')} 
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0 opacity-80">
+                <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.107a.75.75 0 01-.725.64h-12.8a.75.75 0 01-.725-.64l-.001-.107v-.003zM16.5 18.375a6.375 6.375 0 0111.419-3.922.75.75 0 01-.118.995l-3.375 2.625a.75.75 0 01-.932 0l-1.688-1.313a.75.75 0 01.932-1.17l1.096.853 2.64-2.052a4.875 4.875 0 00-7.854 2.977.75.75 0 01-.75.75h-.375z" />
+              </svg>
+              <span>Đánh giá của người dùng</span>
+            </button>
 
             <button 
               onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
-              Xem lại kết quả gần nhất
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 opacity-80">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+              </svg>
+              <span>Xem lại kết quả gần nhất</span>
             </button>
           </nav>
         </div>
 
-       
+        {/* Nút Back ở góc dưới sidebar */}
+        <div>
+          <button 
+            onClick={() => navigate(-1)}
+            className="w-12 h-12 rounded-2xl bg-[#144064] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+            </svg>
+          </button>
+        </div>
       </aside>
 
       {/* 2. MAIN CONTENT BÊN PHẢI */}
       <main className="flex-1 flex flex-col">
         
         {/* Top Navbar */}
-        <header className="h-24 px-10 flex items-center justify-end space-x-4 border-b border-transparent">
+        <header className="h-28 px-10 flex items-center justify-end space-x-4">
+          
+          {/* ALG Wiki Button -> Chuyển hướng sang trang wikipage */}
+          <button 
+            onClick={() => navigate('/wikipage')}
+            className="bg-[#144064] hover:bg-[#0f324f] text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-md transition-all flex flex-col items-center justify-center cursor-pointer leading-tight"
+          >
+            <span>ALG</span>
+            <span>Wiki</span>
+          </button>
+
           {/* Profile Badge */}
           <div 
             onClick={() => navigate('/profile')}
-            className="flex items-center bg-[#e0f2fe] rounded-full px-4 py-2 space-x-3 cursor-pointer hover:bg-[#bae6fd] transition-all"
+            className="flex items-center bg-[#e3effd] rounded-full px-5 py-2.5 space-x-3 cursor-pointer hover:bg-[#d0e5fb] transition-all shadow-sm"
           >
-            <div className="w-10 h-10 rounded-full bg-[#fbcfe8] flex items-center justify-center text-[#db2777]">
+            <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                 <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
               </svg>
             </div>
-            <div className="text-[#0284c7] font-bold text-sm">
+            <div className="text-[#144064] font-bold text-sm">
               <div>Hồ sơ tài khoản</div>
               <div className="text-xs font-semibold opacity-80">user : ...</div>
             </div>
           </div>
 
-          <div className="h-8 w-[1px] bg-gray-200 my-auto"></div>
-
           {/* Logout Button */}
           <button 
             onClick={() => navigate('/login')}
-            className="flex items-center space-x-2 bg-[#fbcfe8] hover:bg-[#f472b6] text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all cursor-pointer"
+            className="flex items-center space-x-2 bg-[#144064] hover:bg-[#0f324f] text-white px-6 py-3.5 rounded-full font-bold text-sm shadow-md transition-all cursor-pointer"
           >
             <span>Đăng xuất</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
@@ -78,51 +112,68 @@ export default function Dashboard() {
         </header>
 
         {/* Content Body */}
-        <section className="p-10 max-w-5xl space-y-8">
+        <section className="px-10 py-6 max-w-5xl space-y-8">
           
           {/* Welcome Text */}
           <div>
-            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
+            <h1 className="text-4xl font-black text-gray-900 tracking-tight">
               Chào mừng bạn đã quay lại!
             </h1>
-            <p className="text-gray-400 font-medium mt-2 text-base">
+            <p className="text-gray-500 font-medium mt-1 text-sm">
               MediWise mong rằng mỗi ngày trôi qua bạn sẽ trở nên khoẻ mạnh hơn.
             </p>
           </div>
 
           {/* Card 1: Kiểm tra nguy cơ */}
-          <div className="bg-white rounded-[32px] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.04)] flex items-center justify-between">
-            <div className="space-y-2 max-w-xl">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Kiểm tra nguy cơ, đánh giá dị ứng
-              </h2>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Cung cấp thông tin về tiền sử dị ứng và loại thuốc bạn đang sử dụng để nhận kết quả đánh giá phù hợp.
-              </p>
+          <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
+            <div className="flex items-center space-x-6">
+              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-9 h-9">
+                  <path fillRule="evenodd" d="M12 1.5c-1.92 0-3.72.56-5.23 1.53-.9.59-1.28 1.72-.88 2.69.96 2.34 2.28 4.46 3.89 6.22 1.09 1.2 2.3 2.24 3.6 3.12 1.3-.88 2.51-1.92 3.6-3.12 1.61-1.76 2.93-3.88 3.89-6.22.4-.97.02-2.1-.88-2.69A9.974 9.974 0 0012 1.5zm0 14.25c-3.14 0-6.14 1.15-8.48 3.23-.48.42-.77 1.03-.77 1.67 0 1.25 1.01 2.25 2.25 2.25h14c1.24 0 2.25-1.01 2.25-2.25 0-.64-.29-1.25-.77-1.67-2.34-2.08-5.34-3.23-8.48-3.23z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-xl font-bold text-gray-900">
+                  Kiểm tra nguy cơ, đánh giá dị ứng
+                </h2>
+                <p className="text-gray-400 text-xs leading-relaxed">
+                  Cung cấp thông tin về tiền sử dị ứng và loại thuốc bạn đang sử dụng để nhận kết quả đánh giá phù hợp.
+                </p>
+              </div>
             </div>
             <button 
               onClick={() => navigate('/Assessment')} 
-              className="bg-[#f472b6] hover:bg-[#ec4899] text-white font-bold py-3.5 px-8 rounded-full shadow-sm text-base transition-all shrink-0 cursor-pointer"
+              className="bg-[#144064] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md text-sm transition-all shrink-0 cursor-pointer flex items-center space-x-2"
             >
-              Bắt đầu ngay !
+              <span>Bắt đầu ngay!</span>
+              <span>→</span>
             </button>
           </div>
 
           {/* Card 2: Lịch sử kiểm tra */}
-          <div className="bg-white rounded-[32px] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.04)] flex items-center justify-between">
-            <div className="space-y-2 max-w-xl">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Lịch sử kiểm tra
-              </h2>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Xem lại các kết quả được lưu trữ trước đó.
-              </p>
+          <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
+            <div className="flex items-center space-x-6">
+              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-9 h-9">
+                  <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h9a1.5 1.5 0 001.5-1.5V5.25a1.5 1.5 0 00-1.5-1.5h-9zM6 2.25A3 3 0 003 5.25v13.5a3 3 0 003 3h9a3 3 0 003-3V5.25a3 3 0 00-3-3H6z" clipRule="evenodd" />
+                  <path d="M7.5 8.25a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM7.5 12a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM7.5 15.75a.75.75 0 01.75-.75h4.5a.75.75 0 010 1.5h-4.5a.75.75 0 01-.75-.75z" />
+                </svg>
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-xl font-bold text-gray-900">
+                  Lịch sử kiểm tra
+                </h2>
+                <p className="text-gray-400 text-xs leading-relaxed">
+                  Xem lại các kết quả được lưu trữ trước đó.
+                </p>
+              </div>
             </div>
             <button 
               onClick={() => navigate('/history')} 
-              className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-400 hover:text-gray-600 font-semibold py-3.5 px-10 rounded-full text-base transition-all shrink-0 cursor-pointer"
+              className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-600 font-bold py-3.5 px-10 rounded-full text-sm transition-all shrink-0 cursor-pointer flex items-center space-x-2 shadow-xs"
             >
-              Truy cập
+              <span>Truy cập</span>
+              <span>→</span>
             </button>
           </div>
 
