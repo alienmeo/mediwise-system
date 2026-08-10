@@ -1,3 +1,9 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import logoImg from './logo.png'; 
+import brandTextImg from './title.png'; 
+
 export default function Home() {
   const navigate = useNavigate();
 
