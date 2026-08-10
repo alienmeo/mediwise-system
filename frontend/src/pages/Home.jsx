@@ -13,21 +13,21 @@ export default function Home() {
       {/* Khối tổng thể căn giữa */}
       <div className="flex flex-col items-center text-center max-w-sm w-full space-y-1">
         
-        {/* 1. Biểu tượng Logo (To rõ) */}
+        {/* 1. Biểu tượng Logo */}
         <img 
           src={logoImg} 
           alt="Mediwise Icon" 
           className="w-72 h-72 object-contain filter drop-shadow-2xl transition-transform duration-300 hover:scale-105"
         />
 
-        {/* 2. Cả khối bên dưới (Tên, Slogan, Nút) được kéo sát lên ngay dưới logo */}
-        <div className="flex flex-col items-center w-full space-y-3 -mt-2">
+        {/* 2. Cả khối bên dưới được kéo sát lên */}
+        <div className="flex flex-col items-center w-full space-y-3 -mt-8">
           
-          {/* Tên thương hiệu */}
+          {/* Tên thương hiệu (Dùng -mt-2 để kéo sát logo hơn nữa nếu cần) */}
           <img 
             src={brandTextImg} 
             alt="Mediwise" 
-            className="h-auto w-full max-w-xs object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+            className="-mt-2 h-auto w-full max-w-xs object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
           />
 
           {/* Slogan */}
