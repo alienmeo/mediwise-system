@@ -11,10 +11,10 @@ export default function Wiki() {
     <div className="min-h-screen bg-[#f4f7fc] flex flex-col lg:flex-row items-stretch justify-center">
       
       {/* CỘT BÊN TRÁI: Nội dung giới thiệu & Giá trị cốt lõi */}
-      <main className="flex-1 px-8 lg:px-16 py-12 max-w-4xl space-y-10">
+      <main className="flex-1 px-8 lg:px-16 py-12 max-w-4xl space-y-8">
         
         {/* Tiêu đề chính */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="flex items-center space-x-2 text-[#144064] font-bold text-sm">
             <span className="text-xl">✨</span>
             <span>Chào mừng đến với</span>
@@ -30,7 +30,7 @@ export default function Wiki() {
         </div>
 
         {/* Lý do hình thành */}
-        <section className="space-y-3">
+        <section className="space-y-2">
           <div className="flex items-center space-x-3 text-[#144064]">
             <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -45,7 +45,7 @@ export default function Wiki() {
         </section>
 
         {/* Giá trị cốt lõi */}
-        <section className="space-y-4">
+        <section className="space-y-3">
           <div className="flex items-center space-x-3 text-[#144064]">
             <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -89,7 +89,7 @@ export default function Wiki() {
         </section>
 
         {/* Khái niệm mở rộng (Dị ứng chéo) */}
-        <section className="space-y-3">
+        <section className="space-y-2">
           <div className="flex items-center space-x-3 text-[#144064]">
             <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -98,7 +98,7 @@ export default function Wiki() {
             </div>
             <h2 className="text-xl font-bold">Để hiểu rõ hơn thì dị ứng chéo là gì?</h2>
           </div>
-          <div className="text-gray-600 text-sm leading-relaxed pl-11 space-y-3">
+          <div className="text-gray-600 text-sm leading-relaxed pl-11 space-y-2">
             <p>
               Dị ứng xảy ra khi hệ miễn dịch của cơ thể bị "nhầm lẫn" giữa các chất khác nhau nhưng có cấu trúc protein tương tự nhau.
             </p>
@@ -113,7 +113,7 @@ export default function Wiki() {
       {/* CỘT BÊN PHẢI: Logo Wiki, Thông tin người phát triển & Nút quay lại */}
       <aside className="w-full lg:w-[420px] bg-white border-l border-gray-200 px-8 py-12 flex flex-col justify-between items-center text-center shrink-0 shadow-sm">
         
-        <div className="w-full space-y-8 flex flex-col items-center">
+        <div className="w-full space-y-6 flex flex-col items-center">
           {/* Logo Wiki bên phải */}
           <div className="w-full max-w-[280px]">
             <img src={wikiLogoImg} alt="Aellergis Wiki Logo" className="w-full h-auto object-contain" />
@@ -131,7 +131,7 @@ export default function Wiki() {
         </div>
 
         {/* Nút Quay lại trang chủ (Dashboard) */}
-        <div className="w-full pt-10">
+        <div className="w-full pt-8">
           <button 
             onClick={() => navigate('/dashboard')}
             className="w-full py-4 px-6 rounded-full bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer"
