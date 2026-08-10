@@ -10,38 +10,36 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#76b4c9] via-[#468093] to-[#204a5c]">
       
-      {/* Khối tổng thể căn giữa màn hình với khoảng cách rất khít (space-y-3) */}
-      <div className="flex flex-col items-center text-center max-w-sm w-full space-y-3">
+      {/* Khối tổng thể căn giữa - ĐÂY LÀ TRÁI TIM CỦA BỐ CỤC GỌN GÀNG */}
+      {/* Chỉ dùng space-y-1.5 (khoảng cách siêu nhỏ) cho TOÀN BỘ các thành phần bên trong */}
+      <div className="flex flex-col items-center text-center max-w-sm w-full space-y-1.5">
         
-        {/* Biểu tượng Logo to rõ */}
-        <div className="flex justify-center">
-          <img 
-            src={logoImg} 
-            alt="Mediwise Icon" 
-            className="w-60 h-60 object-contain filter drop-shadow-xl transition-transform duration-300 hover:scale-105"
-          />
-        </div>
+        {/* 1. Biểu tượng Logo (Vẫn giữ nguyên kích thước to rõ) */}
+        <img 
+          src={logoImg} 
+          alt="Mediwise Icon" 
+          className="w-60 h-60 object-contain filter drop-shadow-xl transition-transform duration-300 hover:scale-105"
+        />
 
-        {/* Hình ảnh tên thương hiệu */}
-        <div className="flex justify-center w-full">
-          <img 
-            src={brandTextImg} 
-            alt="Mediwise" 
-            className="h-auto w-full max-w-xs object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] mb-1"
-          />
-        </div>
+        {/* 2. Tên thương hiệu (Áp sát ngay dưới logo) */}
+        <img 
+          src={brandTextImg} 
+          alt="Mediwise" 
+          className="h-auto w-full max-w-xs object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+        />
 
-        {/* Slogan */}
-        <p className="text-base sm:text-lg font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide mb-2">
+        {/* 3. Slogan (Áp sát ngay dưới tên thương hiệu) */}
+        <p className="text-base sm:text-lg font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] tracking-wide pb-2">
           An toàn hôm nay - vững vàng ngày mai
         </p>
 
-        {/* Cụm chức năng đăng ký / đăng nhập (Áp sát ngay phía dưới slogan) */}
-        <div className="w-full space-y-3">
+        {/* 4. Cụm chức năng đăng ký / đăng nhập */}
+        {/* Khối này cũng nằm trong luồng chính với khoảng cách rất khít */}
+        <div className="w-full space-y-2.5"> {/* Khoảng cách giữa 2 nút */}
           
-          {/* Khối 1: Đăng ký */}
-          <div className="space-y-1">
-            <p className="text-cyan-100/90 font-medium text-xs sm:text-sm tracking-wide">
+          {/* Nút Đăng ký (Màu nhạt) */}
+          <div className="space-y-1"> {/* Khoảng cách giữa chữ và nút */}
+            <p className="text-cyan-100/90 font-medium text-sm tracking-wide">
               Bạn là người mới ?
             </p>
             <button 
@@ -52,9 +50,9 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Khối 2: Đăng nhập */}
-          <div className="space-y-1">
-            <p className="text-cyan-100/90 font-medium text-xs sm:text-sm tracking-wide">
+          {/* Nút Đăng nhập (Màu đậm) */}
+          <div className="space-y-1"> {/* Khoảng cách giữa chữ và nút */}
+            <p className="text-cyan-100/90 font-medium text-sm tracking-wide">
               Bạn đã có tài khoản ?
             </p>
             <button 
