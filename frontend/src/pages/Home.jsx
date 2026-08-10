@@ -8,6 +8,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
+    // Đã đổi lại background thành hiệu ứng tỏa sáng từ tâm (radial gradient) giống mẫu
     <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#76b5c5] via-[#3a7287] to-[#123147]">
       
       {/* Khối tổng thể căn giữa */}
@@ -23,11 +24,11 @@ export default function Home() {
         {/* 2. Cả khối bên dưới được kéo chồng lên viền dưới của logo bằng -mt-14 */}
         <div className="flex flex-col items-center w-full space-y-2.5 -mt-14">
           
-          {/* Tên thương hiệu nổi bật hơn (Tăng kích thước max-w-sm và thêm bộ lọc contrast/brightness cho sắc nét) */}
+          {/* Tên thương hiệu (Đã bỏ đổ bóng) */}
           <img 
             src={brandTextImg} 
             alt="Mediwise" 
-            className="h-auto w-full max-w-[340px] object-contain filter contrast-125 brightness-110"
+            className="h-auto w-full max-w-xs object-contain"
           />
 
           {/* Slogan */}
