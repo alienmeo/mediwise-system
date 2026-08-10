@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
-import { Button } from '../components/UI/Button';
 
 export default function Login({ isRegisterMode = false }) {
   const [isRegister, setIsRegister] = useState(isRegisterMode);
@@ -168,15 +167,15 @@ export default function Login({ isRegisterMode = false }) {
             />
           </div>
 
-          {/* Nút submit (Đã đổi sang màu #144064 và hover sang màu tối hơn một chút) */}
+          {/* Nút submit dùng button thuần với màu #144064 */}
           <div className="pt-2">
-            <Button 
+            <button 
               type="submit" 
-              className="w-full py-4 rounded-2xl bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-base shadow-lg transition-all" 
+              className="w-full py-4 rounded-2xl !bg-[#144064] hover:!bg-[#0f324f] text-white font-bold text-base shadow-lg transition-all cursor-pointer disabled:opacity-60" 
               disabled={loading}
             >
               {loading ? 'Đang xử lý...' : isRegister ? 'Đăng Ký Ngay' : 'Đăng Nhập'}
-            </Button>
+            </button>
           </div>
         </form>
 
