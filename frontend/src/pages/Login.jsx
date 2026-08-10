@@ -162,17 +162,17 @@ export default function Login({ isRegisterMode = false }) {
               type="password"
               disabled={loading}
               className="w-full px-5 py-4 bg-gray-50/80 border border-gray-300 rounded-2xl outline-none focus:border-cyan-600 focus:ring-2 focus:ring-cyan-100 text-gray-800 placeholder-gray-400 text-sm transition-all disabled:opacity-60"
-              placeholder=". . . . . ." 
+              placeholder=". . . . . . . . . ." 
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
           </div>
 
-          {/* Nút submit */}
+          {/* Nút submit (Đã đổi sang màu #144064 và hover sang màu tối hơn một chút) */}
           <div className="pt-2">
             <Button 
               type="submit" 
-              className="w-full py-4 rounded-2xl bg-[#2d6174] hover:bg-[#234d5d] text-white font-bold text-base shadow-lg transition-all" 
+              className="w-full py-4 rounded-2xl bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-base shadow-lg transition-all" 
               disabled={loading}
             >
               {loading ? 'Đang xử lý...' : isRegister ? 'Đăng Ký Ngay' : 'Đăng Nhập'}
