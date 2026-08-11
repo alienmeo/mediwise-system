@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Import hình ảnh logo/wiki ở cột phải (thay đổi đường dẫn file ảnh cho phù hợp với dự án của bạn)
+// Import các hình ảnh cần thiết
 import wikiLogoImg from './wiki-logo.png'; 
+import titleImg from './title.png'; // Import ảnh tiêu đề aellergis
 
 export default function Wiki() {
   const navigate = useNavigate();
@@ -19,12 +20,14 @@ export default function Wiki() {
             <span className="text-xl">✨</span>
             <span>Chào mừng đến với</span>
           </div>
-          <div>
-            <h1 className="text-5xl font-black text-[#144064] tracking-tight">
-              aellergis
-            </h1>
+          <div className="pt-1">
+            <img 
+              src={titleImg} 
+              alt="aellergis" 
+              className="h-14 lg:h-16 w-auto object-contain -ml-2" 
+            />
           </div>
-          <p className="text-gray-600 font-medium text-sm leading-relaxed max-w-2xl">
+          <p className="text-gray-600 font-medium text-sm leading-relaxed max-w-2xl pt-2">
             Nền tảng hỗ trợ tra cứu thông tin về thuốc, thành phần và các cảnh báo dị ứng. Website được phát triển với mục tiêu mang đến nguồn thông tin trực quan, dễ tiếp cận và đáng tin cậy cho mọi người.
           </p>
         </div>
