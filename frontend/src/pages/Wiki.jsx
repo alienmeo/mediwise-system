@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 // Import các hình ảnh cần thiết
 import wikiLogoImg from './wiki-logo.png'; 
-import titleImg from './title.png'; // Import ảnh tiêu đề aellergis
+import titleImg from './title.png'; 
+import image1 from './image1.png'; // Import ảnh cho các cục tròn
+import image2 from './image1.png'; 
+import image3 from './image1.png'; 
 
 export default function Wiki() {
   const navigate = useNavigate();
@@ -14,15 +17,9 @@ export default function Wiki() {
       {/* CỘT BÊN TRÁI: Nội dung giới thiệu & Giá trị cốt lõi */}
       <main className="flex-1 px-8 lg:px-16 py-12 max-w-4xl space-y-8">
         
-        {/* Tiêu đề chính (Đã căn giữa hoàn toàn) */}
-        <div className="space-y-3 text-center">
-          <div className="flex items-center justify-center space-x-2 text-[#144064] font-bold text-sm">
-            <span className="text-xl">✨</span>
-            <span>Chào mừng đến với</span>
-          </div>
-          
-          {/* Hình ảnh title căn giữa */}
-          <div className="flex justify-center pt-1">
+        {/* Tiêu đề chính */}
+        <div className="space-y-4 text-center">
+          <div className="flex justify-center pt-2">
             <img 
               src={titleImg} 
               alt="aellergis" 
@@ -62,32 +59,26 @@ export default function Wiki() {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-11">
-            {/* Badge 1 */}
+            {/* Badge 1: Tin cậy */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-[#144064] text-white flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                  <path fillRule="evenodd" d="M12 1.5c-1.92 0-3.72.56-5.23 1.53-.9.59-1.28 1.72-.88 2.69.96 2.34 2.28 4.46 3.89 6.22 1.09 1.2 2.3 2.24 3.6 3.12 1.3-.88 2.51-1.92 3.6-3.12 1.61-1.76 2.93-3.88 3.89-6.22.4-.97.02-2.1-.88-2.69A9.974 9.974 0 0012 1.5z" clipRule="evenodd" />
-                </svg>
+              <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0 overflow-hidden">
+                <img src={image1} alt="Tin cậy" className="w-4 h-4 object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">Tin cậy</span>
             </div>
 
-            {/* Badge 2 */}
+            {/* Badge 2: Thuận tiện */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-[#144064] text-white flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                  <path d="M4.5 4.5a3 3 0 00-3 3v9a3 3 0 003 3h8.25a3 3 0 003-3v-9a3 3 0 00-3-3H4.5zM19.94 18.75l-2.69-2.69V7.94l2.69-2.69c.944-.945 2.56-.276 2.56 1.06v11.38c0 1.336-1.616 2.005-2.56 1.06z" />
-                </svg>
+              <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0 overflow-hidden">
+                <img src={image2} alt="Thuận tiện" className="w-4 h-4 object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">Thuận tiện</span>
             </div>
 
-            {/* Badge 3 */}
+            {/* Badge 3: An toàn */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-[#144064] text-white flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                  <path fillRule="evenodd" d="M12 1.5c-1.92 0-3.72.56-5.23 1.53-.9.59-1.28 1.72-.88 2.69.96 2.34 2.28 4.46 3.89 6.22 1.09 1.2 2.3 2.24 3.6 3.12 1.3-.88 2.51-1.92 3.6-3.12 1.61-1.76 2.93-3.88 3.89-6.22.4-.97.02-2.1-.88-2.69A9.974 9.974 0 0012 1.5z" clipRule="evenodd" />
-                </svg>
+              <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0 overflow-hidden">
+                <img src={image3} alt="An toàn" className="w-4 h-4 object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">An toàn</span>
             </div>
