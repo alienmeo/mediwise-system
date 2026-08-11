@@ -6,6 +6,7 @@ from routes.auth_routes import auth_bp
 from routes.admin_routes import admin_bp
 from routes.check_routes import check_bp
 import json
+import os
 from models.db_models import AssessmentHistory
 
 app = Flask(__name__)
@@ -21,7 +22,12 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
     return response
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+# Cấu hình Database linh hoạt: Tự động dùng PostgreSQL trên Render, hoặc SQLite khi chạy local
+db_url = os.getenv('DATABASE_URL')
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url if db_url else 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'your-secret-key-mediwise'
 
 db.init_app(app)
