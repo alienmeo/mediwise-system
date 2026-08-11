@@ -14,15 +14,15 @@ export default function Wiki() {
       {/* CỘT BÊN TRÁI: Nội dung giới thiệu & Giá trị cốt lõi */}
       <main className="flex-1 px-8 lg:px-16 py-12 max-w-4xl space-y-8">
         
-        {/* Tiêu đề chính */}
-        <div className="space-y-3">
-          <div className="flex items-center justify-center lg:justify-start space-x-2 text-[#144064] font-bold text-sm">
+        {/* Tiêu đề chính (Đã căn giữa hoàn toàn) */}
+        <div className="space-y-3 text-center">
+          <div className="flex items-center justify-center space-x-2 text-[#144064] font-bold text-sm">
             <span className="text-xl">✨</span>
             <span>Chào mừng đến với</span>
           </div>
           
           {/* Hình ảnh title căn giữa */}
-          <div className="flex justify-center lg:justify-start pt-1">
+          <div className="flex justify-center pt-1">
             <img 
               src={titleImg} 
               alt="aellergis" 
@@ -30,7 +30,7 @@ export default function Wiki() {
             />
           </div>
           
-          <p className="text-gray-600 font-medium text-sm leading-relaxed max-w-2xl pt-2 text-center lg:text-left">
+          <p className="text-gray-600 font-medium text-sm leading-relaxed max-w-2xl mx-auto pt-2 text-center">
             Nền tảng hỗ trợ tra cứu thông tin về thuốc, thành phần và các cảnh báo dị ứng. Website được phát triển với mục tiêu mang đến nguồn thông tin trực quan, dễ tiếp cận và đáng tin cậy cho mọi người.
           </p>
         </div>
