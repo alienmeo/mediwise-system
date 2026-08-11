@@ -16,18 +16,21 @@ export default function Wiki() {
         
         {/* Tiêu đề chính */}
         <div className="space-y-3">
-          <div className="flex items-center space-x-2 text-[#144064] font-bold text-sm">
+          <div className="flex items-center justify-center lg:justify-start space-x-2 text-[#144064] font-bold text-sm">
             <span className="text-xl">✨</span>
             <span>Chào mừng đến với</span>
           </div>
-          <div className="pt-1">
+          
+          {/* Hình ảnh title căn giữa */}
+          <div className="flex justify-center lg:justify-start pt-1">
             <img 
               src={titleImg} 
               alt="aellergis" 
-              className="h-14 lg:h-16 w-auto object-contain -ml-2" 
+              className="h-14 lg:h-16 w-auto object-contain" 
             />
           </div>
-          <p className="text-gray-600 font-medium text-sm leading-relaxed max-w-2xl pt-2">
+          
+          <p className="text-gray-600 font-medium text-sm leading-relaxed max-w-2xl pt-2 text-center lg:text-left">
             Nền tảng hỗ trợ tra cứu thông tin về thuốc, thành phần và các cảnh báo dị ứng. Website được phát triển với mục tiêu mang đến nguồn thông tin trực quan, dễ tiếp cận và đáng tin cậy cho mọi người.
           </p>
         </div>
