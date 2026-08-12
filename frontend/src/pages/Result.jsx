@@ -57,20 +57,37 @@ export default function Result() {
     : 'Không phát hiện';
 
   return (
-    <div className="min-h-screen bg-[#f7f7f9] py-8 px-4 font-sans text-[#222222]">
-      <div className="max-w-4xl mx-auto relative">
-        
-        {/* Logo và Tiêu đề MediWise (Sửa lại layout logo xích sát lề trái giống các trang khác) */}
-        <div 
-          className="mb-6 flex items-center gap-[6px] cursor-pointer sm:absolute sm:top-0 sm:left-0 sm:mb-0" 
-          onClick={() => navigate('/dashboard')}
-        >
-          <img src={logoImg} alt="Logo" className="h-[64px] w-auto object-contain" />
-          <img src={brandTextImg} alt="aellergis title" className="h-[42px] w-auto object-contain" />
-        </div>
+    <div className="min-h-screen bg-[#f7f7f9] py-8 px-4 font-sans text-[#222222] relative">
+      
+      {/* Cố định vị trí logo sát lề trái hoàn toàn giống trang CheckPage */}
+      <div 
+        style={{ 
+          position: 'absolute', 
+          top: '20px', 
+          left: '0px', 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: '-6px',
+          cursor: 'pointer' 
+        }} 
+        onClick={() => navigate('/dashboard')}
+      >
+        <img 
+          src={logoImg} 
+          alt="Logo" 
+          style={{ height: '64px', width: 'auto', objectFit: 'contain' }} 
+        />
+        <img 
+          src={brandTextImg} 
+          alt="aellergis title" 
+          style={{ height: '42px', width: 'auto', objectFit: 'contain' }} 
+        />
+      </div>
+
+      <div className="max-w-4xl mx-auto pt-16 sm:pt-4">
 
         {/* Card Trạng Thái Dị Ứng */}
-        <div className="flex justify-center mb-6 pt-16 sm:pt-0">
+        <div className="flex justify-center mb-6">
           <div className="bg-[#e3effd] rounded-[24px] shadow-sm overflow-hidden text-center w-72 border border-[#d1e4fc]">
             <div className="py-2.5 px-4 text-[#144064] text-lg font-bold">
               Mức độ dị ứng cho: <span className="text-gray-800 font-extrabold">{result.drug_name || 'Thuốc'}</span>
