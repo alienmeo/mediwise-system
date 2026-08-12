@@ -77,7 +77,7 @@ const CheckPage = () => {
       position: 'relative'
     }}>
       
-      {/* Logo và Tiêu đề ở góc trên bên trái (Đã phóng to) */}
+      {/* Logo và Tiêu đề ở góc trên bên trái (Logo phóng to cân đối với text) */}
       <div 
         style={{ 
           position: 'absolute', 
@@ -85,7 +85,7 @@ const CheckPage = () => {
           left: '32px', 
           display: 'flex', 
           alignItems: 'center', 
-          gap: '12px',
+          gap: '14px',
           cursor: 'pointer' 
         }} 
         onClick={() => navigate('/dashboard')}
@@ -93,12 +93,12 @@ const CheckPage = () => {
         <img 
           src={logoImg} 
           alt="Logo" 
-          style={{ height: '48px', width: 'auto', objectFit: 'contain' }} 
+          style={{ height: '64px', width: 'auto', objectFit: 'contain' }} 
         />
         <img 
           src={titleImg} 
           alt="aellergis title" 
-          style={{ height: '38px', width: 'auto', objectFit: 'contain' }} 
+          style={{ height: '42px', width: 'auto', objectFit: 'contain' }} 
         />
       </div>
 
