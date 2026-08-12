@@ -77,15 +77,15 @@ const CheckPage = () => {
       position: 'relative'
     }}>
       
-      {/* Logo và Tiêu đề ở góc trên bên trái (Logo phóng to cân đối với text) */}
+      {/* Logo xích sát lề trái hơn (left: 16px) và title gần lại logo (gap: 6px) */}
       <div 
         style={{ 
           position: 'absolute', 
-          top: '24px', 
-          left: '32px', 
+          top: '20px', 
+          left: '16px', 
           display: 'flex', 
           alignItems: 'center', 
-          gap: '14px',
+          gap: '6px',
           cursor: 'pointer' 
         }} 
         onClick={() => navigate('/dashboard')}
