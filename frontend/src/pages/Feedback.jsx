@@ -103,37 +103,16 @@ export default function Feedback() {
     : feedbacks.filter(f => f.rating === filterRating);
 
   return (
-    <div className="flex min-h-screen bg-[#f7f7f9] relative">
-      
-      {/* Vị trí logo và title chuẩn xác sát lề trái */}
-      <div 
-        style={{ 
-          position: 'absolute', 
-          top: '20px', 
-          left: '24px', 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '-6px',
-          cursor: 'pointer',
-          zIndex: 10 
-        }} 
-        onClick={() => navigate('/dashboard')}
-      >
-        <img 
-          src={logoImg} 
-          alt="Logo" 
-          style={{ height: '64px', width: 'auto', objectFit: 'contain' }} 
-        />
-        <img 
-          src={brandTextImg} 
-          alt="aellergis title" 
-          style={{ height: '42px', width: 'auto', objectFit: 'contain' }} 
-        />
-      </div>
+    <div className="flex min-h-screen bg-[#f7f7f9]">
+      {/* SIDEBAR BÊN TRÁI - Đặt Logo và Title chuẩn xác nằm gọn trong Sidebar */}
+      <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col shrink-0 justify-between">
+        <div className="space-y-8">
+          {/* Logo và Title chuẩn vị trí dashboard */}
+          <div className="flex items-center space-x-1 cursor-pointer" onClick={() => navigate('/dashboard')}>
+            <img src={logoImg} alt="Logo" className="h-16 w-auto object-contain" />
+            <img src={brandTextImg} alt="aellergis" className="h-10 w-auto object-contain" />
+          </div>
 
-      {/* SIDEBAR BÊN TRÁI (Đã đẩy top xuống để không đè lên logo) */}
-      <aside className="w-80 bg-white border-r border-gray-100 p-6 pt-28 flex flex-col shrink-0">
-        <div className="space-y-6">
           <nav className="space-y-4">
             <button onClick={() => navigate('/dashboard')} className="w-full py-4 px-6 rounded-3xl bg-[#e3effd] hover:bg-[#d1e4fc] text-[#144064] font-bold text-center transition-all text-base cursor-pointer">
               Về lại trang chủ
