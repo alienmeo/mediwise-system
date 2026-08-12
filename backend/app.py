@@ -1,11 +1,12 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from models.db_models import db, AssessmentHistory, Feedback
+from models.db_models import db
 from routes.user_routes import user_bp
 from routes.auth_routes import auth_bp
 from routes.admin_routes import admin_bp
 from routes.check_routes import check_bp
 import json
+from models.db_models import AssessmentHistory
 
 app = Flask(__name__)
 
@@ -83,53 +84,37 @@ def direct_user_history():
         print(f"Lỗi trực tiếp tại app.py: {e}")
         return jsonify([]), 200
 
-# Route xử lý cả Sửa (PUT) và Xóa (DELETE) cho Feedback
-@app.route('/api/feedbacks/<int:feedback_id>', methods=['PUT', 'DELETE', 'OPTIONS'])
-def direct_modify_feedback(feedback_id):
-    if request.method == 'OPTIONS':
-        return '', 200
-        
-    try:
-        feedback = Feedback.query.get(feedback_id)
-        if not feedback:
-            return jsonify({"error": "Không tìm thấy đánh giá cần thao tác"}), 404
-            
-        # Kiểm tra quyền sở hữu
-        requester_username = request.headers.get('X-Username', '').strip().lower()
-        if requester_username and feedback.username:
-            if requester_username != feedback.username.strip().lower():
-                return jsonify({"error": "Bạn không có quyền thao tác trên đánh giá này!"}), 403
-
-        # XỬ LÝ CẬP NHẬT (PUT)
-        if request.method == 'PUT':
-            data = request.get_json()
-            if data:
-                if 'rating' in data: feedback.rating = int(data['rating'])
-                if 'comment' in data: feedback.comment = data['comment']
-                db.session.commit()
-                return jsonify({"status": "success", "message": "Đã cập nhật thành công"}), 200
-
-        # XỬ LÝ XÓA (DELETE)
-        if request.method == 'DELETE':
-            db.session.delete(feedback)
-            db.session.commit()
-            return jsonify({"status": "success", "message": "Đã xóa đánh giá thành công"}), 200
-
-    except Exception as e:
-        print(f"Lỗi tại API feedback: {e}")
-        db.session.rollback()
-        return jsonify({"error": "Lỗi server", "message": str(e)}), 500
-
 @app.errorhandler(Exception)
 def handle_exception(e):
     return jsonify({"error": "Lỗi hệ thống từ Server", "message": str(e)}), 500
 
-with app.app_context():
+@app.route('/api/feedbacks/<int:feedback_id>', methods=['DELETE', 'OPTIONS'])
+def direct_delete_feedback(feedback_id):
+    if request.method == 'OPTIONS':
+        return '', 200
     try:
-        db.create_all()
-        print("Đã tự động tạo bảng database thành công!")
+        from models.db_models import Feedback
+        
+        feedback = Feedback.query.get(feedback_id)
+        if not feedback:
+            return jsonify({"error": "Không tìm thấy đánh giá cần xóa"}), 404
+            
+        requester_username = request.headers.get('X-Username', '').strip().lower()
+        
+        if requester_username and feedback.username:
+            if requester_username != feedback.username.strip().lower():
+                return jsonify({"error": "Bạn không có quyền xóa đánh giá của người khác!"}), 403
+
+        db.session.delete(feedback)
+        db.session.commit()
+        
+        return jsonify({"status": "success", "message": "Đã xóa đánh giá thành công"}), 200
     except Exception as e:
-        print(f"Lỗi tạo bảng: {e}")
+        print(f"Lỗi khi xóa feedback: {e}")
+        db.session.rollback()
+        return jsonify({"error": "Lỗi server khi xóa", "message": str(e)}), 500
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True, port=5000)
