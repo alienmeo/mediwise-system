@@ -77,7 +77,7 @@ def direct_user_history():
         print(f"Lỗi lấy lịch sử: {e}")
         return jsonify([]), 200
 
-# 2. API Quản lý Feedback (GET, POST, PUT, DELETE tích hợp đầy đủ không bị lỗi 401)
+# 2. API Quản lý Feedback (GET công khai hoàn toàn, tránh lỗi 401 Unauthorized)
 @app.route('/api/feedbacks', methods=['GET', 'POST', 'OPTIONS'])
 @app.route('/api/feedbacks/<int:feedback_id>', methods=['PUT', 'DELETE', 'OPTIONS'])
 def manage_feedbacks(feedback_id=None):
@@ -85,7 +85,7 @@ def manage_feedbacks(feedback_id=None):
         return '', 200
         
     try:
-        # XEM DANH SÁCH ĐÁNH GIÁ (GET) - Cho phép công khai không cần chặn token 401
+        # XEM DANH SÁCH ĐÁNH GIÁ (GET) - Mở công khai không cần token để client luôn lấy được dữ liệu
         if request.method == 'GET':
             feedbacks = Feedback.query.order_by(Feedback.id.desc()).all()
             result = []
@@ -104,8 +104,6 @@ def manage_feedbacks(feedback_id=None):
             data = request.get_json() or {}
             rating = int(data.get('rating', 5))
             comment = data.get('comment', '').strip()
-            
-            # Lấy username ưu tiên từ body hoặc header
             username = data.get('username') or request.headers.get('X-Username') or 'Người dùng ẩn danh'
             
             if not comment:
