@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Import logo và tiêu đề
+import titleImg from './title.png'; 
+
 const CheckPage = () => {
   const navigate = useNavigate();
   const [allergens, setAllergens] = useState([]);
@@ -63,62 +66,159 @@ const CheckPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '40px auto', padding: '20px', backgroundColor: '#fff', borderRadius: '16px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
-      <h2 style={{ textAlign: 'center', color: '#e83e8c', marginBottom: '24px' }}>Kiểm tra dị ứng chéo Thực phẩm & Thuốc</h2>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #e3effd 0%, #f4f7fc 100%)', 
+      display: 'flex', 
+      flexDirection: 'column',
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      padding: '20px',
+      position: 'relative'
+    }}>
+      
+      {/* Tiêu đề / Logo ở góc trên bên trái */}
+      <div style={{ 
+        position: 'absolute', 
+        top: '24px', 
+        left: '32px', 
+        cursor: 'pointer' 
+      }} onClick={() => navigate('/dashboard')}>
+        <img 
+          src={titleImg} 
+          alt="aellergis logo" 
+          style={{ height: '36px', width: 'auto', objectFit: 'contain' }} 
+        />
+      </div>
 
-      {error && <div style={{ color: '#d9534f', backgroundColor: '#fdf7f7', padding: '10px 14px', borderRadius: '8px', marginBottom: '16px' }}>{error}</div>}
+      <div style={{ 
+        width: '100%', 
+        maxWidth: '560px', 
+        backgroundColor: '#fff', 
+        borderRadius: '32px', 
+        padding: '40px 32px', 
+        boxShadow: '0 10px 30px rgba(0,0,0,0.06)' 
+      }}>
+        
+        <h2 style={{ 
+          textAlign: 'center', 
+          color: '#111', 
+          fontSize: '24px', 
+          fontWeight: '900', 
+          lineHeight: '1.3', 
+          marginBottom: '32px' 
+        }}>
+          KIỂM TRA DỊ ỨNG CHÉO<br />THỰC PHẨM & THUỐC
+        </h2>
 
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '8px' }}>1. Chọn Thực phẩm / Dị nguyên:</label>
-          <select
-            value={selectedFood}
-            onChange={(e) => setSelectedFood(e.target.value)}
-            style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '15px' }}
+        {error && (
+          <div style={{ 
+            color: '#d9534f', 
+            backgroundColor: '#fdf7f7', 
+            padding: '10px 14px', 
+            borderRadius: '8px', 
+            marginBottom: '16px', 
+            fontSize: '14px',
+            textAlign: 'center'
+          }}>
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+          {/* Ô chọn Thực phẩm */}
+          <div style={{ marginBottom: '24px' }}>
+            <label style={{ 
+              display: 'block', 
+              color: '#666', 
+              fontSize: '15px', 
+              fontWeight: '600', 
+              marginBottom: '10px' 
+            }}>
+              1. Chọn thực phẩm từ thư viện thực phẩm
+            </label>
+            <select
+              value={selectedFood}
+              onChange={(e) => setSelectedFood(e.target.value)}
+              style={{ 
+                width: '100%', 
+                padding: '14px 18px', 
+                borderRadius: '16px', 
+                border: '1px solid #d1d5db', 
+                backgroundColor: '#fff',
+                color: selectedFood ? '#111' : '#888', 
+                fontSize: '15px',
+                outline: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              <option value="">-- Chọn thực phẩm --</option>
+              {allergens.map((item) => (
+                <option key={item.id} value={item.name} style={{ color: '#111' }}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Ô chọn Thuốc */}
+          <div style={{ marginBottom: '36px' }}>
+            <label style={{ 
+              display: 'block', 
+              color: '#666', 
+              fontSize: '15px', 
+              fontWeight: '600', 
+              marginBottom: '10px' 
+            }}>
+              2. Chọn thuốc từ thư viện thuốc
+            </label>
+            <select
+              value={selectedDrug}
+              onChange={(e) => setSelectedDrug(e.target.value)}
+              style={{ 
+                width: '100%', 
+                padding: '14px 18px', 
+                borderRadius: '16px', 
+                border: '1px solid #d1d5db', 
+                backgroundColor: '#fff',
+                color: selectedDrug ? '#111' : '#888', 
+                fontSize: '15px',
+                outline: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              <option value="">-- Chọn thuốc --</option>
+              {drugs.map((item) => (
+                <option key={item.id} value={item.name} style={{ color: '#111' }}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Nút Phân Tích */}
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              width: '100%',
+              padding: '16px',
+              backgroundColor: '#144064',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '25px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              boxShadow: '0 4px 12px rgba(20, 64, 100, 0.2)',
+              transition: 'all 0.2s ease'
+            }}
           >
-            <option value="">-- Chọn thực phẩm --</option>
-            {allergens.map((item) => (
-              <option key={item.id} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </div>
+            {loading ? 'Đang phân tích...' : 'Phân Tích Nguy Cơ'}
+          </button>
+        </form>
 
-        <div style={{ marginBottom: '24px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '8px' }}>2. Chọn Thuốc cần kiểm tra:</label>
-          <select
-            value={selectedDrug}
-            onChange={(e) => setSelectedDrug(e.target.value)}
-            style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '15px' }}
-          >
-            <option value="">-- Chọn thuốc --</option>
-            {drugs.map((item) => (
-              <option key={item.id} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            width: '100%',
-            padding: '14px',
-            backgroundColor: '#e83e8c',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '25px',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-          }}
-        >
-          {loading ? 'Đang phân tích...' : 'Phân Tích Nguy Cơ'}
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
