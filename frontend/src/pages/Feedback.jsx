@@ -8,21 +8,36 @@ import brandTextImg from './title.png';
 export default function Feedback() {
   const navigate = useNavigate();
 
-  // 1. Đọc thông tin user chuẩn xác MỘT LẦN DUY NHẤT ở đầu component
-  const currentUser = (() => {
+  // 1. Đọc thông tin user bằng State có hàm khởi tạo an toàn để hiển thị ngay lập tức
+  const [currentUser, setCurrentUser] = useState(() => {
     try {
       const rawData = localStorage.getItem('mediwise_user') || 
                       localStorage.getItem('user') || 
                       localStorage.getItem('userInfo') || '{}';
-      return JSON.parse(rawData);
+      const parsed = JSON.parse(rawData);
+      return parsed.data || parsed.user || parsed;
     } catch (e) {
       return {};
     }
-  })();
+  });
 
-  // Lấy tên user đăng nhập an toàn
-  const userObj = currentUser.data || currentUser.user || currentUser;
-  const userLoginName = (userObj.username || userObj.name || userObj.fullName || userObj.account || userObj.email || '').trim().toLowerCase();
+  // Tự động bắt lại thông tin user ngay khi component load hoặc chuyển trang tới
+  useEffect(() => {
+    try {
+      const rawData = localStorage.getItem('mediwise_user') || 
+                      localStorage.getItem('user') || 
+                      localStorage.getItem('userInfo') || '{}';
+      const parsed = JSON.parse(rawData);
+      const userObj = parsed.data || parsed.user || parsed;
+      if (userObj && Object.keys(userObj).length > 0) {
+        setCurrentUser(userObj);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
+  const userLoginName = (currentUser.username || currentUser.name || currentUser.fullName || currentUser.account || currentUser.email || '').trim().toLowerCase();
 
   const [feedbacks, setFeedbacks] = useState([]);
   const [filterRating, setFilterRating] = useState(0);
@@ -61,7 +76,9 @@ export default function Feedback() {
   const handleDelete = async (id) => {
     if (window.confirm('Bạn có chắc chắn muốn xóa đánh giá này không?')) {
       try {
-        await api.delete(`/feedbacks/${id}`);
+        await api.delete(`/feedbacks/${id}`, {
+          headers: { 'X-Username': userLoginName }
+        });
         setFeedbacks(prev => prev.filter(item => item.id !== id));
       } catch (err) {
         alert('Có lỗi xảy ra khi xóa!');
@@ -84,6 +101,8 @@ export default function Feedback() {
       await api.put(`/feedbacks/${editingFeedback.id}`, {
         rating: editRating,
         comment: editComment
+      }, {
+        headers: { 'X-Username': userLoginName }
       });
 
       setFeedbacks(prev => prev.map(item => 
@@ -110,13 +129,15 @@ export default function Feedback() {
       const payload = {
         rating: newRating,
         comment: newComment,
-        username: userObj.username || userObj.fullName || 'Người dùng'
+        username: currentUser.username || currentUser.fullName || 'Người dùng'
       };
-      const res = await api.post('/feedbacks', payload);
+      const res = await api.post('/feedbacks', payload, {
+        headers: { 'X-Username': userLoginName }
+      });
       if (res.data) {
         setFeedbacks([res.data, ...feedbacks]);
       } else {
-        fetchFeedbacks(); // Tải lại nếu API không trả về object mới trực tiếp
+        fetchFeedbacks(); 
       }
       setIsCreating(false);
       setNewComment('');
@@ -124,12 +145,11 @@ export default function Feedback() {
       alert('Gửi đánh giá thành công!');
     } catch (err) {
       console.error('Lỗi khi gửi đánh giá:', err);
-      // Fallback giả lập nếu chưa có backend API post
       const fakeNew = {
         id: Date.now(),
         rating: newRating,
         comment: newComment,
-        username: userObj.username || userObj.fullName || 'Người dùng',
+        username: currentUser.username || currentUser.fullName || 'Người dùng',
         date: new Date().toLocaleDateString()
       };
       setFeedbacks([fakeNew, ...feedbacks]);
@@ -140,13 +160,14 @@ export default function Feedback() {
     }
   };
 
+  // Fix lỗi NaN bằng cách ép kiểu Number an toàn cho rating
   const avgRating = feedbacks.length 
-    ? (feedbacks.reduce((acc, cur) => acc + cur.rating, 0) / feedbacks.length).toFixed(1)
-    : 0;
+    ? (feedbacks.reduce((acc, cur) => acc + (Number(cur.rating) || 0), 0) / feedbacks.length).toFixed(1)
+    : (0).toFixed(1);
 
   const filteredFeedbacks = filterRating === 0 
     ? feedbacks 
-    : feedbacks.filter(f => f.rating === filterRating);
+    : feedbacks.filter(f => Number(f.rating) === filterRating);
 
   return (
     <div className="flex min-h-screen bg-[#f4f7fc]">
@@ -155,13 +176,11 @@ export default function Feedback() {
       <aside className="w-80 bg-white border-r border-gray-100 py-6 px-0 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
         <div className="space-y-12">
           
-          {/* Brand Logo Header */}
           <div className="flex items-center justify-start cursor-pointer w-full overflow-hidden -ml-4 pl-3" onClick={() => navigate('/dashboard')}>
             <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
             <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
           </div>
 
-          {/* Navigation Buttons */}
           <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/Assessment')} 
@@ -195,7 +214,6 @@ export default function Feedback() {
           </nav>
         </div>
 
-        {/* Nút Back ở góc dưới sidebar */}
         <div className="px-3">
           <button 
             onClick={() => navigate(-1)}
@@ -211,10 +229,7 @@ export default function Feedback() {
       {/* 2. MAIN CONTENT BÊN PHẢI */}
       <main className="flex-1 flex flex-col">
         
-        {/* Top Navbar */}
         <header className="h-28 px-10 flex items-center justify-end space-x-4">
-          
-          {/* ALG Wiki Button */}
           <button 
             onClick={() => navigate('/wiki')}
             className="bg-[#144064] hover:bg-[#0f324f] text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-md transition-all flex flex-col items-center justify-center cursor-pointer leading-tight"
@@ -223,7 +238,6 @@ export default function Feedback() {
             <span>Wiki</span>
           </button>
 
-          {/* Profile Badge */}
           <div 
             onClick={() => navigate('/profile')}
             className="flex items-center bg-[#e3effd] rounded-full px-5 py-2.5 space-x-3 cursor-pointer hover:bg-[#d0e5fb] transition-all shadow-sm"
@@ -235,11 +249,10 @@ export default function Feedback() {
             </div>
             <div className="text-[#144064] font-bold text-sm">
               <div>Hồ sơ tài khoản</div>
-              <div className="text-xs font-semibold opacity-80">user : {userObj.username || '...'}</div>
+              <div className="text-xs font-semibold opacity-80">user : {currentUser.username || currentUser.fullName || '...'}</div>
             </div>
           </div>
 
-          {/* Logout Button */}
           <button 
             onClick={() => {
               localStorage.removeItem('mediwise_token');
@@ -255,10 +268,8 @@ export default function Feedback() {
           </button>
         </header>
 
-        {/* Content Body */}
         <section className="px-10 py-6 max-w-5xl space-y-8">
           
-          {/* Tiêu đề trang & Nút Gửi Đánh Giá */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-3xl font-black text-gray-900 tracking-tight">
@@ -280,13 +291,12 @@ export default function Feedback() {
             </button>
           </div>
 
-          {/* CARD THỐNG KÊ SAO */}
           <div className="bg-white rounded-[32px] p-8 shadow-sm border border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="text-center md:border-r border-gray-100">
               <span className="text-5xl font-black text-gray-900">{avgRating}</span>
               <div className="flex justify-center text-amber-400 my-2">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} className={`w-6 h-6 ${i < Math.round(avgRating) ? 'fill-current' : 'text-gray-200'}`} viewBox="0 0 20 20">
+                  <svg key={i} className={`w-6 h-6 ${i < Math.round(Number(avgRating)) ? 'fill-current' : 'text-gray-200'}`} viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
@@ -294,7 +304,6 @@ export default function Feedback() {
               <p className="text-sm font-bold text-gray-400">Dựa trên {feedbacks.length} đánh giá</p>
             </div>
 
-            {/* BỘ LỌC THEO SỐ SAO */}
             <div className="md:col-span-2 flex flex-wrap gap-2 justify-center md:justify-start">
               <button
                 onClick={() => setFilterRating(0)}
@@ -313,13 +322,12 @@ export default function Feedback() {
                   }`}
                 >
                   <span>{star} sao</span>
-                  <span className="text-xs opacity-75">({feedbacks.filter(f => f.rating === star).length})</span>
+                  <span className="text-xs opacity-75">({feedbacks.filter(f => Number(f.rating) === star).length})</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* DANH SÁCH BÌNH LUẬN CỘNG ĐỒNG */}
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-gray-800">Tất cả nhận xét từ người dùng</h3>
 
@@ -332,9 +340,7 @@ export default function Feedback() {
             ) : (
               filteredFeedbacks.map((item) => {
                 const itemAuthorName = (item.username || item.author || '').trim().toLowerCase();
-                
-                // Kiểm tra điều kiện chính chủ hoặc admin
-                const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || userObj.role === 'admin');
+                const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || currentUser.role === 'admin');
 
                 return (
                   <div key={item.id || Math.random()} className="bg-white rounded-[24px] p-6 shadow-sm border border-gray-100 space-y-3">
@@ -352,13 +358,12 @@ export default function Feedback() {
                       <div className="flex items-center space-x-4">
                         <div className="flex text-amber-400">
                           {[...Array(5)].map((_, i) => (
-                            <svg key={i} className={`w-4 h-4 ${i < item.rating ? 'fill-current' : 'text-gray-200'}`} viewBox="0 0 20 20">
+                            <svg key={i} className={`w-4 h-4 ${i < Number(item.rating) ? 'fill-current' : 'text-gray-200'}`} viewBox="0 0 20 20">
                               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                             </svg>
                           ))}
                         </div>
 
-                        {/* NÚT SỬA & XÓA (Chỉ hiện khi đúng là chủ bài viết hoặc admin) */}
                         {isOwner && (
                           <div className="flex space-x-2 text-xs font-bold">
                             <button 
