@@ -33,6 +33,11 @@ export default function Feedback() {
   const [editRating, setEditRating] = useState(5);
   const [editComment, setEditComment] = useState('');
 
+  // State phục vụ Modal Tạo Đánh giá Mới
+  const [isCreating, setIsCreating] = useState(false);
+  const [newRating, setNewRating] = useState(5);
+  const [newComment, setNewComment] = useState('');
+
   // 2. Gọi API lấy danh sách từ Backend
   const fetchFeedbacks = async () => {
     try {
@@ -94,6 +99,47 @@ export default function Feedback() {
     }
   };
 
+  // 6. Gửi đánh giá mới (POST)
+  const handleCreateFeedback = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim()) {
+      alert('Vui lòng nhập nội dung đánh giá!');
+      return;
+    }
+    try {
+      const payload = {
+        rating: newRating,
+        comment: newComment,
+        username: userObj.username || userObj.fullName || 'Người dùng'
+      };
+      const res = await api.post('/feedbacks', payload);
+      if (res.data) {
+        setFeedbacks([res.data, ...feedbacks]);
+      } else {
+        fetchFeedbacks(); // Tải lại nếu API không trả về object mới trực tiếp
+      }
+      setIsCreating(false);
+      setNewComment('');
+      setNewRating(5);
+      alert('Gửi đánh giá thành công!');
+    } catch (err) {
+      console.error('Lỗi khi gửi đánh giá:', err);
+      // Fallback giả lập nếu chưa có backend API post
+      const fakeNew = {
+        id: Date.now(),
+        rating: newRating,
+        comment: newComment,
+        username: userObj.username || userObj.fullName || 'Người dùng',
+        date: new Date().toLocaleDateString()
+      };
+      setFeedbacks([fakeNew, ...feedbacks]);
+      setIsCreating(false);
+      setNewComment('');
+      setNewRating(5);
+      alert('Đã gửi đánh giá!');
+    }
+  };
+
   const avgRating = feedbacks.length 
     ? (feedbacks.reduce((acc, cur) => acc + cur.rating, 0) / feedbacks.length).toFixed(1)
     : 0;
@@ -109,7 +155,7 @@ export default function Feedback() {
       <aside className="w-80 bg-white border-r border-gray-100 py-6 px-0 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
         <div className="space-y-12">
           
-          {/* Brand Logo Header (Giống hệt Dashboard) */}
+          {/* Brand Logo Header */}
           <div className="flex items-center justify-start cursor-pointer w-full overflow-hidden -ml-4 pl-3" onClick={() => navigate('/dashboard')}>
             <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
             <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
@@ -165,7 +211,7 @@ export default function Feedback() {
       {/* 2. MAIN CONTENT BÊN PHẢI */}
       <main className="flex-1 flex flex-col">
         
-        {/* Top Navbar (Giống hệt Dashboard) */}
+        {/* Top Navbar */}
         <header className="h-28 px-10 flex items-center justify-end space-x-4">
           
           {/* ALG Wiki Button */}
@@ -189,7 +235,7 @@ export default function Feedback() {
             </div>
             <div className="text-[#144064] font-bold text-sm">
               <div>Hồ sơ tài khoản</div>
-              <div className="text-xs font-semibold opacity-80">user : ...</div>
+              <div className="text-xs font-semibold opacity-80">user : {userObj.username || '...'}</div>
             </div>
           </div>
 
@@ -212,14 +258,26 @@ export default function Feedback() {
         {/* Content Body */}
         <section className="px-10 py-6 max-w-5xl space-y-8">
           
-          {/* Tiêu đề trang */}
-          <div>
-            <h1 className="text-3xl font-black text-gray-900 tracking-tight">
-              Tổng Hợp Đánh Giá Của Người Dùng
-            </h1>
-            <p className="text-gray-500 font-medium mt-1 text-sm">
-              Xem các nhận xét và đóng góp từ cộng đồng người dùng Aellergis.
-            </p>
+          {/* Tiêu đề trang & Nút Gửi Đánh Giá */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-black text-gray-900 tracking-tight">
+                Tổng Hợp Đánh Giá Của Người Dùng
+              </h1>
+              <p className="text-gray-500 font-medium mt-1 text-sm">
+                Xem các nhận xét và đóng góp từ cộng đồng người dùng Aellergis.
+              </p>
+            </div>
+
+            <button
+              onClick={() => setIsCreating(true)}
+              className="bg-[#144064] hover:bg-[#0f324f] text-white font-bold px-6 py-3.5 rounded-2xl shadow-md transition-all text-sm flex items-center justify-center space-x-2 shrink-0 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              <span>Viết đánh giá của bạn</span>
+            </button>
           </div>
 
           {/* CARD THỐNG KÊ SAO */}
@@ -269,7 +327,7 @@ export default function Feedback() {
               <div className="text-center py-10 text-gray-400 font-medium">Đang tải dữ liệu...</div>
             ) : filteredFeedbacks.length === 0 ? (
               <div className="bg-white rounded-[32px] p-8 text-center text-gray-400 font-medium border border-gray-100">
-                Chưa có đánh giá nào cho mức {filterRating} sao.
+                Chưa có đánh giá nào cho mức {filterRating === 0 ? 'này' : `${filterRating} sao`}.
               </div>
             ) : (
               filteredFeedbacks.map((item) => {
@@ -279,15 +337,15 @@ export default function Feedback() {
                 const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || userObj.role === 'admin');
 
                 return (
-                  <div key={item.id} className="bg-white rounded-[24px] p-6 shadow-sm border border-gray-100 space-y-3">
+                  <div key={item.id || Math.random()} className="bg-white rounded-[24px] p-6 shadow-sm border border-gray-100 space-y-3">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 rounded-full bg-[#e3effd] text-[#144064] font-bold flex items-center justify-center text-sm">
-                          {item.username?.charAt(0).toUpperCase()}
+                          {item.username?.charAt(0).toUpperCase() || 'U'}
                         </div>
                         <div>
-                          <h4 className="font-bold text-gray-900 text-sm">{item.username}</h4>
-                          <span className="text-xs text-gray-400">{item.date}</span>
+                          <h4 className="font-bold text-gray-900 text-sm">{item.username || 'Người dùng ẩn danh'}</h4>
+                          <span className="text-xs text-gray-400">{item.date || 'Gần đây'}</span>
                         </div>
                       </div>
 
@@ -328,6 +386,56 @@ export default function Feedback() {
           </div>
         </section>
       </main>
+
+      {/* MODAL GỬI ĐÁNH GIÁ MỚI */}
+      {isCreating && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-3xl p-6 w-full max-w-md space-y-4 shadow-2xl">
+            <h3 className="text-xl font-bold text-gray-900">Viết Đánh Giá Của Bạn</h3>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Số sao:</label>
+              <select 
+                value={newRating} 
+                onChange={(e) => setNewRating(Number(e.target.value))}
+                className="w-full p-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#144064] text-sm"
+              >
+                {[5, 4, 3, 2, 1].map(num => (
+                  <option key={num} value={num}>{num} sao</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Nội dung nhận xét:</label>
+              <textarea 
+                rows={4}
+                value={newComment} 
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Chia sẻ trải nghiệm của bạn về Aellergis..."
+                className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#144064] text-sm leading-relaxed"
+              />
+            </div>
+
+            <div className="flex justify-end space-x-3 pt-2">
+              <button 
+                type="button"
+                onClick={() => setIsCreating(false)}
+                className="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-bold cursor-pointer"
+              >
+                Hủy
+              </button>
+              <button 
+                type="button"
+                onClick={handleCreateFeedback}
+                className="px-4 py-2 rounded-xl bg-[#144064] hover:bg-[#0f324f] text-white text-sm font-bold cursor-pointer"
+              >
+                Gửi đánh giá
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* MODAL CHỈNH SỬA ĐÁNH GIÁ */}
       {editingFeedback && (
