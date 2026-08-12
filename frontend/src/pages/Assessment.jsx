@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Import logo và tiêu đề
 import titleImg from './title.png'; 
+import logoImg from './logo.png'; // Đảm bảo bạn có file logo.png ở cùng thư mục
 
 const CheckPage = () => {
   const navigate = useNavigate();
@@ -77,17 +78,28 @@ const CheckPage = () => {
       position: 'relative'
     }}>
       
-      {/* Tiêu đề / Logo ở góc trên bên trái */}
-      <div style={{ 
-        position: 'absolute', 
-        top: '24px', 
-        left: '32px', 
-        cursor: 'pointer' 
-      }} onClick={() => navigate('/dashboard')}>
+      {/* Logo và Tiêu đề ở góc trên bên trái */}
+      <div 
+        style={{ 
+          position: 'absolute', 
+          top: '24px', 
+          left: '32px', 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: '10px',
+          cursor: 'pointer' 
+        }} 
+        onClick={() => navigate('/dashboard')}
+      >
+        <img 
+          src={logoImg} 
+          alt="Logo" 
+          style={{ height: '36px', width: 'auto', objectFit: 'contain' }} 
+        />
         <img 
           src={titleImg} 
-          alt="aellergis logo" 
-          style={{ height: '36px', width: 'auto', objectFit: 'contain' }} 
+          alt="aellergis title" 
+          style={{ height: '28px', width: 'auto', objectFit: 'contain' }} 
         />
       </div>
 
