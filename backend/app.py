@@ -114,7 +114,12 @@ def direct_delete_feedback(feedback_id):
         db.session.rollback()
         return jsonify({"error": "Lỗi server khi xóa", "message": str(e)}), 500
 
-if __name__ == '__main__':
-    with app.app_context():
+with app.app_context():
+    try:
         db.create_all()
+        print("Đã tự động tạo bảng database thành công!")
+    except Exception as e:
+        print(f"Lỗi tạo bảng: {e}")
+
+if __name__ == '__main__':
     app.run(debug=True, port=5000)
