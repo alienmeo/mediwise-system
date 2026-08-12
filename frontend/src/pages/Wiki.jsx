@@ -35,10 +35,8 @@ export default function Wiki() {
         {/* Lý do hình thành */}
         <section className="space-y-2">
           <div className="flex items-center space-x-3 text-[#144064]">
-            <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" />
-              </svg>
+            <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
+              <img src={image1} alt="Lý do hình thành" className="w-5 h-5 object-contain" />
             </div>
             <h2 className="text-xl font-bold">Lý do hình thành</h2>
           </div>
@@ -50,10 +48,8 @@ export default function Wiki() {
         {/* Giá trị cốt lõi */}
         <section className="space-y-3">
           <div className="flex items-center space-x-3 text-[#144064]">
-            <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM6.262 6.07a8.25 8.25 0 1010.512-.765.75.75 0 01.818-.213 9.75 9.75 0 11-12.87 1.455.75.75 0 01.76-.793z" clipRule="evenodd" />
-              </svg>
+            <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
+              <img src={image2} alt="Giá trị cốt lõi" className="w-5 h-5 object-contain" />
             </div>
             <h2 className="text-xl font-bold">Giá trị cốt lõi</h2>
           </div>
@@ -88,10 +84,8 @@ export default function Wiki() {
         {/* Khái niệm mở rộng (Dị ứng chéo) */}
         <section className="space-y-2">
           <div className="flex items-center space-x-3 text-[#144064]">
-            <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" />
-              </svg>
+            <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
+              <img src={image1} alt="Dị ứng chéo" className="w-5 h-5 object-contain" />
             </div>
             <h2 className="text-xl font-bold">Để hiểu rõ hơn thì dị ứng chéo là gì?</h2>
           </div>
