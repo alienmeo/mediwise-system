@@ -61,7 +61,7 @@ export default function Wiki() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-11">
             {/* Badge 1: Tin cậy */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full border border-blue-200/60 bg-white/40 flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
                 <img src={image1} alt="Tin cậy" className="w-5 h-5 object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">Tin cậy</span>
@@ -69,7 +69,7 @@ export default function Wiki() {
 
             {/* Badge 2: Thuận tiện */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full border border-blue-200/60 bg-white/40 flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
                 <img src={image2} alt="Thuận tiện" className="w-5 h-5 object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">Thuận tiện</span>
@@ -77,7 +77,7 @@ export default function Wiki() {
 
             {/* Badge 3: An toàn */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full border border-blue-200/60 bg-white/40 flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
                 <img src={image3} alt="An toàn" className="w-5 h-5 object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">An toàn</span>
