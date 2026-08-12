@@ -77,12 +77,12 @@ const CheckPage = () => {
       position: 'relative'
     }}>
       
-      {/* Logo xích sát lề trái hơn (left: 16px) và title gần lại logo (gap: 6px) */}
+      {/* Đã đưa left: '0px' để logo sát hẳn lề trái theo vị trí bạn chấm */}
       <div 
         style={{ 
           position: 'absolute', 
           top: '20px', 
-          left: '16px', 
+          left: '0px', 
           display: 'flex', 
           alignItems: 'center', 
           gap: '6px',
