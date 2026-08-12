@@ -6,7 +6,6 @@ from routes.auth_routes import auth_bp
 from routes.admin_routes import admin_bp
 from routes.check_routes import check_bp
 import json
-import os
 from models.db_models import AssessmentHistory
 
 app = Flask(__name__)
@@ -22,23 +21,10 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
     return response
 
-# Cấu hình Database linh hoạt: Tự động dùng PostgreSQL trên Render, hoặc SQLite khi chạy local
-db_url = os.getenv('DATABASE_URL')
-if db_url and db_url.startswith("postgres://"):
-    db_url = db_url.replace("postgres://", "postgresql://", 1)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = db_url if db_url else 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'your-secret-key-mediwise'
 
 db.init_app(app)
-
-# Tự động tạo bảng database ngay khi ứng dụng khởi động trên Render hoặc Local
-with app.app_context():
-    try:
-        db.create_all()
-        print("Đã khởi tạo hoặc kiểm tra cấu trúc bảng database thành công!")
-    except Exception as e:
-        print(f"Lỗi khi khởi tạo bảng database: {e}")
 
 # Thêm route trang chủ để tránh lỗi 404 khi truy cập trực tiếp link Render
 @app.route('/', methods=['GET'])
@@ -65,6 +51,7 @@ def direct_user_history():
     if request.method == 'OPTIONS':
         return '', 200
     try:
+        # Lấy tạm toàn bộ lịch sử gần nhất trong database để hiển thị ngay lên web cho bạn
         histories = AssessmentHistory.query.order_by(AssessmentHistory.created_at.desc()).all()
         
         history_list = []
@@ -128,4 +115,6 @@ def direct_delete_feedback(feedback_id):
         return jsonify({"error": "Lỗi server khi xóa", "message": str(e)}), 500
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True, port=5000)
