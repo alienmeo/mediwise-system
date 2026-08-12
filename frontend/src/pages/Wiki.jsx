@@ -35,12 +35,11 @@ export default function Wiki() {
         {/* Lý do hình thành */}
         <section className="space-y-2">
           <div className="flex items-center space-x-3 text-[#144064]">
-            <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
-              <img src={image1} alt="Lý do hình thành" className="w-5 h-5 object-contain" />
-            </div>
+            {/* Cục tròn nhỏ màu xanh đậm thuần túy */}
+            <div className="w-3.5 h-3.5 rounded-full bg-[#144064] shrink-0"></div>
             <h2 className="text-xl font-bold">Lý do hình thành</h2>
           </div>
-          <p className="text-gray-600 text-sm leading-relaxed pl-11">
+          <p className="text-gray-600 text-sm leading-relaxed pl-6">
             Nhận thấy việc tiếp cận thông tin về thuốc và các thành phần có thể gây dị ứng còn gặp nhiều hạn chế, chúng tôi xây dựng Aellergis nhằm hỗ trợ người dùng tra cứu thông tin một cách nhanh chóng và hiệu quả.
           </p>
         </section>
@@ -48,33 +47,32 @@ export default function Wiki() {
         {/* Giá trị cốt lõi */}
         <section className="space-y-3">
           <div className="flex items-center space-x-3 text-[#144064]">
-            <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
-              <img src={image2} alt="Giá trị cốt lõi" className="w-5 h-5 object-contain" />
-            </div>
+            {/* Cục tròn nhỏ màu xanh đậm thuần túy */}
+            <div className="w-3.5 h-3.5 rounded-full bg-[#144064] shrink-0"></div>
             <h2 className="text-xl font-bold">Giá trị cốt lõi</h2>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-11">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-6">
             {/* Badge 1: Tin cậy */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
-                <img src={image1} alt="Tin cậy" className="w-5 h-5 object-contain" />
+              <div className="w-6 h-6 flex items-center justify-center shrink-0">
+                <img src={image1} alt="Tin cậy" className="w-6 h-6 object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">Tin cậy</span>
             </div>
 
             {/* Badge 2: Thuận tiện */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
-                <img src={image2} alt="Thuận tiện" className="w-5 h-5 object-contain" />
+              <div className="w-6 h-6 flex items-center justify-center shrink-0">
+                <img src={image2} alt="Thuận tiện" className="w-6 h-6 object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">Thuận tiện</span>
             </div>
 
             {/* Badge 3: An toàn */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
-                <img src={image3} alt="An toàn" className="w-5 h-5 object-contain" />
+              <div className="w-6 h-6 flex items-center justify-center shrink-0">
+                <img src={image3} alt="An toàn" className="w-6 h-6 object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">An toàn</span>
             </div>
@@ -84,12 +82,11 @@ export default function Wiki() {
         {/* Khái niệm mở rộng (Dị ứng chéo) */}
         <section className="space-y-2">
           <div className="flex items-center space-x-3 text-[#144064]">
-            <div className="w-8 h-8 rounded-full bg-[#144064] flex items-center justify-center shrink-0">
-              <img src={image1} alt="Dị ứng chéo" className="w-5 h-5 object-contain" />
-            </div>
+            {/* Cục tròn nhỏ màu xanh đậm thuần túy */}
+            <div className="w-3.5 h-3.5 rounded-full bg-[#144064] shrink-0"></div>
             <h2 className="text-xl font-bold">Để hiểu rõ hơn thì dị ứng chéo là gì?</h2>
           </div>
-          <div className="text-gray-600 text-sm leading-relaxed pl-11 space-y-2">
+          <div className="text-gray-600 text-sm leading-relaxed pl-6 space-y-2">
             <p>
               Dị ứng xảy ra khi hệ miễn dịch của cơ thể bị "nhầm lẫn" giữa các chất khác nhau nhưng có cấu trúc protein tương tự nhau.
             </p>
