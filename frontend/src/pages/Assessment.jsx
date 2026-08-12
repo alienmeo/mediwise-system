@@ -77,7 +77,7 @@ const CheckPage = () => {
       position: 'relative'
     }}>
       
-      {/* Đã đưa left: '0px' để logo sát hẳn lề trái theo vị trí bạn chấm */}
+      {/* Đã giảm gap xuống -6px để chữ title xích sát vào logo theo vị trí chấm đỏ */}
       <div 
         style={{ 
           position: 'absolute', 
@@ -85,7 +85,7 @@ const CheckPage = () => {
           left: '0px', 
           display: 'flex', 
           alignItems: 'center', 
-          gap: '6px',
+          gap: '-6px',
           cursor: 'pointer' 
         }} 
         onClick={() => navigate('/dashboard')}
