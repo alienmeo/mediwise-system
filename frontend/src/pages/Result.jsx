@@ -17,7 +17,7 @@ export default function Result() {
         <Card className="text-center p-8 max-w-md bg-white rounded-3xl shadow-sm border border-gray-100">
           <p className="text-gray-600 mb-6 font-medium">Không tìm thấy dữ liệu kết quả kiểm tra gần nhất.</p>
           <Button 
-            className="w-full bg-[#e68cb5] hover:bg-[#d87ba5] text-white rounded-full py-3 font-semibold shadow-none border-none cursor-pointer"
+            className="w-full bg-[#144064] hover:bg-[#0f324e] text-white rounded-full py-3 font-semibold shadow-none border-none cursor-pointer"
             onClick={() => navigate('/dashboard')}
           >
             Quay lại trang chính
@@ -35,7 +35,7 @@ export default function Result() {
     LOW: { color: 'text-[#42d134]', label: 'Nguy cơ thấp', dot: 'bg-[#42d134]', alertBg: 'bg-green-50 border-green-200' },
     MEDIUM: { color: 'text-amber-500', label: 'Nguy cơ trung bình', dot: 'bg-amber-500', alertBg: 'bg-amber-50 border-amber-200' },
     HIGH: { color: 'text-red-500', label: 'Nguy cơ cao', dot: 'bg-red-500', alertBg: 'bg-red-50 border-red-200' },
-    CRITICAL: { color: 'text-purple-600', label: 'Nguy cơ rất cao', dot: 'bg-purle-600', alertBg: 'bg-purple-100 border-purple-300' }
+    CRITICAL: { color: 'text-purple-600', label: 'Nguy cơ rất cao', dot: 'bg-purple-600', alertBg: 'bg-purple-100 border-purple-300' }
   };
 
   const currentRisk = riskConfig[rawRisk] || riskConfig.LOW;
@@ -60,19 +60,22 @@ export default function Result() {
     <div className="min-h-screen bg-[#f7f7f9] py-8 px-4 font-sans text-[#222222]">
       <div className="max-w-4xl mx-auto relative">
         
-        {/* Logo MediWise */}
-        <div className="mb-6 flex items-center justify-center gap-2 sm:justify-start sm:absolute sm:top-0 sm:left-0 sm:mb-0">
-          <img src={logoImg} alt="MediWise Logo" className="h-10 w-auto object-contain" />
-          <img src={brandTextImg} alt="MediWise" className="h-8 w-auto object-contain" />
+        {/* Logo và Tiêu đề MediWise (Sửa lại layout logo xích sát lề trái giống các trang khác) */}
+        <div 
+          className="mb-6 flex items-center gap-[6px] cursor-pointer sm:absolute sm:top-0 sm:left-0 sm:mb-0" 
+          onClick={() => navigate('/dashboard')}
+        >
+          <img src={logoImg} alt="Logo" className="h-[64px] w-auto object-contain" />
+          <img src={brandTextImg} alt="aellergis title" className="h-[42px] w-auto object-contain" />
         </div>
 
         {/* Card Trạng Thái Dị Ứng */}
-        <div className="flex justify-center mb-6 pt-2 sm:pt-0">
-          <div className="bg-[#f0fafd] rounded-[24px] shadow-sm overflow-hidden text-center w-72 border border-[#e0f3f7]">
-            <div className="py-2.5 px-4 text-[#e68cb5] text-lg font-bold">
+        <div className="flex justify-center mb-6 pt-16 sm:pt-0">
+          <div className="bg-[#e3effd] rounded-[24px] shadow-sm overflow-hidden text-center w-72 border border-[#d1e4fc]">
+            <div className="py-2.5 px-4 text-[#144064] text-lg font-bold">
               Mức độ dị ứng cho: <span className="text-gray-800 font-extrabold">{result.drug_name || 'Thuốc'}</span>
             </div>
-            <div className="bg-[#e8f7fa] py-3 px-4 border-t border-[#d8f1f5] flex items-center justify-center gap-2.5">
+            <div className="bg-[#f4f7fc] py-3 px-4 border-t border-[#d1e4fc] flex items-center justify-center gap-2.5">
               <span className={`w-4 h-4 rounded-full ${currentRisk.dot}`}></span>
               <span className={`text-xl font-extrabold ${currentRisk.color}`}>
                 {currentRisk.label}
@@ -132,7 +135,7 @@ export default function Result() {
               {explanationsList.length > 0 ? (
                 explanationsList.map((exp, idx) => (
                   <p key={idx} className="flex items-start gap-2">
-                    <span className="text-[#e68cb5] font-bold">•</span>
+                    <span className="text-[#144064] font-bold">•</span>
                     <span>{exp}</span>
                   </p>
                 ))
@@ -147,19 +150,19 @@ export default function Result() {
         {/* Các nút điều hướng hành động */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
           <Link to="/assessment" className="w-full">
-            <button className="w-full bg-[#e68cb5] hover:bg-[#d87ba5] text-white font-medium py-3.5 px-4 rounded-full transition-colors text-center text-sm sm:text-base cursor-pointer">
+            <button className="w-full bg-[#144064] hover:bg-[#0f324e] text-white font-medium py-3.5 px-4 rounded-full transition-colors text-center text-sm sm:text-base cursor-pointer shadow-md">
               Kiểm tra loại thuốc khác
             </button>
           </Link>
 
           <Link to="/dashboard" className="w-full">
-            <button className="w-full bg-[#e68cb5] hover:bg-[#d87ba5] text-white font-medium py-3.5 px-4 rounded-full transition-colors text-center text-sm sm:text-base cursor-pointer">
+            <button className="w-full bg-[#144064] hover:bg-[#0f324e] text-white font-medium py-3.5 px-4 rounded-full transition-colors text-center text-sm sm:text-base cursor-pointer shadow-md">
               Quay lại trang chính
             </button>
           </Link>
 
           <Link to="/feedback" className="w-full">
-            <button className="w-full bg-[#e68cb5] hover:bg-[#d87ba5] text-white font-medium py-3.5 px-4 rounded-full transition-colors text-center text-sm sm:text-base cursor-pointer">
+            <button className="w-full bg-[#144064] hover:bg-[#0f324e] text-white font-medium py-3.5 px-4 rounded-full transition-colors text-center text-sm sm:text-base cursor-pointer shadow-md">
               Đánh giá hệ thống
             </button>
           </Link>
