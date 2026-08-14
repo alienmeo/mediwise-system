@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // Import file title/logo (không dùng logo.png theo yêu cầu)
 import brandTextImg from './title.png'; 
 import wikiLogoImg from './wiki-logo.png'; 
+import image1 from './image1.png'; // Thêm import cho image1
 
 export default function Wiki() {
   const navigate = useNavigate();
@@ -55,30 +56,24 @@ export default function Wiki() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-11 text-left">
             {/* Badge 1 */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-[#144064] text-white flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                  <path fillRule="evenodd" d="M12 1.5c-1.92 0-3.72.56-5.23 1.53-.9.59-1.28 1.72-.88 2.69.96 2.34 2.28 4.46 3.89 6.22 1.09 1.2 2.3 2.24 3.6 3.12 1.3-.88 2.51-1.92 3.6-3.12 1.61-1.76 2.93-3.88 3.89-6.22.4-.97.02-2.1-.88-2.69A9.974 9.974 0 0012 1.5z" clipRule="evenodd" />
-                </svg>
+              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 overflow-hidden p-1 shadow-inner">
+                <img src={image1} alt="Icon Tin cậy" className="w-full h-full object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">Tin cậy</span>
             </div>
 
             {/* Badge 2 */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-[#144064] text-white flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                  <path d="M4.5 4.5a3 3 0 00-3 3v9a3 3 0 003 3h8.25a3 3 0 003-3v-9a3 3 0 00-3-3H4.5zM19.94 18.75l-2.69-2.69V7.94l2.69-2.69c.944-.945 2.56-.276 2.56 1.06v11.38c0 1.336-1.616 2.005-2.56 1.06z" />
-                </svg>
+              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 overflow-hidden p-1 shadow-inner">
+                <img src={image1} alt="Icon Thuận tiện" className="w-full h-full object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">Thuận tiện</span>
             </div>
 
             {/* Badge 3 */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-[#144064] text-white flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                  <path fillRule="evenodd" d="M12 1.5c-1.92 0-3.72.56-5.23 1.53-.9.59-1.28 1.72-.88 2.69.96 2.34 2.28 4.46 3.89 6.22 1.09 1.2 2.3 2.24 3.6 3.12 1.3-.88 2.51-1.92 3.6-3.12 1.61-1.76 2.93-3.88 3.89-6.22.4-.97.02-2.1-.88-2.69A9.974 9.974 0 0012 1.5z" clipRule="evenodd" />
-                </svg>
+              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 overflow-hidden p-1 shadow-inner">
+                <img src={image1} alt="Icon An toàn" className="w-full h-full object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">An toàn</span>
             </div>
