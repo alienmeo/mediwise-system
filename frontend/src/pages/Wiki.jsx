@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // Import file title/logo (không dùng logo.png theo yêu cầu)
 import brandTextImg from './title.png'; 
 import wikiLogoImg from './wiki-logo.png'; 
-import image1 from './image1.png'; // Thêm import cho image1
+import image1 from './image1.png'; 
 
 export default function Wiki() {
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ export default function Wiki() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-11 text-left">
             {/* Badge 1 */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 overflow-hidden p-1 shadow-inner">
+              <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon Tin cậy" className="w-full h-full object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">Tin cậy</span>
@@ -64,7 +64,7 @@ export default function Wiki() {
 
             {/* Badge 2 */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 overflow-hidden p-1 shadow-inner">
+              <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon Thuận tiện" className="w-full h-full object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">Thuận tiện</span>
@@ -72,7 +72,7 @@ export default function Wiki() {
 
             {/* Badge 3 */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
-              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 overflow-hidden p-1 shadow-inner">
+              <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon An toàn" className="w-full h-full object-contain" />
               </div>
               <span className="font-bold text-[#144064] text-sm">An toàn</span>
