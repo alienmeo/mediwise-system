@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 
-import logoImg from './logo.png'; 
+// Import file title/logo giống các trang khác (Wiki, Dashboard, ...)
 import brandTextImg from './title.png'; 
+import wikiLogoImg from './wiki-logo.png'; 
 
 export default function Feedback() {
   const navigate = useNavigate();
@@ -103,36 +104,41 @@ export default function Feedback() {
     : feedbacks.filter(f => f.rating === filterRating);
 
   return (
-    <div className="flex min-h-screen bg-[#f8fafc]">
-      {/* SIDEBAR BÊN TRÁI */}
-      <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col shrink-0">
+    <div className="flex min-h-screen bg-[#f4f7fc]">
+      {/* SIDEBAR BÊN TRÁI: Đồng bộ màu sắc & vị trí logo/title */}
+      <aside className="w-80 bg-white border-r border-gray-200 p-6 flex flex-col justify-between shrink-0 shadow-sm">
         <div className="space-y-10">
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
-            <img src={logoImg} alt="Mediwise Logo" className="h-14 w-auto object-contain" />
-            <img src={brandTextImg} alt="Mediwise" className="h-10 w-auto object-contain" />
+          <div className="flex items-center justify-center cursor-pointer w-full overflow-hidden pt-2" onClick={() => navigate('/dashboard')}>
+            <img src={brandTextImg} alt="Aellergis" className="h-16 w-auto object-contain max-w-[280px] shrink-0" />
           </div>
 
-          <nav className="space-y-4">
-            <button onClick={() => navigate('/dashboard')} className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer">
+          <nav className="space-y-3">
+            <button onClick={() => navigate('/dashboard')} className="w-full py-3.5 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
               Về lại trang chủ
             </button>
-            <button onClick={() => navigate('/history')} className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer">
+            <button onClick={() => navigate('/history')} className="w-full py-3.5 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
               Xem lại kết quả gần nhất
             </button>
-            <button onClick={() => navigate('/FeedbackPage')} className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer">
+            <button onClick={() => navigate('/FeedbackPage')} className="w-full py-3.5 px-6 rounded-full bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
               Tự gửi đánh giá
             </button>
-            <button onClick={() => navigate('/profile')} className="w-full py-4 px-6 rounded-3xl bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0284c7] font-bold text-center transition-all text-base cursor-pointer">
+            <button onClick={() => navigate('/profile')} className="w-full py-3.5 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
               Hồ sơ cá nhân
             </button>
           </nav>
+        </div>
+
+        <div className="w-full pt-6 border-t border-gray-100 flex flex-col items-center space-y-4">
+          <div className="w-full max-w-[200px]">
+            <img src={wikiLogoImg} alt="Aellergis Wiki Logo" className="w-full h-auto object-contain" />
+          </div>
         </div>
       </aside>
 
       {/* MAIN CONTENT BÊN PHẢI */}
       <main className="flex-1 flex flex-col">
-        <header className="h-24 px-10 flex items-center justify-between border-b border-transparent">
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+        <header className="h-24 px-10 flex items-center justify-between border-b border-gray-200 bg-white shadow-xs">
+          <h1 className="text-2xl font-extrabold text-[#144064] tracking-tight">
             Tổng Hợp Đánh Giá Của Người Dùng
           </h1>
           <button 
@@ -141,7 +147,7 @@ export default function Feedback() {
               localStorage.removeItem('mediwise_user');
               navigate('/login');
             }}
-            className="bg-[#fbcfe8] hover:bg-[#f472b6] text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all cursor-pointer"
+            className="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-5 py-2.5 rounded-full font-bold text-sm transition-all cursor-pointer"
           >
             Đăng xuất
           </button>
@@ -149,9 +155,9 @@ export default function Feedback() {
 
         <section className="p-10 max-w-5xl space-y-8">
           {/* CARD THỐNG KÊ SAO */}
-          <div className="bg-white rounded-[32px] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.04)] grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+          <div className="bg-white rounded-[24px] p-8 shadow-sm border border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="text-center md:border-r border-gray-100">
-              <span className="text-5xl font-black text-gray-900">{avgRating}</span>
+              <span className="text-5xl font-black text-[#144064]">{avgRating}</span>
               <div className="flex justify-center text-amber-400 my-2">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className={`w-6 h-6 ${i < Math.round(avgRating) ? 'fill-current' : 'text-gray-200'}`} viewBox="0 0 20 20">
@@ -167,7 +173,7 @@ export default function Feedback() {
               <button
                 onClick={() => setFilterRating(0)}
                 className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all cursor-pointer ${
-                  filterRating === 0 ? 'bg-[#0284c7] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  filterRating === 0 ? 'bg-[#144064] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
                 Tất cả ({feedbacks.length})
@@ -177,7 +183,7 @@ export default function Feedback() {
                   key={star}
                   onClick={() => setFilterRating(star)}
                   className={`px-4 py-2.5 rounded-full text-sm font-bold transition-all cursor-pointer flex items-center space-x-1 ${
-                    filterRating === star ? 'bg-[#0284c7] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    filterRating === star ? 'bg-[#144064] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
                   <span>{star} sao</span>
@@ -189,26 +195,24 @@ export default function Feedback() {
 
           {/* DANH SÁCH BÌNH LUẬN CỘNG ĐỒNG */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-gray-800">Tất cả nhận xét từ người dùng</h3>
+            <h3 className="text-xl font-bold text-[#144064]">Tất cả nhận xét từ người dùng</h3>
 
             {loading ? (
               <div className="text-center py-10 text-gray-400 font-medium">Đang tải dữ liệu...</div>
             ) : filteredFeedbacks.length === 0 ? (
-              <div className="bg-white rounded-[32px] p-8 text-center text-gray-400 font-medium">
+              <div className="bg-white rounded-[24px] p-8 text-center text-gray-400 font-medium border border-gray-100 shadow-xs">
                 Chưa có đánh giá nào cho mức {filterRating} sao.
               </div>
             ) : (
               filteredFeedbacks.map((item) => {
                 const itemAuthorName = (item.username || item.author || '').trim().toLowerCase();
-                
-                // Kiểm tra điều kiện chính chủ hoặc admin
                 const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || userObj.role === 'admin');
 
                 return (
-                  <div key={item.id} className="bg-white rounded-[24px] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.03)] space-y-3">
+                  <div key={item.id} className="bg-white rounded-[20px] p-6 shadow-xs border border-gray-100 space-y-3">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 rounded-full bg-[#e0f2fe] text-[#0284c7] font-bold flex items-center justify-center text-sm">
+                        <div className="w-10 h-10 rounded-full bg-[#e3effd] text-[#144064] font-bold flex items-center justify-center text-sm shadow-inner">
                           {item.username?.charAt(0).toUpperCase()}
                         </div>
                         <div>
@@ -226,12 +230,11 @@ export default function Feedback() {
                           ))}
                         </div>
 
-                        {/* NÚT SỬA & XÓA (Chỉ hiện khi đúng là chủ bài viết hoặc admin) */}
                         {isOwner && (
                           <div className="flex space-x-2 text-xs font-bold">
                             <button 
                               onClick={() => handleOpenEdit(item)}
-                              className="px-3 py-1 bg-sky-50 text-sky-600 rounded-lg hover:bg-sky-100 transition-all cursor-pointer"
+                              className="px-3 py-1 bg-sky-50 text-[#144064] rounded-lg hover:bg-sky-100 transition-all cursor-pointer"
                             >
                               Sửa
                             </button>
@@ -259,14 +262,14 @@ export default function Feedback() {
       {editingFeedback && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-3xl p-6 w-full max-w-md space-y-4 shadow-2xl">
-            <h3 className="text-xl font-bold text-gray-900">Chỉnh Sửa Đánh Giá</h3>
+            <h3 className="text-xl font-bold text-[#144064]">Chỉnh Sửa Đánh Giá</h3>
 
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">Số sao:</label>
               <select 
                 value={editRating} 
                 onChange={(e) => setEditRating(Number(e.target.value))}
-                className="w-full p-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500"
+                className="w-full p-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#144064]"
               >
                 {[5, 4, 3, 2, 1].map(num => (
                   <option key={num} value={num}>{num} sao</option>
@@ -280,7 +283,7 @@ export default function Feedback() {
                 rows={4}
                 value={editComment} 
                 onChange={(e) => setEditComment(e.target.value)}
-                className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm"
+                className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#144064] text-sm"
               />
             </div>
 
@@ -293,7 +296,7 @@ export default function Feedback() {
               </button>
               <button 
                 onClick={handleSaveEdit}
-                className="px-4 py-2 rounded-xl bg-[#0284c7] hover:bg-[#0369a1] text-white text-sm font-bold cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-[#144064] hover:bg-[#0f324f] text-white text-sm font-bold cursor-pointer"
               >
                 Cập nhật
               </button>
