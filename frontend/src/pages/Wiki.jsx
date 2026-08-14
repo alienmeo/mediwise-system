@@ -12,27 +12,23 @@ export default function Wiki() {
     <div className="min-h-screen bg-[#f4f7fc] flex flex-col lg:flex-row items-stretch justify-center">
       
       {/* CỘT BÊN TRÁI: Nội dung giới thiệu & Giá trị cốt lõi */}
-      <main className="flex-1 px-8 lg:px-16 py-12 max-w-4xl space-y-10">
+      <main className="flex-1 px-8 lg:px-16 py-12 max-w-4xl space-y-10 flex flex-col items-center text-center">
         
         {/* Tiêu đề chính */}
-        <div className="space-y-4">
-          <div className="flex items-center space-x-2 text-[#144064] font-bold text-sm">
-            <span className="text-xl">✨</span>
-            <span>Chào mừng đến với</span>
-          </div>
+        <div className="space-y-4 w-full flex flex-col items-center">
           <div>
             <div className="flex items-center justify-center cursor-pointer w-full overflow-hidden" onClick={() => navigate('/dashboard')}>
               <img src={brandTextImg} alt="Aellergis" className="h-16 w-auto object-contain max-w-[280px] shrink-0" />
             </div>
           </div>
-          <p className="text-gray-600 font-medium text-sm leading-relaxed max-w-2xl">
+          <p className="text-gray-600 font-medium text-sm leading-relaxed max-w-2xl text-center">
             Nền tảng hỗ trợ tra cứu thông tin về thuốc, thành phần và các cảnh báo dị ứng. Website được phát triển với mục tiêu mang đến nguồn thông tin trực quan, dễ tiếp cận và đáng tin cậy cho mọi người.
           </p>
         </div>
 
         {/* Lý do hình thành */}
-        <section className="space-y-3">
-          <div className="flex items-center space-x-3 text-[#144064]">
+        <section className="space-y-3 w-full">
+          <div className="flex items-center justify-center space-x-3 text-[#144064]">
             <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" />
@@ -40,14 +36,14 @@ export default function Wiki() {
             </div>
             <h2 className="text-xl font-bold">Lý do hình thành</h2>
           </div>
-          <p className="text-gray-600 text-sm leading-relaxed pl-11">
+          <p className="text-gray-600 text-sm leading-relaxed max-w-2xl mx-auto text-center">
             Nhận thấy việc tiếp cận thông tin về thuốc và các thành phần có thể gây dị ứng còn gặp nhiều hạn chế, chúng tôi xây dựng Aellergis nhằm hỗ trợ người dùng tra cứu thông tin một cách nhanh chóng và hiệu quả.
           </p>
         </section>
 
         {/* Giá trị cốt lõi */}
-        <section className="space-y-4">
-          <div className="flex items-center space-x-3 text-[#144064]">
+        <section className="space-y-4 w-full">
+          <div className="flex items-center justify-center space-x-3 text-[#144064]">
             <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM6.262 6.07a8.25 8.25 0 1010.512-.765.75.75 0 01.818-.213 9.75 9.75 0 11-12.87 1.455.75.75 0 01.76-.793z" clipRule="evenodd" />
@@ -56,9 +52,9 @@ export default function Wiki() {
             <h2 className="text-xl font-bold">Giá trị cốt lõi</h2>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-11">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto w-full">
             {/* Badge 1 */}
-            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
+            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs justify-center">
               <div className="w-8 h-8 rounded-full bg-[#144064] text-white flex items-center justify-center shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
                   <path fillRule="evenodd" d="M12 1.5c-1.92 0-3.72.56-5.23 1.53-.9.59-1.28 1.72-.88 2.69.96 2.34 2.28 4.46 3.89 6.22 1.09 1.2 2.3 2.24 3.6 3.12 1.3-.88 2.51-1.92 3.6-3.12 1.61-1.76 2.93-3.88 3.89-6.22.4-.97.02-2.1-.88-2.69A9.974 9.974 0 0012 1.5z" clipRule="evenodd" />
@@ -68,7 +64,7 @@ export default function Wiki() {
             </div>
 
             {/* Badge 2 */}
-            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
+            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs justify-center">
               <div className="w-8 h-8 rounded-full bg-[#144064] text-white flex items-center justify-center shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
                   <path d="M4.5 4.5a3 3 0 00-3 3v9a3 3 0 003 3h8.25a3 3 0 003-3v-9a3 3 0 00-3-3H4.5zM19.94 18.75l-2.69-2.69V7.94l2.69-2.69c.944-.945 2.56-.276 2.56 1.06v11.38c0 1.336-1.616 2.005-2.56 1.06z" />
@@ -78,7 +74,7 @@ export default function Wiki() {
             </div>
 
             {/* Badge 3 */}
-            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
+            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs justify-center">
               <div className="w-8 h-8 rounded-full bg-[#144064] text-white flex items-center justify-center shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
                   <path fillRule="evenodd" d="M12 1.5c-1.92 0-3.72.56-5.23 1.53-.9.59-1.28 1.72-.88 2.69.96 2.34 2.28 4.46 3.89 6.22 1.09 1.2 2.3 2.24 3.6 3.12 1.3-.88 2.51-1.92 3.6-3.12 1.61-1.76 2.93-3.88 3.89-6.22.4-.97.02-2.1-.88-2.69A9.974 9.974 0 0012 1.5z" clipRule="evenodd" />
@@ -90,8 +86,8 @@ export default function Wiki() {
         </section>
 
         {/* Khái niệm mở rộng (Dị ứng chéo) */}
-        <section className="space-y-3">
-          <div className="flex items-center space-x-3 text-[#144064]">
+        <section className="space-y-3 w-full">
+          <div className="flex items-center justify-center space-x-3 text-[#144064]">
             <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" />
@@ -99,7 +95,7 @@ export default function Wiki() {
             </div>
             <h2 className="text-xl font-bold">Để hiểu rõ hơn thì dị ứng chéo là gì?</h2>
           </div>
-          <div className="text-gray-600 text-sm leading-relaxed pl-11 space-y-3">
+          <div className="text-gray-600 text-sm leading-relaxed max-w-2xl mx-auto space-y-3 text-center">
             <p>
               Dị ứng xảy ra khi hệ miễn dịch của cơ thể bị "nhầm lẫn" giữa các chất khác nhau nhưng có cấu trúc protein tương tự nhau.
             </p>
