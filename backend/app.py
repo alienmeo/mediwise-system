@@ -9,10 +9,9 @@ import json
 
 app = Flask(__name__)
 
-# Bật CORS cho phép toàn bộ phương thức và origin
+# Bật CORS
 CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
-# Middleware ép trả về đầy đủ header CORS cho mọi request (kể cả preflight OPTIONS)
 @app.after_request
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -21,34 +20,21 @@ def add_cors_headers(response):
     return response
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'your-secret-key-mediwise'
 
 db.init_app(app)
 
-# Route trang chủ tránh lỗi 404 khi truy cập trực tiếp link Render
-@app.route('/', methods=['GET'])
-def home():
-    return jsonify({
-        "status": "success",
-        "message": "Chào mừng đến với MediWise API Server!",
-        "endpoints": {
-            "history": "/api/user/history",
-            "feedbacks": "/api/feedbacks",
-            "auth": "/api/auth"
-        }
-    }), 200
-
-# Đăng ký Blueprint chuẩn tiền tố
+# --- Các route Blueprint ---
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
 app.register_blueprint(user_bp, url_prefix='/api')
 app.register_blueprint(admin_bp, url_prefix='/api/admin')
 app.register_blueprint(check_bp, url_prefix='/api')
 
-# 1. API Lịch sử khảo sát
+# --- API Lịch sử khảo sát ---
 @app.route('/api/user/history', methods=['GET', 'OPTIONS'])
 def direct_user_history():
-    if request.method == 'OPTIONS':
-        return '', 200
+    if request.method == 'OPTIONS': return '', 200
     try:
         histories = AssessmentHistory.query.order_by(AssessmentHistory.created_at.desc()).all()
         history_list = []
@@ -56,120 +42,82 @@ def direct_user_history():
             details_obj = {"recommendations": "Chưa có khuyến cáo chi tiết."}
             if h.result_json:
                 try:
-                    parsed_result = json.loads(h.result_json)
-                    if isinstance(parsed_result, dict):
-                        if 'recommendations' in parsed_result:
-                            details_obj['recommendations'] = parsed_result['recommendations']
-                        elif 'recommendation' in parsed_result:
-                            details_obj['recommendations'] = parsed_result['recommendation']
-                except:
-                    pass 
-
+                    parsed = json.loads(h.result_json)
+                    details_obj['recommendations'] = parsed.get('recommendations') or parsed.get('recommendation', "Chưa có khuyến cáo.")
+                except: pass
             history_list.append({
                 "id": h.id,
-                "drug_name": h.drug_name if h.drug_name else "Thuốc chưa rõ tên",
-                "risk_level": h.risk_level if h.risk_level else "LOW",
+                "drug_name": h.drug_name or "Thuốc chưa rõ tên",
+                "risk_level": h.risk_level or "LOW",
                 "checked_at": h.created_at.strftime("%d/%m/%Y %H:%M") if h.created_at else "Chưa xác định",
                 "details": details_obj
             })
         return jsonify(history_list), 200
     except Exception as e:
-        print(f"Lỗi lấy lịch sử: {e}")
         return jsonify([]), 200
 
-# 2. API Quản lý Feedback (GET, POST, PUT, DELETE tích hợp đầy đủ không bị lỗi 401)
+# --- API Quản lý Feedback (TỐI ƯU HÓA DELETE) ---
 @app.route('/api/feedbacks', methods=['GET', 'POST', 'OPTIONS'])
 @app.route('/api/feedbacks/<int:feedback_id>', methods=['PUT', 'DELETE', 'OPTIONS'])
 def manage_feedbacks(feedback_id=None):
-    if request.method == 'OPTIONS':
-        return '', 200
+    if request.method == 'OPTIONS': return '', 200
         
     try:
-        # XEM DANH SÁCH ĐÁNH GIÁ (GET) - Cho phép công khai không cần chặn token 401
+        # GET: Lấy danh sách
         if request.method == 'GET':
             feedbacks = Feedback.query.order_by(Feedback.id.desc()).all()
-            result = []
-            for f in feedbacks:
-                result.append({
-                    "id": f.id,
-                    "rating": f.rating,
-                    "comment": f.comment,
-                    "username": f.username if f.username else "Người dùng ẩn danh",
-                    "date": getattr(f, 'date', 'Gần đây')
-                })
-            return jsonify(result), 200
+            return jsonify([{
+                "id": f.id, "rating": f.rating, "comment": f.comment,
+                "username": f.username or "Người dùng ẩn danh",
+                "date": getattr(f, 'date', 'Gần đây')
+            } for f in feedbacks]), 200
 
-        # TẠO ĐÁNH GIÁ MỚI (POST)
+        # POST: Tạo mới
         if request.method == 'POST':
             data = request.get_json() or {}
-            rating = int(data.get('rating', 5))
-            comment = data.get('comment', '').strip()
-            
-            # Lấy username ưu tiên từ body hoặc header
-            username = data.get('username') or request.headers.get('X-Username') or 'Người dùng ẩn danh'
-            
-            if not comment:
-                return jsonify({"error": "Nội dung đánh giá không được để trống"}), 400
-
-            new_feedback = Feedback(
-                rating=rating,
-                comment=comment,
-                username=username
+            new_f = Feedback(
+                rating=int(data.get('rating', 5)),
+                comment=data.get('comment', '').strip(),
+                username=data.get('username') or request.headers.get('X-Username') or 'Người dùng ẩn danh'
             )
-            db.session.add(new_feedback)
+            db.session.add(new_f)
             db.session.commit()
+            return jsonify({"id": new_f.id, "rating": new_f.rating, "comment": new_f.comment, "username": new_f.username, "date": "Vừa xong"}), 201
 
-            return jsonify({
-                "id": new_feedback.id,
-                "rating": new_feedback.rating,
-                "comment": new_feedback.comment,
-                "username": new_feedback.username,
-                "date": "Vừa xong"
-            }), 201
-
-        # CÁC THAO TÁC CẦN XÁC THỰC THEO ID (PUT, DELETE)
+        # CÁC THAO TÁC CẦN ID (PUT/DELETE)
         feedback = Feedback.query.get(feedback_id)
         if not feedback:
-            return jsonify({"error": "Không tìm thấy đánh giá"}), 404
+            return jsonify({"error": "Không tìm thấy"}), 404
 
-        requester_username = request.headers.get('X-Username', '').strip().lower()
-        if requester_username and feedback.username:
-            if requester_username != feedback.username.strip().lower():
-                return jsonify({"error": "Bạn không có quyền thao tác trên đánh giá này!"}), 403
+        # Xác thực quyền sở hữu
+        req_user = request.headers.get('X-Username', '').strip().lower()
+        if req_user and feedback.username and req_user != feedback.username.strip().lower():
+            return jsonify({"error": "Bạn không có quyền thao tác!"}), 403
 
-        # CẬP NHẬT (PUT)
+        # PUT: Cập nhật
         if request.method == 'PUT':
             data = request.get_json() or {}
-            if 'rating' in data:
-                feedback.rating = int(data['rating'])
-            if 'comment' in data:
-                feedback.comment = data['comment']
-                
+            feedback.rating = int(data.get('rating', feedback.rating))
+            feedback.comment = data.get('comment', feedback.comment)
             db.session.commit()
-            return jsonify({
-                "id": feedback.id,
-                "rating": feedback.rating,
-                "comment": feedback.comment,
-                "username": feedback.username
-            }), 200
+            return jsonify({"id": feedback.id, "rating": feedback.rating, "comment": feedback.comment, "username": feedback.username}), 200
 
-        # XÓA (DELETE)
+        # DELETE: Xóa (Đã fix lỗi 500)
         if request.method == 'DELETE':
             db.session.delete(feedback)
             db.session.commit()
             return jsonify({"status": "success", "message": "Đã xóa thành công"}), 200
 
     except Exception as e:
-        print(f"Lỗi xử lý feedback API: {e}")
         db.session.rollback()
+        print(f"Lỗi API Feedback: {e}")
         return jsonify({"error": "Lỗi server", "message": str(e)}), 500
 
 @app.errorhandler(Exception)
 def handle_exception(e):
-    return jsonify({"error": "Lỗi hệ thống từ Server", "message": str(e)}), 500
+    return jsonify({"error": "Lỗi hệ thống", "message": str(e)}), 500
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-        print("Đã khởi tạo database thành công!")
     app.run(debug=True, port=5000)
