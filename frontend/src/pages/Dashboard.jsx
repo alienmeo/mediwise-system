@@ -1,13 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Import logo và tiêu đề
+// Import 2 file logo
 import logoImg from './logo.png'; 
 import brandTextImg from './title.png'; 
-
-// Import 2 hình ảnh mới từ thư mục (đường dẫn có thể thay đổi tùy theo vị trí file Dashboard.jsx so với thư mục page)
-import image1 from './image1.png'; // Hoặc đường dẫn trỏ tới frontend/src/page/...
-import image2 from './image2.png';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -128,11 +124,13 @@ export default function Dashboard() {
             </p>
           </div>
 
-          {/* Card 1: Chèn image1 */}
+          {/* Card 1: Kiểm tra nguy cơ */}
           <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center shrink-0 overflow-hidden p-2 shadow-inner border border-blue-100">
-                <img src={image1} alt="Icon 1" className="w-full h-full object-contain" />
+              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-9 h-9">
+                  <path fillRule="evenodd" d="M12 1.5c-1.92 0-3.72.56-5.23 1.53-.9.59-1.28 1.72-.88 2.69.96 2.34 2.28 4.46 3.89 6.22 1.09 1.2 2.3 2.24 3.6 3.12 1.3-.88 2.51-1.92 3.6-3.12 1.61-1.76 2.93-3.88 3.89-6.22.4-.97.02-2.1-.88-2.69A9.974 9.974 0 0012 1.5zm0 14.25c-3.14 0-6.14 1.15-8.48 3.23-.48.42-.77 1.03-.77 1.67 0 1.25 1.01 2.25 2.25 2.25h14c1.24 0 2.25-1.01 2.25-2.25 0-.64-.29-1.25-.77-1.67-2.34-2.08-5.34-3.23-8.48-3.23z" clipRule="evenodd" />
+                </svg>
               </div>
               <div className="space-y-1">
                 <h2 className="text-xl font-bold text-gray-900">
@@ -152,11 +150,14 @@ export default function Dashboard() {
             </button>
           </div>
 
-          {/* Card 2: Chèn image2 */}
+          {/* Card 2: Lịch sử kiểm tra */}
           <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center shrink-0 overflow-hidden p-2 shadow-inner border border-blue-100">
-                <img src={image2} alt="Icon 2" className="w-full h-full object-contain" />
+              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-9 h-9">
+                  <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h9a1.5 1.5 0 001.5-1.5V5.25a1.5 1.5 0 00-1.5-1.5h-9zM6 2.25A3 3 0 003 5.25v13.5a3 3 0 003 3h9a3 3 0 003-3V5.25a3 3 0 00-3-3H6z" clipRule="evenodd" />
+                  <path d="M7.5 8.25a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM7.5 12a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM7.5 15.75a.75.75 0 01.75-.75h4.5a.75.75 0 010 1.5h-4.5a.75.75 0 01-.75-.75z" />
+                </svg>
               </div>
               <div className="space-y-1">
                 <h2 className="text-xl font-bold text-gray-900">
