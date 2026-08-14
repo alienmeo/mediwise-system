@@ -1,9 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Import 2 file logo
+// Import các file logo và ảnh icon ở đầu file (chuẩn ES Modules)
 import logoImg from './logo.png'; 
 import brandTextImg from './title.png'; 
+import image1 from './image1.png';
+import image2 from './image2.png';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -127,8 +129,8 @@ export default function Dashboard() {
           {/* Card 1: Kiểm tra nguy cơ */}
           <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0 overflow-hidden">
-                <img src={require('frontend/src/page/image1.png')} alt="Icon 1" className="w-full h-full object-cover" />
+              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0 overflow-hidden p-3">
+                <img src={image1} alt="Icon 1" className="w-full h-full object-contain" />
               </div>
               <div className="space-y-1">
                 <h2 className="text-xl font-bold text-gray-900">
@@ -151,8 +153,8 @@ export default function Dashboard() {
           {/* Card 2: Lịch sử kiểm tra */}
           <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0 overflow-hidden">
-                <img src={require('frontend/src/page/image2')} alt="Icon 2" className="w-full h-full object-cover" />
+              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0 overflow-hidden p-3">
+                <img src={image2} alt="Icon 2" className="w-full h-full object-contain" />
               </div>
               <div className="space-y-1">
                 <h2 className="text-xl font-bold text-gray-900">
