@@ -109,21 +109,21 @@ export default function Profile() {
           <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/dashboard')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer"
             >
               <span>Về lại trang chủ</span>
             </button>
 
             <button 
               onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer"
             >
               <span>Xem lại kết quả gần nhất</span>
             </button>
 
             <button 
               onClick={() => navigate('/FeedbackPage')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer"
             >
               <span>Đánh giá của người dùng</span>
             </button>
