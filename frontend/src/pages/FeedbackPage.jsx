@@ -23,13 +23,17 @@ export default function FeedbackPage() {
 
     setIsSubmitting(true);
 
-    const savedUser = localStorage.getItem('mediwise_user') || localStorage.getItem('user');
-    let currentUsername = 'Người dùng MediWise';
-    if (savedUser) {
+    // Lấy thông tin user từ mọi key có thể lưu trong localStorage
+    const rawUser = localStorage.getItem('mediwise_user') || localStorage.getItem('user') || localStorage.getItem('username');
+    let currentUsername = 'test'; // Fallback mặc định khớp với hệ thống của bạn
+
+    if (rawUser) {
       try {
-        const parsed = JSON.parse(savedUser);
-        currentUsername = parsed.fullName || parsed.username || 'Người dùng MediWise';
-      } catch (err) {}
+        const parsed = JSON.parse(rawUser);
+        currentUsername = parsed.username || parsed.fullName || parsed.name || rawUser;
+      } catch (err) {
+        currentUsername = rawUser; // Trường hợp lưu thẳng chuỗi string (VD: "test")
+      }
     }
 
     try {
@@ -37,10 +41,14 @@ export default function FeedbackPage() {
         username: currentUsername,
         rating: Number(rating),
         comment: feedbackText.trim()
+      }, {
+        headers: {
+          'X-Username': currentUsername // Đảm bảo gửi kèm header để backend bắt chính xác
+        }
       });
 
       alert('Cảm ơn bạn đã gửi đánh giá!');
-      navigate('/feedback'); // Chuyển sang trang xem danh sách tổng hợp
+      navigate('/feedback'); // Chuyển hướng về trang danh sách đánh giá
     } catch (error) {
       console.error('Lỗi khi gửi đánh giá:', error);
       alert('Không thể gửi đánh giá. Vui lòng kiểm tra kết nối với Server Backend!');
