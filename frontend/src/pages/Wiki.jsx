@@ -14,7 +14,7 @@ export default function Wiki() {
       {/* CỘT BÊN TRÁI: Nội dung giới thiệu & Giá trị cốt lõi */}
       <main className="flex-1 px-8 lg:px-16 py-12 max-w-4xl space-y-10">
         
-        {/* Tiêu đề chính */}
+        {/* Tiêu đề chính và đoạn mô tả được căn giữa */}
         <div className="space-y-4 text-center">
           <div>
             <div className="flex items-center justify-center cursor-pointer w-full overflow-hidden" onClick={() => navigate('/dashboard')}>
@@ -36,7 +36,7 @@ export default function Wiki() {
             </div>
             <h2 className="text-xl font-bold">Lý do hình thành</h2>
           </div>
-          <p className="text-gray-600 text-sm leading-relaxed pl-11">
+          <p className="text-gray-600 text-sm leading-relaxed pl-11 text-left">
             Nhận thấy việc tiếp cận thông tin về thuốc và các thành phần có thể gây dị ứng còn gặp nhiều hạn chế, chúng tôi xây dựng Aellergis nhằm hỗ trợ người dùng tra cứu thông tin một cách nhanh chóng và hiệu quả.
           </p>
         </section>
@@ -52,7 +52,7 @@ export default function Wiki() {
             <h2 className="text-xl font-bold">Giá trị cốt lõi</h2>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-11">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-11 text-left">
             {/* Badge 1 */}
             <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
               <div className="w-8 h-8 rounded-full bg-[#144064] text-white flex items-center justify-center shrink-0">
@@ -95,7 +95,7 @@ export default function Wiki() {
             </div>
             <h2 className="text-xl font-bold">Để hiểu rõ hơn thì dị ứng chéo là gì?</h2>
           </div>
-          <div className="text-gray-600 text-sm leading-relaxed pl-11 space-y-3">
+          <div className="text-gray-600 text-sm leading-relaxed pl-11 space-y-3 text-left">
             <p>
               Dị ứng xảy ra khi hệ miễn dịch của cơ thể bị "nhầm lẫn" giữa các chất khác nhau nhưng có cấu trúc protein tương tự nhau.
             </p>
