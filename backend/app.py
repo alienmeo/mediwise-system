@@ -56,7 +56,7 @@ def direct_user_history():
     except Exception as e:
         return jsonify([]), 200
 
-# --- API Quản lý Feedback (TỐI ƯU HÓA DELETE) ---
+# --- API Quản lý Feedback (TỐI ƯU HÓA ĐỌC JSON) ---
 @app.route('/api/feedbacks', methods=['GET', 'POST', 'OPTIONS'])
 @app.route('/api/feedbacks/<int:feedback_id>', methods=['PUT', 'DELETE', 'OPTIONS'])
 def manage_feedbacks(feedback_id=None):
@@ -72,9 +72,9 @@ def manage_feedbacks(feedback_id=None):
                 "date": getattr(f, 'date', 'Gần đây')
             } for f in feedbacks]), 200
 
-        # POST: Tạo mới
+        # POST: Tạo mới (Đã dùng force=True để tránh lỗi body rỗng)
         if request.method == 'POST':
-            data = request.get_json() or {}
+            data = request.get_json(silent=True, force=True) or {}
             new_f = Feedback(
                 rating=int(data.get('rating', 5)),
                 comment=data.get('comment', '').strip(),
@@ -96,13 +96,13 @@ def manage_feedbacks(feedback_id=None):
 
         # PUT: Cập nhật
         if request.method == 'PUT':
-            data = request.get_json() or {}
+            data = request.get_json(silent=True, force=True) or {}
             feedback.rating = int(data.get('rating', feedback.rating))
             feedback.comment = data.get('comment', feedback.comment)
             db.session.commit()
             return jsonify({"id": feedback.id, "rating": feedback.rating, "comment": feedback.comment, "username": feedback.username}), 200
 
-        # DELETE: Xóa (Đã fix lỗi 500)
+        # DELETE: Xóa
         if request.method == 'DELETE':
             db.session.delete(feedback)
             db.session.commit()
