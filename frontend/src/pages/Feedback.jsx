@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 
-// Import file title/logo giống các trang khác (Wiki, Dashboard, ...)
+// Import file title/logo giống trang Dashboard
 import brandTextImg from './title.png'; 
 import wikiLogoImg from './wiki-logo.png'; 
 
@@ -105,31 +105,31 @@ export default function Feedback() {
 
   return (
     <div className="flex min-h-screen bg-[#f4f7fc]">
-      {/* SIDEBAR BÊN TRÁI: Đồng bộ màu sắc & vị trí logo/title */}
+      {/* SIDEBAR BÊN TRÁI: Đồng bộ chính xác layout và style của Dashboard */}
       <aside className="w-80 bg-white border-r border-gray-200 p-6 flex flex-col justify-between shrink-0 shadow-sm">
-        <div className="space-y-10">
+        <div className="space-y-8">
           <div className="flex items-center justify-center cursor-pointer w-full overflow-hidden pt-2" onClick={() => navigate('/dashboard')}>
             <img src={brandTextImg} alt="Aellergis" className="h-16 w-auto object-contain max-w-[280px] shrink-0" />
           </div>
 
           <nav className="space-y-3">
-            <button onClick={() => navigate('/dashboard')} className="w-full py-3.5 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
+            <button onClick={() => navigate('/dashboard')} className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
               Về lại trang chủ
             </button>
-            <button onClick={() => navigate('/history')} className="w-full py-3.5 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
+            <button onClick={() => navigate('/history')} className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
               Xem lại kết quả gần nhất
             </button>
-            <button onClick={() => navigate('/FeedbackPage')} className="w-full py-3.5 px-6 rounded-full bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
+            <button onClick={() => navigate('/FeedbackPage')} className="w-full py-4 px-6 rounded-full bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
               Tự gửi đánh giá
             </button>
-            <button onClick={() => navigate('/profile')} className="w-full py-3.5 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
+            <button onClick={() => navigate('/profile')} className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm cursor-pointer shadow-xs">
               Hồ sơ cá nhân
             </button>
           </nav>
         </div>
 
         <div className="w-full pt-6 border-t border-gray-100 flex flex-col items-center space-y-4">
-          <div className="w-full max-w-[200px]">
+          <div className="w-full max-w-[240px]">
             <img src={wikiLogoImg} alt="Aellergis Wiki Logo" className="w-full h-auto object-contain" />
           </div>
         </div>
