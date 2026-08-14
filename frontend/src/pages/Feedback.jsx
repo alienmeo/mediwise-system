@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 
 // Import file title/logo giống trang Dashboard
+import logoImg from './logo.png'; 
 import brandTextImg from './title.png'; 
-import wikiLogoImg from './wiki-logo.png'; 
 
 export default function Feedback() {
   const navigate = useNavigate();
@@ -105,11 +105,12 @@ export default function Feedback() {
 
   return (
     <div className="flex min-h-screen bg-[#f4f7fc]">
-      {/* SIDEBAR BÊN TRÁI: Đồng bộ chính xác layout và style của Dashboard */}
+      {/* SIDEBAR BÊN TRÁI: Đồng bộ layout logo + title & style màu sắc với Dashboard */}
       <aside className="w-80 bg-white border-r border-gray-200 p-6 flex flex-col justify-between shrink-0 shadow-sm">
-        <div className="space-y-8">
-          <div className="flex items-center justify-center cursor-pointer w-full overflow-hidden pt-2" onClick={() => navigate('/dashboard')}>
-            <img src={brandTextImg} alt="Aellergis" className="h-16 w-auto object-contain max-w-[280px] shrink-0" />
+        <div className="space-y-10">
+          <div className="flex items-center space-x-3 cursor-pointer pt-2" onClick={() => navigate('/dashboard')}>
+            <img src={logoImg} alt="Mediwise Logo" className="h-12 w-auto object-contain shrink-0" />
+            <img src={brandTextImg} alt="Mediwise" className="h-8 w-auto object-contain shrink-0" />
           </div>
 
           <nav className="space-y-3">
@@ -126,12 +127,6 @@ export default function Feedback() {
               Hồ sơ cá nhân
             </button>
           </nav>
-        </div>
-
-        <div className="w-full pt-6 border-t border-gray-100 flex flex-col items-center space-y-4">
-          <div className="w-full max-w-[240px]">
-            <img src={wikiLogoImg} alt="Aellergis Wiki Logo" className="w-full h-auto object-contain" />
-          </div>
         </div>
       </aside>
 
