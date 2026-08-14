@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Import các file ảnh logo và title giống cấu trúc các trang khác
-import logoImg from './logo.png'; 
+// Import file title/logo (không dùng logo.png theo yêu cầu)
 import brandTextImg from './title.png'; 
 import wikiLogoImg from './wiki-logo.png'; 
 
@@ -22,9 +21,8 @@ export default function Wiki() {
             <span>Chào mừng đến với</span>
           </div>
           <div>
-            <div className="flex items-center cursor-pointer w-full overflow-hidden -ml-4 pl-3" onClick={() => navigate('/dashboard')}>
-              <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
-              <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
+            <div className="flex items-center justify-center cursor-pointer w-full overflow-hidden" onClick={() => navigate('/dashboard')}>
+              <img src={brandTextImg} alt="Aellergis" className="h-16 w-auto object-contain max-w-[280px] shrink-0" />
             </div>
           </div>
           <p className="text-gray-600 font-medium text-sm leading-relaxed max-w-2xl">
