@@ -8,12 +8,19 @@ import brandTextImg from './title.png';
 export default function Feedback() {
   const navigate = useNavigate();
 
-  // 1. Đọc thông tin user bằng State có hàm khởi tạo an toàn để hiển thị ngay lập tức
+  // 1. Đọc thông tin user an toàn, hỗ trợ mọi định dạng lưu trữ trong localStorage
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const rawData = localStorage.getItem('mediwise_user') || 
                       localStorage.getItem('user') || 
-                      localStorage.getItem('userInfo') || '{}';
+                      localStorage.getItem('userInfo') || 
+                      localStorage.getItem('username') || '{}';
+      
+      // Nếu lưu dưới dạng chuỗi đơn thuần (ví dụ: 'test')
+      if (!rawData.startsWith('{') && !rawData.startsWith('[')) {
+        return { username: rawData };
+      }
+
       const parsed = JSON.parse(rawData);
       return parsed.data || parsed.user || parsed;
     } catch (e) {
@@ -21,12 +28,19 @@ export default function Feedback() {
     }
   });
 
-  // Tự động bắt lại thông tin user ngay khi component load hoặc chuyển trang tới
+  // Tự động cập nhật lại thông tin user khi component load
   useEffect(() => {
     try {
       const rawData = localStorage.getItem('mediwise_user') || 
                       localStorage.getItem('user') || 
-                      localStorage.getItem('userInfo') || '{}';
+                      localStorage.getItem('userInfo') || 
+                      localStorage.getItem('username') || '{}';
+      
+      if (!rawData.startsWith('{') && !rawData.startsWith('[')) {
+        setCurrentUser({ username: rawData });
+        return;
+      }
+
       const parsed = JSON.parse(rawData);
       const userObj = parsed.data || parsed.user || parsed;
       if (userObj && Object.keys(userObj).length > 0) {
@@ -37,7 +51,8 @@ export default function Feedback() {
     }
   }, []);
 
-  const userLoginName = (currentUser.username || currentUser.name || currentUser.fullName || currentUser.account || currentUser.email || '').trim().toLowerCase();
+  // Xác định tên đăng nhập chuẩn xác, ưu tiên các trường phổ biến hoặc mặc định về 'test'
+  const userLoginName = (currentUser.username || currentUser.name || currentUser.fullName || currentUser.account || currentUser.email || 'test').trim().toLowerCase();
 
   const [feedbacks, setFeedbacks] = useState([]);
   const [filterRating, setFilterRating] = useState(0);
@@ -118,22 +133,25 @@ export default function Feedback() {
     }
   };
 
-  // 6. Gửi đánh giá mới (POST)
+  // 6. Gửi đánh giá mới (POST) - Đã đính kèm username chuẩn xác
   const handleCreateFeedback = async (e) => {
     e.preventDefault();
     if (!newComment.trim()) {
       alert('Vui lòng nhập nội dung đánh giá!');
       return;
     }
+
     try {
       const payload = {
-        rating: newRating,
-        comment: newComment,
-        username: currentUser.username || currentUser.fullName || 'Người dùng'
+        rating: Number(newRating),
+        comment: newComment.trim(),
+        username: userLoginName
       };
+
       const res = await api.post('/feedbacks', payload, {
         headers: { 'X-Username': userLoginName }
       });
+
       if (res.data) {
         setFeedbacks([res.data, ...feedbacks]);
       } else {
@@ -145,22 +163,11 @@ export default function Feedback() {
       alert('Gửi đánh giá thành công!');
     } catch (err) {
       console.error('Lỗi khi gửi đánh giá:', err);
-      const fakeNew = {
-        id: Date.now(),
-        rating: newRating,
-        comment: newComment,
-        username: currentUser.username || currentUser.fullName || 'Người dùng',
-        date: new Date().toLocaleDateString()
-      };
-      setFeedbacks([fakeNew, ...feedbacks]);
-      setIsCreating(false);
-      setNewComment('');
-      setNewRating(5);
-      alert('Đã gửi đánh giá!');
+      alert('Có lỗi khi gửi đánh giá lên server!');
     }
   };
 
-  // Fix lỗi NaN bằng cách ép kiểu Number an toàn cho rating
+  // Tính điểm trung bình an toàn không bị lỗi NaN
   const avgRating = feedbacks.length 
     ? (feedbacks.reduce((acc, cur) => acc + (Number(cur.rating) || 0), 0) / feedbacks.length).toFixed(1)
     : (0).toFixed(1);
@@ -249,7 +256,7 @@ export default function Feedback() {
             </div>
             <div className="text-[#144064] font-bold text-sm">
               <div>Hồ sơ tài khoản</div>
-              <div className="text-xs font-semibold opacity-80">user : {currentUser.username || currentUser.fullName || '...'}</div>
+              <div className="text-xs font-semibold opacity-80">user : {userLoginName}</div>
             </div>
           </div>
 
