@@ -27,12 +27,10 @@ export default function Result() {
     );
   }
 
-  // Chuyển risk_level về chữ hoa để dễ map
   const rawRisk = (result.risk_level || 'LOW').toUpperCase();
 
-  // Cấu hình hiển thị màu sắc và nhãn nguy cơ
   const riskConfig = {
-    LOW: { color: 'text-emerald-600', label: 'Nguy cơ thấp', dot: 'bg-emerald-500', alertBg: 'bg-emerald-50 border-emerald-200' },
+    LOW: { color: 'text-emerald-500', label: 'Nguy cơ thấp', dot: 'bg-emerald-500', alertBg: 'bg-emerald-50 border-emerald-200' },
     MEDIUM: { color: 'text-amber-500', label: 'Nguy cơ trung bình', dot: 'bg-amber-500', alertBg: 'bg-amber-50 border-amber-200' },
     HIGH: { color: 'text-red-500', label: 'Nguy cơ cao', dot: 'bg-red-500', alertBg: 'bg-red-50 border-red-200' },
     CRITICAL: { color: 'text-purple-600', label: 'Nguy cơ rất cao', dot: 'bg-purple-600', alertBg: 'bg-purple-50 border-purple-200' }
@@ -40,22 +38,15 @@ export default function Result() {
 
   const currentRisk = riskConfig[rawRisk] || riskConfig.LOW;
 
-  // Lấy dữ liệu an toàn từ cả cấp độ root lẫn object 'details' do Backend trả về
   const detailsData = result.details || {};
-  
   const dangerousList = result.dangerous_ingredients || detailsData.dangerous_ingredients || [];
   const crossList = result.cross_triggers || detailsData.cross_triggers || [];
   const explanationsList = result.explanations || detailsData.explanations || [];
   const recommendationsText = result.recommendations || detailsData.recommendations || '';
-
-  // Lấy tên thuốc kiểm tra từ result
   const drugName = result.drug_name || detailsData.drug_name || '';
 
-  // Hàm chuẩn hóa hiển thị: Ưu tiên đưa thực phẩm/thành phần nguy hiểm (dangerousList) lên trước, sau đó đến tên thuốc (drug)
   const formatIngredientsWithDrugFirst = (list, drug) => {
     let items = [];
-    
-    // Đưa danh sách thực phẩm / thành phần nguy hiểm lên trước
     if (Array.isArray(list) && list.length > 0) {
       list.forEach(item => {
         if (typeof item === 'string') {
@@ -68,13 +59,9 @@ export default function Result() {
     } else if (typeof list === 'string' && list.trim() !== '') {
       items.push(list);
     }
-
-    // Sau đó đến tên thuốc kiểm tra
     if (drug) {
       items.push(drug);
     }
-
-    // Lọc bỏ trùng lặp nếu có
     const uniqueItems = [...new Set(items)];
     return uniqueItems.length > 0 ? uniqueItems.join(', ') : 'Không phát hiện';
   };
@@ -99,21 +86,21 @@ export default function Result() {
   return (
     <div className="min-h-screen bg-[#f4f7fc] py-8 px-6 font-sans text-[#222222]">
       
-      {/* Logo MediWise (Cố định góc trên cùng bên trái ngoài cùng màn hình) */}
-      <div className="flex items-center justify-start cursor-pointer overflow-hidden -ml-4 pl-3 mb-6 w-fit" onClick={() => navigate('/dashboard')}>
+      {/* Logo MediWise */}
+      <div className="flex items-center justify-start cursor-pointer overflow-hidden -ml-4 pl-3 mb-4 w-fit" onClick={() => navigate('/dashboard')}>
         <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
         <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
       </div>
 
       <div className="max-w-4xl mx-auto">
         
-        {/* Card Trạng Thái Dị Ứng */}
+        {/* Card Mức độ dị ứng (Đưa lên trên chính giữa theo ảnh mẫu) */}
         <div className="flex justify-center mb-6">
-          <div className="bg-white rounded-[24px] shadow-sm overflow-hidden text-center w-72 border border-gray-100">
-            <div className="py-2.5 px-4 text-[#144064] text-lg font-bold">
-              Mức độ dị ứng cho: <span className="text-gray-800 font-extrabold">{drugName || 'Thuốc'}</span>
+          <div className="bg-white rounded-t-[24px] rounded-b-[24px] shadow-sm overflow-hidden text-center w-80 border border-gray-100">
+            <div className="py-2.5 px-4 text-[#144064] text-base font-bold">
+              Mức độ dị ứng
             </div>
-            <div className="bg-[#e3effd] py-3 px-4 border-t border-gray-100 flex items-center justify-center gap-2.5">
+            <div className="bg-[#e3effd]/50 py-3 px-4 border-t border-gray-100 flex items-center justify-center gap-2.5">
               <span className={`w-4 h-4 rounded-full ${currentRisk.dot}`}></span>
               <span className={`text-xl font-extrabold ${currentRisk.color}`}>
                 {currentRisk.label}
@@ -132,17 +119,17 @@ export default function Result() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
-              {/* Box 1: Tên thực phẩm, thuốc kiểm tra (Thực phẩm trước, thuốc sau) */}
+              {/* Box 1 */}
               <div className="p-5 border-2 border-gray-100 rounded-[20px] bg-white">
                 <span className="text-base font-bold text-gray-900 block mb-1">
-                  Tên thực phẩm, thuốc kiểm tra
+                  Thực phẩm / Tên thuốc
                 </span>
                 <span className={`text-base font-semibold block ${formattedTargetText !== 'Không phát hiện' ? 'text-gray-800' : 'text-gray-400'}`}>
                   {formattedTargetText}
                 </span>
               </div>
 
-              {/* Box 2: Dị ứng chéo / Liên đới */}
+              {/* Box 2 */}
               <div className="p-5 border-2 border-gray-100 rounded-[20px] bg-white">
                 <span className="text-base font-bold text-gray-900 block mb-1">
                   Thành phần dị ứng chéo liên đới
@@ -160,7 +147,7 @@ export default function Result() {
           {/* Section 2: Giải thích nguyên nhân & Khuyến cáo */}
           <div>
             <h2 className="text-xl font-bold text-gray-900 mb-3">
-              Giải thích nguyên nhân & Khuyến cáo
+              Giải thích nguyên nhân
             </h2>
             
             {recommendationsText && (
@@ -178,32 +165,49 @@ export default function Result() {
                   </p>
                 ))
               ) : (
-                <p className="text-gray-400">Không có giải thích chi tiết nào bổ sung cho loại thuốc này.</p>
+                <p className="text-gray-400">Nguyên nhân</p>
               )}
             </div>
           </div>
 
         </div>
 
-        {/* Các nút điều hướng hành động */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+        {/* Các nút điều hướng hành động (Thiết kế dạng viên thuốc có chứa icon tròn bên trái giống ảnh mẫu) */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          
           <Link to="/assessment" className="w-full">
-            <button className="w-full bg-[#144064] hover:bg-[#0f324f] text-white font-medium py-3.5 px-4 rounded-full transition-colors text-center text-sm sm:text-base cursor-pointer shadow-md">
-              Kiểm tra loại thuốc khác
-            </button>
+            <div className="flex items-center bg-[#d6e4fd] hover:c-blue-700 rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100">
+              <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white shrink-0 shadow-sm">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+              </div>
+              <span className="flex-1 text-center text-[#144064] font-bold text-sm sm:text-base pr-4">
+                Kiểm tra loại thuốc khác
+              </span>
+            </div>
           </Link>
 
           <Link to="/dashboard" className="w-full">
-            <button className="w-full bg-[#144064] hover:bg-[#0f324f] text-white font-medium py-3.5 px-4 rounded-full transition-colors text-center text-sm sm:text-base cursor-pointer shadow-md">
-              Quay lại trang chính
-            </button>
+            <div className="flex items-center bg-[#d6e4fd] hover:c-blue-700 rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100">
+              <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white shrink-0 shadow-sm">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+              </div>
+              <span className="flex-1 text-center text-[#144064] font-bold text-sm sm:text-base pr-4">
+                Quay lại trang chính
+              </span>
+            </div>
           </Link>
 
           <Link to="/feedback" className="w-full">
-            <button className="w-full bg-[#144064] hover:bg-[#0f324f] text-white font-medium py-3.5 px-4 rounded-full transition-colors text-center text-sm sm:text-base cursor-pointer shadow-md">
-              Đánh giá hệ thống
-            </button>
+            <div className="flex items-center bg-[#d6e4fd] hover:c-blue-700 rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100">
+              <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white shrink-0 shadow-sm">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+              </div>
+              <span className="flex-1 text-center text-[#144064] font-bold text-sm sm:text-base pr-4">
+                Đánh giá hệ thống
+              </span>
+            </div>
           </Link>
+
         </div>
 
       </div>
