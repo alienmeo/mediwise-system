@@ -51,13 +51,11 @@ export default function Result() {
   // Lấy tên thuốc kiểm tra từ result
   const drugName = result.drug_name || detailsData.drug_name || '';
 
-  // Hàm chuyển đổi hoặc chuẩn hóa hiển thị thành phần (kết hợp cả tên thuốc kiểm tra và danh phần thực phẩm/thuốc nguy hiểm)
-  const formatIngredientsWithDrug = (list, drug) => {
+  // Hàm chuẩn hóa hiển thị: Ưu tiên đưa thực phẩm/thành phần nguy hiểm (dangerousList) lên trước, sau đó đến tên thuốc (drug)
+  const formatIngredientsWithDrugFirst = (list, drug) => {
     let items = [];
-    if (drug) {
-      items.push(drug);
-    }
     
+    // Đưa danh sách thực phẩm / thành phần nguy hiểm lên trước
     if (Array.isArray(list) && list.length > 0) {
       list.forEach(item => {
         if (typeof item === 'string') {
@@ -71,12 +69,17 @@ export default function Result() {
       items.push(list);
     }
 
+    // Sau đó đến tên thuốc kiểm tra
+    if (drug) {
+      items.push(drug);
+    }
+
     // Lọc bỏ trùng lặp nếu có
     const uniqueItems = [...new Set(items)];
     return uniqueItems.length > 0 ? uniqueItems.join(', ') : 'Không phát hiện';
   };
 
-  const formattedTargetText = formatIngredientsWithDrug(dangerousList, drugName);
+  const formattedTargetText = formatIngredientsWithDrugFirst(dangerousList, drugName);
 
   const formatIngredients = (list) => {
     if (!list) return 'Không phát hiện';
@@ -129,7 +132,7 @@ export default function Result() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
-              {/* Box 1: Tên thực phẩm, thuốc kiểm tra */}
+              {/* Box 1: Tên thực phẩm, thuốc kiểm tra (Thực phẩm trước, thuốc sau) */}
               <div className="p-5 border-2 border-gray-100 rounded-[20px] bg-white">
                 <span className="text-base font-bold text-gray-900 block mb-1">
                   Tên thực phẩm, thuốc kiểm tra
