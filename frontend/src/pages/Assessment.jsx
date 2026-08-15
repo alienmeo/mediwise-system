@@ -67,16 +67,16 @@ const CheckPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#f4f7fc]">
+    <div className="flex flex-col min-h-screen bg-[#f4f7fc] relative">
       
-      {/* Brand Logo Header (Giống vị trí và style dashboard.jsx) */}
-      <div className="fixed top-6 left-0 z-50 flex items-center justify-start cursor-pointer w-auto overflow-hidden pl-3" onClick={() => navigate('/')}>
+      {/* Brand Logo Header ở góc trái trên cùng */}
+      <div className="absolute top-6 left-6 z-50 flex items-center justify-start cursor-pointer w-auto overflow-hidden" onClick={() => navigate('/')}>
         <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
         <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
       </div>
 
-      {/* Main Content Container (Đã dịch chuyển hộp chọn xích lên trên bằng cách giảm padding-top và căn chỉnh items-start) */}
-      <div className="flex-1 flex items-start justify-center p-6 pt-24">
+      {/* Main Content Container căn chính giữa tuyệt đối cả chiều ngang và dọc */}
+      <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-xl bg-white rounded-[32px] p-10 shadow-sm border border-gray-100">
           
           {/* Tiêu đề trang */}
@@ -138,7 +138,7 @@ const CheckPage = () => {
               {loading ? 'Đang phân tích...' : 'Phân Tích Nguy Cơ'}
             </button>
           </form>
-          
+
         </div>
       </div>
 
