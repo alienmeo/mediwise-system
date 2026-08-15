@@ -45,8 +45,10 @@ export default function Result() {
   const recommendationsText = result.recommendations || detailsData.recommendations || '';
   const drugName = result.drug_name || detailsData.drug_name || '';
 
+  // Luôn hiển thị tên thuốc hoặc thực phẩm kiểm tra trong mọi trường hợp
   const formatIngredientsWithDrugFirst = (list, drug) => {
     let items = [];
+    
     if (Array.isArray(list) && list.length > 0) {
       list.forEach(item => {
         if (typeof item === 'string') {
@@ -59,11 +61,13 @@ export default function Result() {
     } else if (typeof list === 'string' && list.trim() !== '') {
       items.push(list);
     }
-    if (drug) {
+
+    if (drug && !items.includes(drug)) {
       items.push(drug);
     }
+
     const uniqueItems = [...new Set(items)];
-    return uniqueItems.length > 0 ? uniqueItems.join(', ') : 'Không phát hiện';
+    return uniqueItems.length > 0 ? uniqueItems.join(', ') : (drug || 'Không phát hiện');
   };
 
   const formattedTargetText = formatIngredientsWithDrugFirst(dangerousList, drugName);
@@ -94,9 +98,9 @@ export default function Result() {
 
       <div className="max-w-4xl mx-auto">
         
-        {/* Card Mức độ dị ứng (Đưa lên trên chính giữa theo ảnh mẫu) */}
+        {/* Card Mức độ dị ứng */}
         <div className="flex justify-center mb-6">
-          <div className="bg-white rounded-t-[24px] rounded-b-[24px] shadow-sm overflow-hidden text-center w-80 border border-gray-100">
+          <div className="bg-white rounded-[24px] shadow-sm overflow-hidden text-center w-80 border border-gray-100">
             <div className="py-2.5 px-4 text-[#144064] text-base font-bold">
               Mức độ dị ứng
             </div>
@@ -119,17 +123,17 @@ export default function Result() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
-              {/* Box 1 */}
+              {/* Box 1: Luôn hiển thị tên thực phẩm/thuốc rõ ràng */}
               <div className="p-5 border-2 border-gray-100 rounded-[20px] bg-white">
                 <span className="text-base font-bold text-gray-900 block mb-1">
                   Thực phẩm / Tên thuốc
                 </span>
-                <span className={`text-base font-semibold block ${formattedTargetText !== 'Không phát hiện' ? 'text-gray-800' : 'text-gray-400'}`}>
+                <span className="text-base font-semibold block text-gray-800">
                   {formattedTargetText}
                 </span>
               </div>
 
-              {/* Box 2 */}
+              {/* Box 2: Dị ứng chéo */}
               <div className="p-5 border-2 border-gray-100 rounded-[20px] bg-white">
                 <span className="text-base font-bold text-gray-900 block mb-1">
                   Thành phần dị ứng chéo liên đới
@@ -165,18 +169,18 @@ export default function Result() {
                   </p>
                 ))
               ) : (
-                <p className="text-gray-400">Nguyên nhân</p>
+                <p className="text-gray-400">Không có giải thích chi tiết nào bổ sung cho loại thuốc này.</p>
               )}
             </div>
           </div>
 
         </div>
 
-        {/* Các nút điều hướng hành động (Thiết kế dạng viên thuốc có chứa icon tròn bên trái giống ảnh mẫu) */}
+        {/* Các nút điều hướng hành động */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
           
           <Link to="/assessment" className="w-full">
-            <div className="flex items-center bg-[#d6e4fd] hover:c-blue-700 rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100">
+            <div className="flex items-center bg-[#d6e4fd] hover:bg-[#c5daf9] rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100 transition-colors">
               <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white shrink-0 shadow-sm">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
               </div>
@@ -187,7 +191,7 @@ export default function Result() {
           </Link>
 
           <Link to="/dashboard" className="w-full">
-            <div className="flex items-center bg-[#d6e4fd] hover:c-blue-700 rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100">
+            <div className="flex items-center bg-[#d6e4fd] hover:bg-[#c5daf9] rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100 transition-colors">
               <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white shrink-0 shadow-sm">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
               </div>
@@ -198,7 +202,7 @@ export default function Result() {
           </Link>
 
           <Link to="/feedback" className="w-full">
-            <div className="flex items-center bg-[#d6e4fd] hover:c-blue-700 rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100">
+            <div className="flex items-center bg-[#d6e4fd] hover:bg-[#c5daf9] rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100 transition-colors">
               <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white shrink-0 shadow-sm">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
               </div>
