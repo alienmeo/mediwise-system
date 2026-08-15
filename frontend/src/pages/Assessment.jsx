@@ -63,62 +63,69 @@ const CheckPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '40px auto', padding: '20px', backgroundColor: '#fff', borderRadius: '16px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
-      <h2 style={{ textAlign: 'center', color: '#e83e8c', marginBottom: '24px' }}>Kiểm tra dị ứng chéo Thực phẩm & Thuốc</h2>
+    <div className="flex min-h-screen items-center justify-center bg-[#f4f7fc] p-6">
+      <div className="w-full max-w-xl bg-white rounded-[32px] p-10 shadow-sm border border-gray-100">
+        
+        {/* Tiêu đề trang giống hệt ảnh mẫu */}
+        <h2 className="text-2xl font-black text-gray-900 text-center uppercase tracking-tight mb-8 leading-tight">
+          KIỂM TRA DỊ ỨNG CHÉO<br />THỰC PHẨM & THUỐC
+        </h2>
 
-      {error && <div style={{ color: '#d9534f', backgroundColor: '#fdf7f7', padding: '10px 14px', borderRadius: '8px', marginBottom: '16px' }}>{error}</div>}
+        {error && (
+          <div className="bg-rose-50 border border-rose-200 text-rose-600 p-3.5 rounded-xl mb-6 text-sm font-semibold">
+            {error}
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '8px' }}>1. Chọn Thực phẩm / Dị nguyên:</label>
-          <select
-            value={selectedFood}
-            onChange={(e) => setSelectedFood(e.target.value)}
-            style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '15px' }}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Ô chọn Thực phẩm */}
+          <div>
+            <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">
+              1.Chọn thực phẩm từ thư viện thực phẩm
+            </label>
+            <select
+              value={selectedFood}
+              onChange={(e) => setSelectedFood(e.target.value)}
+              className="w-full p-4 rounded-2xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#144064] cursor-pointer"
+            >
+              <option value="">-- Chọn thực phẩm --</option>
+              {allergens.map((item) => (
+                <option key={item.id} value={item.name}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Ô chọn Thuốc */}
+          <div>
+            <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">
+              2.Chọn thuốc từ thư viện thuốc
+            </label>
+            <select
+              value={selectedDrug}
+              onChange={(e) => setSelectedDrug(e.target.value)}
+              className="w-full p-4 rounded-2xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#144064] cursor-pointer"
+            >
+              <option value="">-- Chọn thuốc --</option>
+              {drugs.map((item) => (
+                <option key={item.id} value={item.name}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Nút Phân Tích Nguy Cơ đồng bộ chuẩn hệ thống màu Dark Navy */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-4 mt-4 bg-[#144064] hover:bg-[#0f324f] text-white rounded-full font-bold text-base shadow-md transition-all cursor-pointer disabled:opacity-50"
           >
-            <option value="">-- Chọn thực phẩm --</option>
-            {allergens.map((item) => (
-              <option key={item.id} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div style={{ marginBottom: '24px' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '8px' }}>2. Chọn Thuốc cần kiểm tra:</label>
-          <select
-            value={selectedDrug}
-            onChange={(e) => setSelectedDrug(e.target.value)}
-            style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '15px' }}
-          >
-            <option value="">-- Chọn thuốc --</option>
-            {drugs.map((item) => (
-              <option key={item.id} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            width: '100%',
-            padding: '14px',
-            backgroundColor: '#e83e8c',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '25px',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-          }}
-        >
-          {loading ? 'Đang phân tích...' : 'Phân Tích Nguy Cơ'}
-        </button>
-      </form>
+            {loading ? 'Đang phân tích...' : 'Phân Tích Nguy Cơ'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
