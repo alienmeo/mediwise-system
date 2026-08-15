@@ -48,7 +48,7 @@ export default function Result() {
   const explanationsList = result.explanations || detailsData.explanations || [];
   const recommendationsText = result.recommendations || detailsData.recommendations || '';
 
-  // Hàm chuyển đổi hoặc chuẩn hóa hiển thị thành phần (hỗ trợ cả dạng string, mảng object {name, type,...} hoặc mảng string)
+  // Hàm chuyển đổi hoặc chuẩn hóa hiển thị thành phần
   const formatIngredients = (list) => {
     if (!list) return 'Không phát hiện';
     if (typeof list === 'string') return list;
@@ -56,7 +56,6 @@ export default function Result() {
       if (list.length === 0) return 'Không phát hiện';
       return list.map(item => {
         if (typeof item === 'string') return item;
-        // Nếu item là object có chứa thuộc tính name hoặc food/drug
         return item.name || item.ingredient || item.food || item.drug || JSON.stringify(item);
       }).join(', ');
     }
@@ -102,10 +101,10 @@ export default function Result() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
-              {/* Box 1: Thành phần nguy hiểm */}
+              {/* Box 1: Tên thực phẩm, thuốc kiểm tra */}
               <div className="p-5 border-2 border-gray-100 rounded-[20px] bg-white">
                 <span className="text-base font-bold text-gray-900 block mb-1">
-                  Thành phần nguy hiểm phát hiện
+                  Tên thực phẩm, thuốc kiểm tra
                 </span>
                 <span className={`text-base font-semibold block ${dangerousText !== 'Không phát hiện' ? 'text-red-500' : 'text-gray-400'}`}>
                   {dangerousText}
