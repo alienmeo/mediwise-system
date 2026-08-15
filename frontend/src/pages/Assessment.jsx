@@ -67,7 +67,7 @@ const CheckPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#f4f7fc]">
+    <div className="flex flex-col min-h-screen bg-[#f4f7fc]">
       
       {/* Brand Logo Header (Giống vị trí và style dashboard.jsx) */}
       <div className="fixed top-6 left-0 z-50 flex items-center justify-start cursor-pointer w-auto overflow-hidden pl-3" onClick={() => navigate('/')}>
@@ -75,8 +75,8 @@ const CheckPage = () => {
         <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
       </div>
 
-      {/* Main Content Container (Căn giữa và bọc form) */}
-      <div className="flex-1 flex items-center justify-center p-6 pt-28"> {/* pt-28 để tránh header fixed */}
+      {/* Main Content Container (Đã dịch chuyển hộp chọn xích lên trên bằng cách giảm padding-top và căn chỉnh items-start) */}
+      <div className="flex-1 flex items-start justify-center p-6 pt-24">
         <div className="w-full max-w-xl bg-white rounded-[32px] p-10 shadow-sm border border-gray-100">
           
           {/* Tiêu đề trang */}
@@ -95,7 +95,7 @@ const CheckPage = () => {
             <div>
               <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">
                 1.Chọn thực phẩm từ thư viện thực phẩm
-                </label>
+              </label>
               <select
                 value={selectedFood}
                 onChange={(e) => setSelectedFood(e.target.value)}
@@ -106,7 +106,7 @@ const CheckPage = () => {
                   <option key={item.id} value={item.name}>
                     {item.name}
                   </option>
-                  ))}
+                ))}
               </select>
             </div>
 
@@ -114,7 +114,7 @@ const CheckPage = () => {
             <div>
               <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">
                 2.Chọn thuốc từ thư viện thuốc
-                </label>
+              </label>
               <select
                 value={selectedDrug}
                 onChange={(e) => setSelectedDrug(e.target.value)}
@@ -125,7 +125,7 @@ const CheckPage = () => {
                   <option key={item.id} value={item.name}>
                     {item.name}
                   </option>
-                  ))}
+                ))}
               </select>
             </div>
 
