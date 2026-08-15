@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Import các file logo và ảnh icon ở đầu file (chuẩn ES Modules)
+import logoImg from './logo.png'; 
+import brandTextImg from './title.png'; 
+
 const CheckPage = () => {
   const navigate = useNavigate();
   const [allergens, setAllergens] = useState([]);
@@ -63,69 +67,81 @@ const CheckPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#f4f7fc] p-6">
-      <div className="w-full max-w-xl bg-white rounded-[32px] p-10 shadow-sm border border-gray-100">
-        
-        {/* Tiêu đề trang giống hệt ảnh mẫu */}
-        <h2 className="text-2xl font-black text-gray-900 text-center uppercase tracking-tight mb-8 leading-tight">
-          KIỂM TRA DỊ ỨNG CHÉO<br />THỰC PHẨM & THUỐC
-        </h2>
-
-        {error && (
-          <div className="bg-rose-50 border border-rose-200 text-rose-600 p-3.5 rounded-xl mb-6 text-sm font-semibold">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Ô chọn Thực phẩm */}
-          <div>
-            <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">
-              1.Chọn thực phẩm từ thư viện thực phẩm
-            </label>
-            <select
-              value={selectedFood}
-              onChange={(e) => setSelectedFood(e.target.value)}
-              className="w-full p-4 rounded-2xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#144064] cursor-pointer"
-            >
-              <option value="">-- Chọn thực phẩm --</option>
-              {allergens.map((item) => (
-                <option key={item.id} value={item.name}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Ô chọn Thuốc */}
-          <div>
-            <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">
-              2.Chọn thuốc từ thư viện thuốc
-            </label>
-            <select
-              value={selectedDrug}
-              onChange={(e) => setSelectedDrug(e.target.value)}
-              className="w-full p-4 rounded-2xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#144064] cursor-pointer"
-            >
-              <option value="">-- Chọn thuốc --</option>
-              {drugs.map((item) => (
-                <option key={item.id} value={item.name}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Nút Phân Tích Nguy Cơ đồng bộ chuẩn hệ thống màu Dark Navy */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-4 mt-4 bg-[#144064] hover:bg-[#0f324f] text-white rounded-full font-bold text-base shadow-md transition-all cursor-pointer disabled:opacity-50"
-          >
-            {loading ? 'Đang phân tích...' : 'Phân Tích Nguy Cơ'}
-          </button>
-        </form>
+    <div className="flex min-h-screen bg-[#f4f7fc]">
+      
+      {/* Brand Logo Header (Giống vị trí và style dashboard.jsx) */}
+      <div className="fixed top-6 left-0 z-50 flex items-center justify-start cursor-pointer w-auto overflow-hidden pl-3" onClick={() => navigate('/')}>
+        <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
+        <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
       </div>
+
+      {/* Main Content Container (Căn giữa và bọc form) */}
+      <div className="flex-1 flex items-center justify-center p-6 pt-28"> {/* pt-28 để tránh header fixed */}
+        <div className="w-full max-w-xl bg-white rounded-[32px] p-10 shadow-sm border border-gray-100">
+          
+          {/* Tiêu đề trang */}
+          <h2 className="text-2xl font-black text-gray-900 text-center uppercase tracking-tight mb-8 leading-tight">
+            KIỂM TRA DỊ ỨNG CHÉO<br />THỰC PHẨM & THUỐC
+          </h2>
+
+          {error && (
+            <div className="bg-rose-50 border border-rose-200 text-rose-600 p-3.5 rounded-xl mb-6 text-sm font-semibold">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Ô chọn Thực phẩm */}
+            <div>
+              <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">
+                1.Chọn thực phẩm từ thư viện thực phẩm
+                </label>
+              <select
+                value={selectedFood}
+                onChange={(e) => setSelectedFood(e.target.value)}
+                className="w-full p-4 rounded-2xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#144064] cursor-pointer"
+              >
+                <option value="">-- Chọn thực phẩm --</option>
+                {allergens.map((item) => (
+                  <option key={item.id} value={item.name}>
+                    {item.name}
+                  </option>
+                  ))}
+              </select>
+            </div>
+
+            {/* Ô chọn Thuốc */}
+            <div>
+              <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">
+                2.Chọn thuốc từ thư viện thuốc
+                </label>
+              <select
+                value={selectedDrug}
+                onChange={(e) => setSelectedDrug(e.target.value)}
+                className="w-full p-4 rounded-2xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#144064] cursor-pointer"
+              >
+                <option value="">-- Chọn thuốc --</option>
+                {drugs.map((item) => (
+                  <option key={item.id} value={item.name}>
+                    {item.name}
+                  </option>
+                  ))}
+              </select>
+            </div>
+
+            {/* Nút Phân Tích Nguy Cơ */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 mt-4 bg-[#144064] hover:bg-[#0f324f] text-white rounded-full font-bold text-base shadow-md transition-all cursor-pointer disabled:opacity-50"
+            >
+              {loading ? 'Đang phân tích...' : 'Phân Tích Nguy Cơ'}
+            </button>
+          </form>
+          
+        </div>
+      </div>
+
     </div>
   );
 };
