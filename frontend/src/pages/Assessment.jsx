@@ -67,67 +67,19 @@ const CheckPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#f4f7fc]">
+    <div className="flex flex-col min-h-screen bg-[#f4f7fc] relative">
       
-      {/* 1. SIDEBAR BÊN TRÁI (Giống hệt dashboard.jsx) */}
-      <aside className="w-80 bg-white border-r border-gray-100 py-6 px-0 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
-        <div className="space-y-12">
-          
-          {/* Brand Logo Header */}
-          <div className="flex items-center justify-start cursor-pointer w-full overflow-hidden -ml-4 pl-3" onClick={() => navigate('/')}>
-            <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
-            <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
-          </div>
+      {/* Brand Logo Header chuẩn vị trí và class định dạng giống dashboard.jsx */}
+      <div 
+        className="absolute top-6 left-6 z-50 flex items-center justify-start cursor-pointer w-auto overflow-hidden -ml-4 pl-3" 
+        onClick={() => navigate('/dashboard')}
+      >
+        <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
+        <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
+      </div>
 
-          {/* Navigation Buttons */}
-          <nav className="space-y-4 px-3">
-            <button 
-              onClick={() => navigate('/Assessment')} 
-              className="w-full py-4 px-6 rounded-full bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-left transition-all text-sm flex items-center space-x-3 shadow-md cursor-pointer"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 shrink-0">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-              </svg>
-              <span>Bắt đầu khảo sát mới</span>
-            </button>
-
-            <button 
-              onClick={() => navigate('/feedback')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0 opacity-80">
-                <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.107a.75.75 0 01-.725.64h-12.8a.75.75 0 01-.725-.64l-.001-.107v-.003zM16.5 18.375a6.375 6.375 0 0111.419-3.922.75.75 0 01-.118.995l-3.375 2.625a.75.75 0 01-.932 0l-1.688-1.313a.75.75 0 01.932-1.17l1.096.853 2.64-2.052a4.875 4.875 0 00-7.854 2.977.75.75 0 01-.75.75h-.375z" />
-              </svg>
-              <span>Đánh giá của người dùng</span>
-            </button>
-
-            <button 
-              onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 opacity-80">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-              </svg>
-              <span>Xem lại kết quả gần nhất</span>
-            </button>
-          </nav>
-        </div>
-
-        {/* Nút Back ở góc dưới sidebar */}
-        <div className="px-3">
-          <button 
-            onClick={() => navigate(-1)}
-            className="w-12 h-12 rounded-2xl bg-[#144064] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-            </svg>
-          </button>
-        </div>
-      </aside>
-
-      {/* 2. MAIN CONTENT BÊN PHẢI (Căn chỉnh form vào chính giữa màn hình) */}
-      <main className="flex-1 flex items-center justify-center p-6">
+      {/* Main Content Container căn chỉnh chính giữa trang */}
+      <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-xl bg-white rounded-[32px] p-10 shadow-sm border border-gray-100">
           
           {/* Tiêu đề trang */}
@@ -145,7 +97,7 @@ const CheckPage = () => {
             {/* Ô chọn Thực phẩm */}
             <div>
               <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">
-                1. Chọn thực phẩm từ thư viện thực phẩm
+                1.Chọn thực phẩm từ thư viện thực phẩm
               </label>
               <select
                 value={selectedFood}
@@ -164,7 +116,7 @@ const CheckPage = () => {
             {/* Ô chọn Thuốc */}
             <div>
               <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">
-                2. Chọn thuốc từ thư viện thuốc
+                2.Chọn thuốc từ thư viện thuốc
               </label>
               <select
                 value={selectedDrug}
@@ -191,7 +143,7 @@ const CheckPage = () => {
           </form>
 
         </div>
-      </main>
+      </div>
 
     </div>
   );
