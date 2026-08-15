@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Import các file logo và ảnh icon ở đầu file (chuẩn ES Modules)
+// Import các file logo và ảnh chuẩn giống hệt dashboard.jsx
 import logoImg from './logo.png'; 
 import brandTextImg from './title.png'; 
 
@@ -69,13 +69,16 @@ const CheckPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-[#f4f7fc] relative">
       
-      {/* Brand Logo Header ở góc trái trên cùng */}
-      <div className="absolute top-6 left-6 z-50 flex items-center justify-start cursor-pointer w-auto overflow-hidden" onClick={() => navigate('/')}>
+      {/* Brand Logo Header chuẩn vị trí và class định dạng giống dashboard.jsx */}
+      <div 
+        className="absolute top-6 left-6 z-50 flex items-center justify-start cursor-pointer w-auto overflow-hidden -ml-4 pl-3" 
+        onClick={() => navigate('/dashboard')}
+      >
         <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
         <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
       </div>
 
-      {/* Main Content Container căn chính giữa tuyệt đối cả chiều ngang và dọc */}
+      {/* Main Content Container căn chỉnh chính giữa trang */}
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-xl bg-white rounded-[32px] p-10 shadow-sm border border-gray-100">
           
