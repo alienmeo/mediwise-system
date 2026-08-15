@@ -58,16 +58,16 @@ export default function Result() {
 
   return (
     <div className="min-h-screen bg-[#f4f7fc] py-8 px-4 font-sans text-[#222222]">
-      <div className="max-w-4xl mx-auto relative">
+      <div className="max-w-4xl mx-auto">
         
-        {/* Logo MediWise (Đặt chuẩn vị trí giống Dashboard) */}
-        <div className="mb-6 flex items-center justify-center gap-2 sm:justify-start sm:absolute sm:top-0 sm:left-0 sm:mb-0 cursor-pointer overflow-hidden -ml-4 pl-3" onClick={() => navigate('/dashboard')}>
+        {/* Logo MediWise (Đặt chuẩn ở góc trên cùng bên trái giống các trang khác) */}
+        <div className="flex items-center justify-start cursor-pointer w-full overflow-hidden -ml-4 pl-3 mb-6" onClick={() => navigate('/dashboard')}>
           <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
           <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
         </div>
 
         {/* Card Trạng Thái Dị Ứng */}
-        <div className="flex justify-center mb-6 pt-16 sm:pt-0">
+        <div className="flex justify-center mb-6">
           <div className="bg-white rounded-[24px] shadow-sm overflow-hidden text-center w-72 border border-gray-100">
             <div className="py-2.5 px-4 text-[#144064] text-lg font-bold">
               Mức độ dị ứng cho: <span className="text-gray-800 font-extrabold">{result.drug_name || 'Thuốc'}</span>
