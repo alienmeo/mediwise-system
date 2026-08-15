@@ -57,15 +57,16 @@ export default function Result() {
     : 'Không phát hiện';
 
   return (
-    <div className="min-h-screen bg-[#f4f7fc] py-8 px-4 font-sans text-[#222222]">
+    <div className="min-h-screen bg-[#f4f7fc] py-8 px-6 font-sans text-[#222222]">
+      
+      {/* Logo MediWise (Cố định góc trên cùng bên trái ngoài cùng màn hình) */}
+      <div className="flex items-center justify-start cursor-pointer overflow-hidden -ml-4 pl-3 mb-6 w-fit" onClick={() => navigate('/dashboard')}>
+        <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
+        <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
+      </div>
+
       <div className="max-w-4xl mx-auto">
         
-        {/* Logo MediWise (Đặt chuẩn ở góc trên cùng bên trái giống các trang khác) */}
-        <div className="flex items-center justify-start cursor-pointer w-full overflow-hidden -ml-4 pl-3 mb-6" onClick={() => navigate('/dashboard')}>
-          <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
-          <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
-        </div>
-
         {/* Card Trạng Thái Dị Ứng */}
         <div className="flex justify-center mb-6">
           <div className="bg-white rounded-[24px] shadow-sm overflow-hidden text-center w-72 border border-gray-100">
