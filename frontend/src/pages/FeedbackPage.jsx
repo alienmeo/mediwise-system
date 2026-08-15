@@ -50,47 +50,50 @@ export default function FeedbackPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#f8fafc]">
-      {/* SIDEBAR */}
-      <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col justify-between shrink-0">
-        <div className="space-y-8">
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
-            <img src={logoImg} alt="Mediwise Logo" className="h-14 w-auto object-contain" />
-            <img src={brandTextImg} alt="Mediwise" className="h-10 w-auto object-contain" />
+    <div className="flex min-h-screen bg-[#f4f7fc]">
+      {/* 1. SIDEBAR BÊN TRÁI */}
+      <aside className="w-80 bg-white border-r border-gray-100 py-6 px-0 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
+        <div className="space-y-12">
+          
+          {/* Brand Logo Header (Vị trí chuẩn giống Dashboard) */}
+          <div className="flex items-center justify-start cursor-pointer w-full overflow-hidden -ml-4 pl-3" onClick={() => navigate('/dashboard')}>
+            <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
+            <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
           </div>
 
-          <div className="text-center pt-2">
+          <div className="text-center px-4">
             <h2 className="text-xl font-bold text-gray-900 leading-snug">
               Khảo sát trải nghiệm<br />người dùng
             </h2>
           </div>
 
-          <div className="relative flex py-2 items-center">
+          <div className="relative flex py-2 items-center px-4">
             <div className="flex-grow border-t border-gray-200"></div>
-            <span className="flex-shrink mx-2 text-[#f472b6] text-xs">♥</span>
+            <span className="flex-shrink mx-2 text-[#144064] text-xs">♥</span>
             <div className="flex-grow border-t border-gray-200"></div>
           </div>
 
-          <p className="text-gray-400 text-sm text-center px-2 leading-relaxed">
+          <p className="text-gray-400 text-sm text-center px-6 leading-relaxed">
             Ý kiến của bạn là cơ sở giúp MediWise ngày càng hoàn thiện.
           </p>
         </div>
 
-        <div>
+        {/* Nút Back ở góc dưới sidebar */}
+        <div className="px-3">
           <button 
             onClick={() => navigate(-1)}
-            className="w-12 h-12 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors cursor-pointer"
+            className="w-12 h-12 rounded-2xl bg-[#144064] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 016 6v3" />
             </svg>
           </button>
         </div>
       </aside>
 
-      {/* MAIN CONTENT */}
+      {/* 2. MAIN CONTENT BÊN PHẢI */}
       <main className="flex-1 flex flex-col">
-        <header className="h-24 px-10 flex items-center justify-between border-b border-transparent">
+        <header className="h-28 px-10 flex items-center justify-between border-b border-transparent">
           <div>
             <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
               Cảm ơn bạn đã trải nghiệm MediWise!
@@ -106,7 +109,7 @@ export default function FeedbackPage() {
               localStorage.removeItem('mediwise_user');
               navigate('/login');
             }}
-            className="flex items-center space-x-1 text-[#fbcfe8] hover:text-[#f472b6] font-semibold text-sm transition-colors cursor-pointer"
+            className="flex items-center space-x-1 text-[#144064] hover:text-[#0f324f] font-semibold text-sm transition-colors cursor-pointer"
           >
             <span>Đăng xuất</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
@@ -115,9 +118,9 @@ export default function FeedbackPage() {
           </button>
         </header>
 
-        <form onSubmit={handleSubmit} className="p-10 max-w-4xl space-y-8 flex-1 flex flex-col justify-between">
+        <form onSubmit={handleSubmit} className="px-10 py-6 max-w-4xl space-y-8 flex-1 flex flex-col justify-between">
           <div className="space-y-6">
-            <div className="bg-white rounded-[32px] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.03)] space-y-6">
+            <div className="bg-white rounded-[32px] p-8 shadow-sm border border-gray-100 space-y-6">
               <h2 className="text-xl font-bold text-gray-900">
                 Bạn hài lòng với MediWise ở mức nào?
               </h2>
@@ -136,8 +139,8 @@ export default function FeedbackPage() {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       className="w-12 h-12 transition-colors duration-200"
-                      fill={(hoverRating || rating) >= star ? "#f472b6" : "none"}
-                      stroke="#f472b6"
+                      fill={(hoverRating || rating) >= star ? "#144064" : "none"}
+                      stroke="#144064"
                       strokeWidth="1.5"
                     >
                       <path
@@ -151,7 +154,7 @@ export default function FeedbackPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-[32px] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.03)] space-y-4">
+            <div className="bg-white rounded-[32px] p-8 shadow-sm border border-gray-100 space-y-4">
               <h2 className="text-xl font-bold text-gray-900">
                 Bạn có góp ý hoặc mong muốn MediWise thay đổi điều gì không?
               </h2>
@@ -161,16 +164,16 @@ export default function FeedbackPage() {
                 onChange={(e) => setFeedbackText(e.target.value)}
                 placeholder="Nhập góp ý của bạn tại đây..."
                 rows={4}
-                className="w-full rounded-2xl border border-gray-300 p-4 text-gray-700 text-sm placeholder-gray-400 focus:outline-none focus:border-[#f472b6] focus:ring-1 focus:ring-[#f472b6] transition-all resize-none"
+                className="w-full rounded-2xl border border-gray-200 p-4 text-gray-700 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#144064] transition-all resize-none"
               ></textarea>
             </div>
           </div>
 
-          <div className="flex justify-end pt-4">
+          <div className="flex justify-end pt-4 pb-6">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center space-x-2 bg-[#db2777] hover:bg-[#be185d] text-white font-bold py-3.5 px-8 rounded-full shadow-md transition-all cursor-pointer text-base disabled:opacity-50"
+              className="flex items-center space-x-2 bg-[#144064] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md transition-all cursor-pointer text-base disabled:opacity-50"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
