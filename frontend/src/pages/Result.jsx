@@ -48,7 +48,36 @@ export default function Result() {
   const explanationsList = result.explanations || detailsData.explanations || [];
   const recommendationsText = result.recommendations || detailsData.recommendations || '';
 
-  // Hàm chuyển đổi hoặc chuẩn hóa hiển thị thành phần
+  // Lấy tên thuốc kiểm tra từ result
+  const drugName = result.drug_name || detailsData.drug_name || '';
+
+  // Hàm chuyển đổi hoặc chuẩn hóa hiển thị thành phần (kết hợp cả tên thuốc kiểm tra và danh phần thực phẩm/thuốc nguy hiểm)
+  const formatIngredientsWithDrug = (list, drug) => {
+    let items = [];
+    if (drug) {
+      items.push(drug);
+    }
+    
+    if (Array.isArray(list) && list.length > 0) {
+      list.forEach(item => {
+        if (typeof item === 'string') {
+          items.push(item);
+        } else if (item && typeof item === 'object') {
+          const val = item.name || item.ingredient || item.food || item.drug;
+          if (val) items.push(val);
+        }
+      });
+    } else if (typeof list === 'string' && list.trim() !== '') {
+      items.push(list);
+    }
+
+    // Lọc bỏ trùng lặp nếu có
+    const uniqueItems = [...new Set(items)];
+    return uniqueItems.length > 0 ? uniqueItems.join(', ') : 'Không phát hiện';
+  };
+
+  const formattedTargetText = formatIngredientsWithDrug(dangerousList, drugName);
+
   const formatIngredients = (list) => {
     if (!list) return 'Không phát hiện';
     if (typeof list === 'string') return list;
@@ -62,7 +91,6 @@ export default function Result() {
     return String(list);
   };
 
-  const dangerousText = formatIngredients(dangerousList);
   const crossText = formatIngredients(crossList);
 
   return (
@@ -80,7 +108,7 @@ export default function Result() {
         <div className="flex justify-center mb-6">
           <div className="bg-white rounded-[24px] shadow-sm overflow-hidden text-center w-72 border border-gray-100">
             <div className="py-2.5 px-4 text-[#144064] text-lg font-bold">
-              Mức độ dị ứng cho: <span className="text-gray-800 font-extrabold">{result.drug_name || 'Thuốc'}</span>
+              Mức độ dị ứng cho: <span className="text-gray-800 font-extrabold">{drugName || 'Thuốc'}</span>
             </div>
             <div className="bg-[#e3effd] py-3 px-4 border-t border-gray-100 flex items-center justify-center gap-2.5">
               <span className={`w-4 h-4 rounded-full ${currentRisk.dot}`}></span>
@@ -106,8 +134,8 @@ export default function Result() {
                 <span className="text-base font-bold text-gray-900 block mb-1">
                   Tên thực phẩm, thuốc kiểm tra
                 </span>
-                <span className={`text-base font-semibold block ${dangerousText !== 'Không phát hiện' ? 'text-red-500' : 'text-gray-400'}`}>
-                  {dangerousText}
+                <span className={`text-base font-semibold block ${formattedTargetText !== 'Không phát hiện' ? 'text-gray-800' : 'text-gray-400'}`}>
+                  {formattedTargetText}
                 </span>
               </div>
 
