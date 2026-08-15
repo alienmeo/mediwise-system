@@ -48,13 +48,23 @@ export default function Result() {
   const explanationsList = result.explanations || detailsData.explanations || [];
   const recommendationsText = result.recommendations || detailsData.recommendations || '';
 
-  const dangerousText = dangerousList.length > 0 
-    ? (Array.isArray(dangerousList) ? dangerousList.join(', ') : dangerousList)
-    : 'Không phát hiện';
+  // Hàm chuyển đổi hoặc chuẩn hóa hiển thị thành phần (hỗ trợ cả dạng string, mảng object {name, type,...} hoặc mảng string)
+  const formatIngredients = (list) => {
+    if (!list) return 'Không phát hiện';
+    if (typeof list === 'string') return list;
+    if (Array.isArray(list)) {
+      if (list.length === 0) return 'Không phát hiện';
+      return list.map(item => {
+        if (typeof item === 'string') return item;
+        // Nếu item là object có chứa thuộc tính name hoặc food/drug
+        return item.name || item.ingredient || item.food || item.drug || JSON.stringify(item);
+      }).join(', ');
+    }
+    return String(list);
+  };
 
-  const crossText = crossList.length > 0 
-    ? (Array.isArray(crossList) ? crossList.join(', ') : crossList)
-    : 'Không phát hiện';
+  const dangerousText = formatIngredients(dangerousList);
+  const crossText = formatIngredients(crossList);
 
   return (
     <div className="min-h-screen bg-[#f4f7fc] py-8 px-6 font-sans text-[#222222]">
@@ -97,7 +107,7 @@ export default function Result() {
                 <span className="text-base font-bold text-gray-900 block mb-1">
                   Thành phần nguy hiểm phát hiện
                 </span>
-                <span className={`text-base font-semibold block ${dangerousList.length > 0 ? 'text-red-500' : 'text-gray-400'}`}>
+                <span className={`text-base font-semibold block ${dangerousText !== 'Không phát hiện' ? 'text-red-500' : 'text-gray-400'}`}>
                   {dangerousText}
                 </span>
               </div>
@@ -107,7 +117,7 @@ export default function Result() {
                 <span className="text-base font-bold text-gray-900 block mb-1">
                   Thành phần dị ứng chéo liên đới
                 </span>
-                <span className={`text-base font-semibold block ${crossList.length > 0 ? 'text-amber-600' : 'text-gray-400'}`}>
+                <span className={`text-base font-semibold block ${crossText !== 'Không phát hiện' ? 'text-amber-600' : 'text-gray-400'}`}>
                   {crossText}
                 </span>
               </div>
