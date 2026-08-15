@@ -43,12 +43,21 @@ export default function Result() {
   const crossList = result.cross_triggers || detailsData.cross_triggers || [];
   const explanationsList = result.explanations || detailsData.explanations || [];
   const recommendationsText = result.recommendations || detailsData.recommendations || '';
+  
+  // Lấy tên thuốc và tên thực phẩm/dị nguyên từ các nguồn dữ liệu có thể có của Backend
   const drugName = result.drug_name || detailsData.drug_name || '';
+  const foodName = result.food_name || detailsData.food_name || result.allergen || detailsData.allergen || result.food || detailsData.food || '';
 
-  // Luôn hiển thị tên thuốc hoặc thực phẩm kiểm tra trong mọi trường hợp
-  const formatIngredientsWithDrugFirst = (list, drug) => {
+  // Hàm gom đầy đủ cả thực phẩm và tên thuốc để hiển thị chung vào một ô
+  const formatIngredientsWithDrugFirst = (list, drug, food) => {
     let items = [];
     
+    // Ưu tiên đưa tên thực phẩm/dị nguyên lên đầu
+    if (food) {
+      items.push(food);
+    }
+
+    // Thêm các thành phần nguy hiểm trong danh sách (nếu có)
     if (Array.isArray(list) && list.length > 0) {
       list.forEach(item => {
         if (typeof item === 'string') {
@@ -62,15 +71,16 @@ export default function Result() {
       items.push(list);
     }
 
+    // Đưa tên thuốc kiểm tra vào tiếp theo
     if (drug && !items.includes(drug)) {
       items.push(drug);
     }
 
     const uniqueItems = [...new Set(items)];
-    return uniqueItems.length > 0 ? uniqueItems.join(', ') : (drug || 'Không phát hiện');
+    return uniqueItems.length > 0 ? uniqueItems.join(', ') : 'Không phát hiện';
   };
 
-  const formattedTargetText = formatIngredientsWithDrugFirst(dangerousList, drugName);
+  const formattedTargetText = formatIngredientsWithDrugFirst(dangerousList, drugName, foodName);
 
   const formatIngredients = (list) => {
     if (!list) return 'Không phát hiện';
@@ -123,7 +133,7 @@ export default function Result() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
-              {/* Box 1: Luôn hiển thị tên thực phẩm/thuốc rõ ràng */}
+              {/* Box 1: Hiển thị đồng thời Thực phẩm và Tên thuốc */}
               <div className="p-5 border-2 border-gray-100 rounded-[20px] bg-white">
                 <span className="text-base font-bold text-gray-900 block mb-1">
                   Thực phẩm / Tên thuốc
