@@ -55,7 +55,7 @@ export default function Wiki() {
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-11 text-left">
             {/* Badge 1 */}
-            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#eaf8fb] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
+            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#c7f2f6] to-[#eaf8fb] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
               <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon Tin cậy" className="w-full h-full object-contain" />
               </div>
@@ -63,7 +63,7 @@ export default function Wiki() {
             </div>
 
             {/* Badge 2 */}
-            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#eaf8fb] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
+            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#c7f2f6] to-[#eaf8fb] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
               <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon Thuận tiện" className="w-full h-full object-contain" />
               </div>
@@ -71,7 +71,7 @@ export default function Wiki() {
             </div>
 
             {/* Badge 3 */}
-            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#eaf8fb] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
+            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#c7f2f6] to-[#eaf8fb] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
               <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon An toàn" className="w-full h-full object-contain" />
               </div>

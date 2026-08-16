@@ -111,21 +111,21 @@ export default function Profile() {
           <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/dashboard')} 
-              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#d0e5fb] text-[#326871] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Về lại trang chủ</span>
             </button>
 
             <button 
               onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#d0e5fb] text-[#326871] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Xem lại kết quả gần nhất</span>
             </button>
 
             <button 
               onClick={() => navigate('/Feedback')} 
-              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#d0e5fb] text-[#326871] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Đánh giá của người dùng</span>
             </button>
@@ -221,7 +221,7 @@ export default function Profile() {
                 <button
                   type="button"
                   onClick={() => setIsEditing(true)}
-                  className="bg-[#eaf8fb] hover:bg-[#d0e5fb] text-[#326871] font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer w-full sm:w-auto"
+                  className="bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer w-full sm:w-auto"
                 >
                   Chỉnh sửa
                 </button>
