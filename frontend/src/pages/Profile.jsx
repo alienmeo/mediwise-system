@@ -124,7 +124,7 @@ export default function Profile() {
             </button>
 
             <button 
-              onClick={() => navigate('/FeedbackPage')} 
+              onClick={() => navigate('/Feedback')} 
               className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Đánh giá của người dùng</span>
