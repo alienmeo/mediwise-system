@@ -12,9 +12,9 @@ export default function Dashboard() {
   // State để điều khiển việc đóng/mở Sidebar trên điện thoại
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Hàm xử lý thông báo khi click vào nút Truy cập lịch sử
+  // Hàm xử lý thông báo khi click vào tính năng lịch sử/kết quả gần nhất
   const handleHistoryClick = () => {
-    alert("Tính năng này sẽ sớm được cập nhật. Cảm ơn bạn đã tin dùng Aellergis");
+    alert("Tính năng sẽ sớm được cập nhật. Cảm ơn bạn đã tin dùng Aellergis");
   };
 
   return (
