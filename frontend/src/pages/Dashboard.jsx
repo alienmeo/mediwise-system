@@ -12,6 +12,11 @@ export default function Dashboard() {
   // State để điều khiển việc đóng/mở Sidebar trên điện thoại
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Hàm xử lý thông báo khi click vào nút Truy cập lịch sử
+  const handleHistoryClick = () => {
+    alert("Tính năng này sẽ sớm được cập nhật. Cảm ơn bạn đã tin dùng Aellergis");
+  };
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-[#f4f7fc]">
       
@@ -48,7 +53,7 @@ export default function Dashboard() {
             </button>
 
             <button 
-              onClick={() => navigate('/history')} 
+              onClick={handleHistoryClick} 
               className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 opacity-80">
@@ -145,7 +150,7 @@ export default function Dashboard() {
             <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Đánh giá của người dùng
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { handleHistoryClick(); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
           </div>
@@ -204,7 +209,7 @@ export default function Dashboard() {
               </div>
             </div>
             <button 
-              onClick={() => navigate('/history')} 
+              onClick={handleHistoryClick} 
               className="w-full md:w-auto bg-white border border-gray-200 hover:bg-gray-50 text-gray-600 font-bold py-3.5 px-10 rounded-full text-sm transition-all shrink-0 cursor-pointer flex items-center justify-center space-x-2 shadow-xs"
             >
               <span>Truy cập</span>
