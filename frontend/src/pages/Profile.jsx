@@ -7,6 +7,8 @@ import brandTextImg from './title.png';
 
 export default function Profile() {
   const navigate = useNavigate();
+  // State điều khiển đóng/mở menu trên điện thoại
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     username: '',
@@ -94,10 +96,10 @@ export default function Profile() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#f4f7fc]">
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#f4f7fc]">
       
-      {/* 1. SIDEBAR BÊN TRÁI */}
-      <aside className="w-80 bg-white border-r border-gray-100 py-6 px-0 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
+      {/* 1. SIDEBAR BÊN TRÁI (Ẩn trên mobile, hiện từ màn hình md trở lên) */}
+      <aside className="hidden md:flex w-80 bg-white border-r border-gray-100 py-6 px-0 flex-col justify-between shrink-0 shadow-sm overflow-hidden">
         <div className="space-y-12">
           
           {/* Brand Logo Header */}
@@ -109,21 +111,21 @@ export default function Profile() {
           <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/dashboard')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Về lại trang chủ</span>
             </button>
 
             <button 
               onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Xem lại kết quả gần nhất</span>
             </button>
 
             <button 
               onClick={() => navigate('/FeedbackPage')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Đánh giá của người dùng</span>
             </button>
@@ -132,10 +134,31 @@ export default function Profile() {
       </aside>
 
       {/* 2. MAIN CONTENT BÊN PHẢI */}
-      <main className="flex-1 flex flex-col">
-        <header className="h-28 px-10 flex items-center justify-between">
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Hồ Sơ Cá Nhân</h1>
+      <main className="flex-1 flex flex-col w-full">
+        
+        {/* Top Navbar */}
+        <header className="h-16 md:h-28 px-4 md:px-10 flex items-center justify-between border-b md:border-none border-gray-100 bg-white md:bg-transparent">
           
+          {/* Cụm trái: Nút Menu 3 gạch & Logo thu gọn trên Mobile */}
+          <div className="flex items-center space-x-2 overflow-hidden">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#144064] shrink-0 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
+
+            <div className="flex items-center md:hidden cursor-pointer shrink-0" onClick={() => navigate('/dashboard')}>
+              <img src={logoImg} alt="Logo" className="h-7 w-auto object-contain" />
+              <img src={brandTextImg} alt="Aellergis" className="h-6 w-auto object-contain max-w-[90px] -ml-1.5" />
+            </div>
+          </div>
+
+          <h1 className="text-xl md:text-3xl font-extrabold text-gray-900 tracking-tight hidden md:block">Hồ Sơ Cá Nhân</h1>
+          
+          {/* Nút Đăng xuất */}
           <button 
             onClick={() => {
               localStorage.removeItem('mediwise_token');
@@ -143,7 +166,7 @@ export default function Profile() {
               localStorage.removeItem('user');
               navigate('/login');
             }}
-            className="flex items-center space-x-2 bg-[#144064] hover:bg-[#0f324f] text-white px-6 py-3.5 rounded-full font-bold text-sm shadow-md transition-all cursor-pointer"
+            className="flex items-center space-x-1.5 bg-[#144064] hover:bg-[#0f324f] text-white px-4 py-2 md:px-6 md:py-3.5 rounded-full font-bold text-xs md:text-sm shadow-md transition-all cursor-pointer"
           >
             <span>Đăng xuất</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
@@ -152,48 +175,68 @@ export default function Profile() {
           </button>
         </header>
 
-        <section className="px-10 py-6 max-w-4xl space-y-8">
+        {/* Tiêu đề riêng cho Mobile hiển thị ngay dưới header */}
+        <div className="px-4 pt-4 md:hidden">
+          <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Hồ Sơ Cá Nhân</h1>
+        </div>
+
+        {/* MENU THẢ XUỐNG KHI BẤM NÚT 3 GẠCH TRÊN MOBILE */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
+            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+              🏠 Về lại trang chủ
+            </button>
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+              📂 Xem lại kết quả gần nhất
+            </button>
+            <button onClick={() => { navigate('/FeedbackPage'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+              💬 Đánh giá của người dùng
+            </button>
+          </div>
+        )}
+
+        <section className="px-4 md:px-10 py-6 max-w-4xl space-y-6 md:space-y-8">
           {/* Card Avatar & Header Info */}
-          <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center space-x-6">
-            <div className="w-24 h-24 rounded-full bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-14 h-14">
+          <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 md:w-14 md:h-14">
                 <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
               </svg>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900">
                 {userInfo.fullName || userInfo.username || 'Người dùng Aellergis'}
               </h2>
-              <p className="text-gray-400 font-medium text-sm mt-1">
+              <p className="text-gray-400 font-medium text-xs md:text-sm mt-1 break-all">
                 {userInfo.email ? `Email: ${userInfo.email}` : `Tài khoản: ${userInfo.username}`}
               </p>
             </div>
           </div>
 
           {/* Form Chi Tiết Thông Tin */}
-          <form onSubmit={handleSave} className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 space-y-6">
-            <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-              <h3 className="text-xl font-bold text-gray-800">Thông tin chi tiết</h3>
+          <form onSubmit={handleSave} className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-4 gap-4">
+              <h3 className="text-lg md:text-xl font-bold text-gray-800">Thông tin chi tiết</h3>
               {!isEditing ? (
                 <button
                   type="button"
                   onClick={() => setIsEditing(true)}
-                  className="bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer"
+                  className="bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer w-full sm:w-auto"
                 >
                   Chỉnh sửa
                 </button>
               ) : (
-                <div className="space-x-3">
+                <div className="flex space-x-3 w-full sm:w-auto">
                   <button
                     type="button"
                     onClick={() => setIsEditing(false)}
-                    className="bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold px-5 py-2 rounded-full text-sm transition-all cursor-pointer"
+                    className="flex-1 sm:flex-none bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold px-5 py-2 rounded-full text-sm transition-all cursor-pointer"
                   >
                     Hủy
                   </button>
                   <button
                     type="submit"
-                    className="bg-[#144064] hover:bg-[#0f324f] text-white font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer shadow-md"
+                    className="flex-1 sm:flex-none bg-[#144064] hover:bg-[#0f324f] text-white font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer shadow-md"
                   >
                     Lưu
                   </button>
