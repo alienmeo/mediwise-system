@@ -11,6 +11,11 @@ export default function FeedbackPage() {
   // State điều khiển đóng/mở menu trên điện thoại
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Hàm xử lý thông báo khi click vào tính năng lịch sử/kết quả gần nhất
+  const handleHistoryClick = () => {
+    alert("Tính năng sẽ sớm được cập nhật. Cảm ơn bạn đã tin dùng Aellergis");
+  };
+
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [feedbackText, setFeedbackText] = useState('');
@@ -66,21 +71,48 @@ export default function FeedbackPage() {
             <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
           </div>
 
-          <div className="text-center px-4">
-            <h2 className="text-xl font-bold text-gray-900 leading-snug">
-              Khảo sát trải nghiệm<br />người dùng
-            </h2>
-          </div>
+          {/* Navigation Buttons đồng bộ giao diện */}
+          <nav className="space-y-4 px-3">
+            <button 
+              onClick={() => navigate('/dashboard')} 
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 shrink-0">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+              </svg>
+              <span>Về lại trang chủ</span>
+            </button>
 
-          <div className="relative flex py-2 items-center px-4">
-            <div className="flex-grow border-t border-gray-200"></div>
-            <span className="flex-shrink mx-2 text-[#326871] text-xs">♥</span>
-            <div className="flex-grow border-t border-gray-200"></div>
-          </div>
+            <button 
+              onClick={handleHistoryClick} 
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 opacity-80">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+              </svg>
+              <span>Xem lại kết quả gần nhất</span>
+            </button>
 
-          <p className="text-gray-400 text-sm text-center px-6 leading-relaxed">
-            Ý kiến của bạn là cơ sở giúp Aellergis ngày càng hoàn thiện.
-          </p>
+            <button 
+              onClick={() => navigate('/feedback')} 
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0 opacity-80">
+                <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.107a.75.75 0 01-.725.64h-12.8a.75.75 0 01-.725-.64l-.001-.107v-.003zM16.5 18.375a6.375 6.375 0 0111.419-3.922.75.75 0 01-.118.995l-3.375 2.625a.75.75 0 01-.932 0l-1.688-1.313a.75.75 0 01.932-1.17l1.096.853 2.64-2.052a4.875 4.875 0 00-7.854 2.977.75.75 0 01-.75.75h-.375z" />
+              </svg>
+              <span>Xem danh sách đánh giá</span>
+            </button>
+
+            <button 
+              onClick={() => navigate('/profile')} 
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0 opacity-80">
+                <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+              </svg>
+              <span>Hồ sơ cá nhân</span>
+            </button>
+          </nav>
         </div>
 
         {/* Nút Back ở góc dưới sidebar */}
@@ -135,12 +167,9 @@ export default function FeedbackPage() {
               localStorage.removeItem('mediwise_user');
               navigate('/login');
             }}
-            className="flex items-center space-x-1 text-[#326871] hover:text-[#1f3f45] font-semibold text-xs md:text-sm transition-colors cursor-pointer"
+            className="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-4 py-2 md:px-5 md:py-2.5 rounded-full font-bold text-xs md:text-sm transition-all cursor-pointer"
           >
-            <span>Đăng xuất</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l3 3m0 0l-3 3m3-3H2.25" />
-            </svg>
+            Đăng xuất
           </button>
         </header>
 
@@ -160,7 +189,7 @@ export default function FeedbackPage() {
             <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Về lại trang chủ
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { handleHistoryClick(); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
             <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
