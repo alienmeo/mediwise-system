@@ -11,6 +11,11 @@ export default function Feedback() {
   // State điều khiển đóng/mở menu trên điện thoại
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Hàm xử lý thông báo khi click vào tính năng lịch sử/kết quả gần nhất
+  const handleHistoryClick = () => {
+    alert("Tính năng sẽ sớm được cập nhật. Cảm ơn bạn đã tin dùng Aellergis");
+  };
+
   // 1. Đọc thông tin user chuẩn xác MỘT LẦN DUY NHẤT ở đầu component
   const currentUser = (() => {
     try {
@@ -131,7 +136,7 @@ export default function Feedback() {
             </button>
 
             <button 
-              onClick={() => navigate('/history')} 
+              onClick={handleHistoryClick} 
               className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 opacity-80">
@@ -228,7 +233,7 @@ export default function Feedback() {
             <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Về lại trang chủ
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { handleHistoryClick(); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
             <button onClick={() => { navigate('/FeedbackPage'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#326871] text-white font-bold text-sm text-left">
