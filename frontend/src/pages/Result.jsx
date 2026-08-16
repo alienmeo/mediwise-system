@@ -114,7 +114,7 @@ export default function Result() {
             <div className="py-2.5 px-4 text-[#326871] text-base font-bold">
               Mức độ dị ứng
             </div>
-            <div className="bg-[#e3effd]/50 py-3 px-4 border-t border-gray-100 flex items-center justify-center gap-2.5">
+            <div className="bg-[#eaf8fb]/50 py-3 px-4 border-t border-gray-100 flex items-center justify-center gap-2.5">
               <span className={`w-4 h-4 rounded-full ${currentRisk.dot}`}></span>
               <span className={`text-xl font-extrabold ${currentRisk.color}`}>
                 {currentRisk.label}

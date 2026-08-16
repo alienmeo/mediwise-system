@@ -106,7 +106,7 @@ export default function FeedbackPage() {
           <div className="flex items-center space-x-2 overflow-hidden">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#326871] shrink-0 cursor-pointer"
+              className="md:hidden p-2 rounded-lg bg-[#eaf8fb] text-[#326871] shrink-0 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -157,16 +157,16 @@ export default function FeedbackPage() {
         {/* MENU THẢ XUỐNG KHI BẤM NÚT 3 GẠCH TRÊN MOBILE */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
-            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Về lại trang chủ
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
-            <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Xem danh sách đánh giá
             </button>
-            <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Hồ sơ cá nhân
             </button>
           </div>

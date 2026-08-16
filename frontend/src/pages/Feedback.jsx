@@ -122,7 +122,7 @@ export default function Feedback() {
           <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/dashboard')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 shrink-0">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -132,7 +132,7 @@ export default function Feedback() {
 
             <button 
               onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 opacity-80">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -152,7 +152,7 @@ export default function Feedback() {
 
             <button 
               onClick={() => navigate('/profile')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0 opacity-80">
                 <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
@@ -185,7 +185,7 @@ export default function Feedback() {
           <div className="flex items-center space-x-2 overflow-hidden">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#326871] shrink-0 cursor-pointer"
+              className="md:hidden p-2 rounded-lg bg-[#eaf8fb] text-[#326871] shrink-0 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -225,16 +225,16 @@ export default function Feedback() {
         {/* MENU THẢ XUỐNG KHI BẤM NÚT 3 GẠCH TRÊN MOBILE */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
-            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Về lại trang chủ
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
             <button onClick={() => { navigate('/FeedbackPage'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#326871] text-white font-bold text-sm text-left">
                Tự gửi đánh giá
             </button>
-            <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Hồ sơ cá nhân
             </button>
           </div>
@@ -299,7 +299,7 @@ export default function Feedback() {
                   <div key={item.id} className="bg-white rounded-[2rem] p-5 md:p-6 shadow-xs border border-gray-100 space-y-3">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 rounded-full bg-[#e3effd] text-[#326871] font-bold flex items-center justify-center text-sm shadow-inner shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-[#eaf8fb] text-[#326871] font-bold flex items-center justify-center text-sm shadow-inner shrink-0">
                           {item.username?.charAt(0).toUpperCase()}
                         </div>
                         <div>

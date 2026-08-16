@@ -30,7 +30,7 @@ export default function Wiki() {
         {/* Lý do hình thành */}
         <section className="space-y-3">
           <div className="flex items-center space-x-3 text-[#326871]">
-            <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#eaf8fb] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" />
               </svg>
@@ -45,7 +45,7 @@ export default function Wiki() {
         {/* Giá trị cốt lõi */}
         <section className="space-y-4">
           <div className="flex items-center space-x-3 text-[#326871]">
-            <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#eaf8fb] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM6.262 6.07a8.25 8.25 0 1010.512-.765.75.75 0 01.818-.213 9.75 9.75 0 11-12.87 1.455.75.75 0 01.76-.793z" clipRule="evenodd" />
               </svg>
@@ -55,7 +55,7 @@ export default function Wiki() {
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 lg:pl-11 text-left">
             {/* Badge 1 */}
-            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
+            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#eaf8fb] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
               <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon Tin cậy" className="w-full h-full object-contain" />
               </div>
@@ -63,7 +63,7 @@ export default function Wiki() {
             </div>
 
             {/* Badge 2 */}
-            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
+            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#eaf8fb] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
               <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon Thuận tiện" className="w-full h-full object-contain" />
               </div>
@@ -71,7 +71,7 @@ export default function Wiki() {
             </div>
 
             {/* Badge 3 */}
-            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#e3effd] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
+            <div className="flex items-center space-x-3 bg-gradient-to-r from-[#d0e5fb] to-[#eaf8fb] border border-blue-100 px-5 py-3 rounded-full shadow-xs">
               <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon An toàn" className="w-full h-full object-contain" />
               </div>
@@ -83,7 +83,7 @@ export default function Wiki() {
         {/* Khái niệm mở rộng (Dị ứng chéo) */}
         <section className="space-y-3">
           <div className="flex items-center space-x-3 text-[#326871]">
-            <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#eaf8fb] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" />
               </svg>
