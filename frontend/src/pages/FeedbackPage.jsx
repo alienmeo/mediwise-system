@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 
+// Import file title/logo chuẩn giống Dashboard và trang Feedback list
 import logoImg from './logo.png'; 
 import brandTextImg from './title.png'; 
 
 export default function FeedbackPage() {
   const navigate = useNavigate();
+  // State điều khiển đóng/mở menu trên điện thoại
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
@@ -28,7 +31,8 @@ export default function FeedbackPage() {
     if (savedUser) {
       try {
         const parsed = JSON.parse(savedUser);
-        currentUsername = parsed.fullName || parsed.username || 'Người dùng MediWise';
+        const userObj = parsed.data || parsed.user || parsed;
+        currentUsername = userObj.fullName || userObj.username || userObj.name || 'Người dùng MediWise';
       } catch (err) {}
     }
 
@@ -50,12 +54,13 @@ export default function FeedbackPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#f4f7fc]">
-      {/* 1. SIDEBAR BÊN TRÁI */}
-      <aside className="w-80 bg-white border-r border-gray-100 py-6 px-0 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#f4f7fc]">
+      
+      {/* 1. SIDEBAR BÊN TRÁI (Ẩn trên mobile, hiện từ màn hình md trở lên) */}
+      <aside className="hidden md:flex w-80 bg-white border-r border-gray-100 py-6 px-0 flex-col justify-between shrink-0 shadow-sm overflow-hidden">
         <div className="space-y-12">
           
-          {/* Brand Logo Header (Vị trí chuẩn giống Dashboard) */}
+          {/* Brand Logo Header chuẩn vị trí Dashboard */}
           <div className="flex items-center justify-start cursor-pointer w-full overflow-hidden -ml-4 pl-3" onClick={() => navigate('/dashboard')}>
             <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
             <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
@@ -92,9 +97,29 @@ export default function FeedbackPage() {
       </aside>
 
       {/* 2. MAIN CONTENT BÊN PHẢI */}
-      <main className="flex-1 flex flex-col">
-        <header className="h-28 px-10 flex items-center justify-between border-b border-transparent">
-          <div>
+      <main className="flex-1 flex flex-col w-full">
+        
+        {/* Top Navbar */}
+        <header className="h-16 md:h-28 px-4 md:px-10 flex items-center justify-between border-b md:border-none border-gray-100 bg-white md:bg-transparent">
+          
+          {/* Cụm trái: Nút Menu 3 gạch & Logo thu gọn trên Mobile */}
+          <div className="flex items-center space-x-2 overflow-hidden">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#144064] shrink-0 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
+
+            <div className="flex items-center md:hidden cursor-pointer shrink-0" onClick={() => navigate('/dashboard')}>
+              <img src={logoImg} alt="Logo" className="h-7 w-auto object-contain" />
+              <img src={brandTextImg} alt="Aellergis" className="h-6 w-auto object-contain max-w-[90px] -ml-1.5" />
+            </div>
+          </div>
+
+          <div className="hidden md:block">
             <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
               Cảm ơn bạn đã trải nghiệm MediWise!
             </h1>
@@ -103,13 +128,14 @@ export default function FeedbackPage() {
             </p>
           </div>
 
+          {/* Nút Đăng xuất */}
           <button 
             onClick={() => {
               localStorage.removeItem('mediwise_token');
               localStorage.removeItem('mediwise_user');
               navigate('/login');
             }}
-            className="flex items-center space-x-1 text-[#144064] hover:text-[#0f324f] font-semibold text-sm transition-colors cursor-pointer"
+            className="flex items-center space-x-1 text-[#144064] hover:text-[#0f324f] font-semibold text-xs md:text-sm transition-colors cursor-pointer"
           >
             <span>Đăng xuất</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
@@ -118,14 +144,44 @@ export default function FeedbackPage() {
           </button>
         </header>
 
-        <form onSubmit={handleSubmit} className="px-10 py-6 max-w-4xl space-y-8 flex-1 flex flex-col justify-between">
+        {/* Tiêu đề chào mừng trên Mobile */}
+        <div className="px-4 pt-4 md:hidden">
+          <h1 className="text-xl font-extrabold text-gray-900 tracking-tight">
+            Cảm ơn bạn đã trải nghiệm MediWise!
+          </h1>
+          <p className="text-gray-400 font-medium text-xs mt-0.5">
+            Vui lòng dành ít phút để chia sẻ trải nghiệm của bạn
+          </p>
+        </div>
+
+        {/* MENU THẢ XUỐNG KHI BẤM NÚT 3 GẠCH TRÊN MOBILE */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
+            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+               Về lại trang chủ
+            </button>
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+               Xem lại kết quả gần nhất
+            </button>
+            <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+               Xem danh sách đánh giá
+            </button>
+            <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+               Hồ sơ cá nhân
+            </button>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="px-4 md:px-10 py-6 max-w-4xl space-y-6 md:space-y-8 flex-1 flex flex-col justify-between w-full">
           <div className="space-y-6">
-            <div className="bg-white rounded-[32px] p-8 shadow-sm border border-gray-100 space-y-6">
-              <h2 className="text-xl font-bold text-gray-900">
+            
+            {/* Card Chọn sao */}
+            <div className="bg-white rounded-[2rem] md:rounded-[32px] p-6 md:p-8 shadow-sm border border-gray-100 space-y-4 md:space-y-6">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900">
                 Bạn hài lòng với MediWise ở mức nào?
               </h2>
 
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 md:space-x-4">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
                     type="button"
@@ -138,7 +194,7 @@ export default function FeedbackPage() {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
-                      className="w-12 h-12 transition-colors duration-200"
+                      className="w-10 h-10 md:w-12 md:h-12 transition-colors duration-200"
                       fill={(hoverRating || rating) >= star ? "#144064" : "none"}
                       stroke="#144064"
                       strokeWidth="1.5"
@@ -154,8 +210,9 @@ export default function FeedbackPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-[32px] p-8 shadow-sm border border-gray-100 space-y-4">
-              <h2 className="text-xl font-bold text-gray-900">
+            {/* Card Nhập ý kiến */}
+            <div className="bg-white rounded-[2rem] md:rounded-[32px] p-6 md:p-8 shadow-sm border border-gray-100 space-y-4">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900">
                 Bạn có góp ý hoặc mong muốn MediWise thay đổi điều gì không?
               </h2>
 
@@ -169,11 +226,11 @@ export default function FeedbackPage() {
             </div>
           </div>
 
-          <div className="flex justify-end pt-4 pb-6">
+          <div className="flex justify-end pt-2 pb-6">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center space-x-2 bg-[#144064] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md transition-all cursor-pointer text-base disabled:opacity-50"
+              className="w-full md:w-auto flex items-center justify-center space-x-2 bg-[#144064] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md transition-all cursor-pointer text-base disabled:opacity-50"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
