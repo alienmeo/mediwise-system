@@ -22,6 +22,11 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // Hàm xử lý thông báo khi click vào tính năng lịch sử/kết quả gần nhất
+  const handleHistoryClick = () => {
+    alert("Tính năng sẽ sớm được cập nhật. Cảm ơn bạn đã tin dùng Aellergis");
+  };
+
   // --- LẤY DỮ LIỆU TỪ BACKEND / LOCALSTORAGE ---
   useEffect(() => {
     const token = localStorage.getItem('mediwise_token');
@@ -117,7 +122,7 @@ export default function Profile() {
             </button>
 
             <button 
-              onClick={() => navigate('/history')} 
+              onClick={handleHistoryClick} 
               className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#c7f2f6] text-[#326871] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Xem lại kết quả gần nhất</span>
@@ -186,7 +191,7 @@ export default function Profile() {
             <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Về lại trang chủ
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { handleHistoryClick(); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
             <button onClick={() => { navigate('/Feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
