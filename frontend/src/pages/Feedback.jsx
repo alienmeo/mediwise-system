@@ -8,6 +8,8 @@ import brandTextImg from './title.png';
 
 export default function Feedback() {
   const navigate = useNavigate();
+  // State điều khiển đóng/mở menu trên điện thoại
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // 1. Đọc thông tin user chuẩn xác MỘT LẦN DUY NHẤT ở đầu component
   const currentUser = (() => {
@@ -104,10 +106,10 @@ export default function Feedback() {
     : feedbacks.filter(f => f.rating === filterRating);
 
   return (
-    <div className="flex min-h-screen bg-[#f4f7fc]">
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#f4f7fc]">
       
-      {/* 1. SIDEBAR BÊN TRÁI (Đồng bộ tuyệt đối layout, class và kích thước vị trí Logo/Title với Dashboard) */}
-      <aside className="w-80 bg-white border-r border-gray-100 py-6 px-0 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
+      {/* 1. SIDEBAR BÊN TRÁI (Ẩn trên mobile, hiện từ màn hình md trở lên) */}
+      <aside className="hidden md:flex w-80 bg-white border-r border-gray-100 py-6 px-0 flex-col justify-between shrink-0 shadow-sm overflow-hidden">
         <div className="space-y-12">
           
           {/* Brand Logo Header chuẩn vị trí Dashboard */}
@@ -174,43 +176,90 @@ export default function Feedback() {
       </aside>
 
       {/* 2. MAIN CONTENT BÊN PHẢI */}
-      <main className="flex-1 flex flex-col">
-        <header className="h-28 px-10 flex items-center justify-between border-b border-gray-100 bg-white shadow-xs">
-          <h1 className="text-2xl font-extrabold text-[#144064] tracking-tight">
+      <main className="flex-1 flex flex-col w-full">
+        
+        {/* Top Navbar */}
+        <header className="h-16 md:h-28 px-4 md:px-10 flex items-center justify-between border-b md:border-none border-gray-100 bg-white md:bg-transparent">
+          
+          {/* Cụm trái: Nút Menu 3 gạch & Logo thu gọn trên Mobile */}
+          <div className="flex items-center space-x-2 overflow-hidden">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#144064] shrink-0 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
+
+            <div className="flex items-center md:hidden cursor-pointer shrink-0" onClick={() => navigate('/dashboard')}>
+              <img src={logoImg} alt="Logo" className="h-7 w-auto object-contain" />
+              <img src={brandTextImg} alt="Aellergis" className="h-6 w-auto object-contain max-w-[90px] -ml-1.5" />
+            </div>
+          </div>
+
+          <h1 className="text-xl md:text-2xl font-extrabold text-[#144064] tracking-tight hidden md:block">
             Tổng Hợp Đánh Giá Của Người Dùng
           </h1>
+          
+          {/* Nút Đăng xuất */}
           <button 
             onClick={() => {
               localStorage.removeItem('mediwise_token');
               localStorage.removeItem('mediwise_user');
               navigate('/login');
             }}
-            className="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-5 py-2.5 rounded-full font-bold text-sm transition-all cursor-pointer"
+            className="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-4 py-2 md:px-5 md:py-2.5 rounded-full font-bold text-xs md:text-sm transition-all cursor-pointer"
           >
             Đăng xuất
           </button>
         </header>
 
-        <section className="p-10 max-w-5xl space-y-8">
+        {/* Tiêu đề riêng cho Mobile hiển thị ngay dưới header */}
+        <div className="px-4 pt-4 md:hidden">
+          <h1 className="text-xl font-extrabold text-[#144064] tracking-tight">
+            Tổng Hợp Đánh Giá Của Người Dùng
+          </h1>
+        </div>
+
+        {/* MENU THẢ XUỐNG KHI BẤM NÚT 3 GẠCH TRÊN MOBILE */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
+            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+              🏠 Về lại trang chủ
+            </button>
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+              📂 Xem lại kết quả gần nhất
+            </button>
+            <button onClick={() => { navigate('/FeedbackPage'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#144064] text-white font-bold text-sm text-left">
+              💬 Tự gửi đánh giá
+            </button>
+            <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+              👤 Hồ sơ cá nhân
+            </button>
+          </div>
+        )}
+
+        <section className="px-4 md:px-10 py-6 max-w-5xl space-y-6 md:space-y-8 w-full">
           {/* CARD THỐNG KÊ SAO */}
-          <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+          <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="text-center md:border-r border-gray-100">
-              <span className="text-5xl font-black text-[#144064]">{avgRating}</span>
+              <span className="text-4xl md:text-5xl font-black text-[#144064]">{avgRating}</span>
               <div className="flex justify-center text-amber-400 my-2">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} className={`w-6 h-6 ${i < Math.round(avgRating) ? 'fill-current' : 'text-gray-200'}`} viewBox="0 0 20 20">
+                  <svg key={i} className={`w-5 h-5 md:w-6 md:h-6 ${i < Math.round(avgRating) ? 'fill-current' : 'text-gray-200'}`} viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
               </div>
-              <p className="text-sm font-bold text-gray-400">Dựa trên {feedbacks.length} đánh giá</p>
+              <p className="text-xs md:text-sm font-bold text-gray-400">Dựa trên {feedbacks.length} đánh giá</p>
             </div>
 
             {/* BỘ LỌC THEO SỐ SAO */}
             <div className="md:col-span-2 flex flex-wrap gap-2 justify-center md:justify-start">
               <button
                 onClick={() => setFilterRating(0)}
-                className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all cursor-pointer ${
+                className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all cursor-pointer ${
                   filterRating === 0 ? 'bg-[#144064] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -220,7 +269,7 @@ export default function Feedback() {
                 <button
                   key={star}
                   onClick={() => setFilterRating(star)}
-                  className={`px-4 py-2.5 rounded-full text-sm font-bold transition-all cursor-pointer flex items-center space-x-1 ${
+                  className={`px-3 md:px-4 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all cursor-pointer flex items-center space-x-1 ${
                     filterRating === star ? 'bg-[#144064] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
@@ -233,7 +282,7 @@ export default function Feedback() {
 
           {/* DANH SÁCH BÌNH LUẬN CỘNG ĐỒNG */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-[#144064]">Tất cả nhận xét từ người dùng</h3>
+            <h3 className="text-lg md:text-xl font-bold text-[#144064]">Tất cả nhận xét từ người dùng</h3>
 
             {loading ? (
               <div className="text-center py-10 text-gray-400 font-medium">Đang tải dữ liệu...</div>
@@ -247,10 +296,10 @@ export default function Feedback() {
                 const isOwner = userLoginName !== '' && (userLoginName === itemAuthorName || userObj.role === 'admin');
 
                 return (
-                  <div key={item.id} className="bg-white rounded-[2rem] p-6 shadow-xs border border-gray-100 space-y-3">
-                    <div className="flex justify-between items-center">
+                  <div key={item.id} className="bg-white rounded-[2rem] p-5 md:p-6 shadow-xs border border-gray-100 space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 rounded-full bg-[#e3effd] text-[#144064] font-bold flex items-center justify-center text-sm shadow-inner">
+                        <div className="w-10 h-10 rounded-full bg-[#e3effd] text-[#144064] font-bold flex items-center justify-center text-sm shadow-inner shrink-0">
                           {item.username?.charAt(0).toUpperCase()}
                         </div>
                         <div>
@@ -259,7 +308,7 @@ export default function Feedback() {
                         </div>
                       </div>
 
-                      <div className="flex items-center space-x-4">
+                      <div className="flex items-center justify-between sm:justify-end space-x-4">
                         <div className="flex text-amber-400">
                           {[...Array(5)].map((_, i) => (
                             <svg key={i} className={`w-4 h-4 ${i < item.rating ? 'fill-current' : 'text-gray-200'}`} viewBox="0 0 20 20">
@@ -307,7 +356,7 @@ export default function Feedback() {
               <select 
                 value={editRating} 
                 onChange={(e) => setEditRating(Number(e.target.value))}
-                className="w-full p-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#144064]"
+                className="w-full p-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#144064] text-sm"
               >
                 {[5, 4, 3, 2, 1].map(num => (
                   <option key={num} value={num}>{num} sao</option>
