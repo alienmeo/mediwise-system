@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Import các file logo và ảnh icon ở đầu file (chuẩn ES Modules)
 import logoImg from './logo.png'; 
 import brandTextImg from './title.png'; 
 import image1 from './image1.png';
@@ -9,21 +8,20 @@ import image2 from './image2.png';
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  // State để điều khiển việc đóng/mở Sidebar trên điện thoại
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#f4f7fc]">
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#f4f7fc]">
       
-      {/* 1. SIDEBAR BÊN TRÁI */}
-      <aside className="w-80 bg-white border-r border-gray-100 py-6 px-0 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
+      {/* --- SIDEBAR CHO DESKTOP (Ẩn trên mobile, hiện từ md trở lên) --- */}
+      <aside className="hidden md:flex w-80 bg-white border-r border-gray-100 py-6 px-0 flex-col justify-between shrink-0 shadow-sm overflow-hidden">
         <div className="space-y-12">
-          
-          {/* Brand Logo Header */}
           <div className="flex items-center justify-start cursor-pointer w-full overflow-hidden -ml-4 pl-3" onClick={() => navigate('/dashboard')}>
             <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
             <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
           </div>
 
-          {/* Navigation Buttons */}
           <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/Assessment')} 
@@ -57,7 +55,6 @@ export default function Dashboard() {
           </nav>
         </div>
 
-        {/* Nút Back ở góc dưới sidebar */}
         <div className="px-3">
           <button 
             onClick={() => navigate(-1)}
@@ -70,70 +67,99 @@ export default function Dashboard() {
         </div>
       </aside>
 
-      {/* 2. MAIN CONTENT BÊN PHẢI */}
-      <main className="flex-1 flex flex-col">
+      {/* --- MAIN CONTENT BÊN PHẢI --- */}
+      <main className="flex-1 flex flex-col w-full">
         
-        {/* Top Navbar */}
-        <header className="h-28 px-10 flex items-center justify-end space-x-4">
+        {/* Top Navbar: Thêm nút Hamburger (menu 3 gạch) chỉ hiện trên mobile */}
+        <header className="h-20 md:h-28 px-4 md:px-10 flex items-center justify-between md:justify-end space-x-2 md:space-x-4 border-b md:border-none border-gray-100 bg-white md:bg-transparent">
           
-          {/* ALG Wiki Button */}
+          {/* Nút mở Menu trên Mobile */}
           <button 
-            onClick={() => navigate('/wiki')}
-            className="bg-[#144064] hover:bg-[#0f324f] text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-md transition-all flex flex-col items-center justify-center cursor-pointer leading-tight"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2.5 rounded-xl bg-[#e3effd] text-[#144064] cursor-pointer"
           >
-            <span>ALG</span>
-            <span>Wiki</span>
-          </button>
-
-          {/* Profile Badge */}
-          <div 
-            onClick={() => navigate('/profile')}
-            className="flex items-center bg-[#e3effd] rounded-full px-5 py-2.5 space-x-3 cursor-pointer hover:bg-[#d0e5fb] transition-all shadow-sm"
-          >
-            <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <div className="text-[#144064] font-bold text-sm">
-              <div>Hồ sơ tài khoản</div>
-              <div className="text-xs font-semibold opacity-80">user : ...</div>
-            </div>
-          </div>
-
-          {/* Logout Button */}
-          <button 
-            onClick={() => navigate('/login')}
-            className="flex items-center space-x-2 bg-[#144064] hover:bg-[#0f324f] text-white px-6 py-3.5 rounded-full font-bold text-sm shadow-md transition-all cursor-pointer"
-          >
-            <span>Đăng xuất</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l3 3m0 0l-3 3m3-3H2.25" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
           </button>
+
+          {/* Logo hiển thị gọn trên mobile */}
+          <div className="flex items-center md:hidden cursor-pointer" onClick={() => navigate('/dashboard')}>
+            <img src={logoImg} alt="Logo" className="h-10 w-auto object-contain" />
+            <img src={brandTextImg} alt="Aellergis" className="h-8 w-auto object-contain max-w-[120px] -ml-2" />
+          </div>
+
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <button 
+              onClick={() => navigate('/wiki')}
+              className="bg-[#144064] hover:bg-[#0f324f] text-white px-3 md:px-6 py-2.5 md:py-3 rounded-xl font-bold text-xs md:text-sm shadow-md transition-all flex flex-col items-center justify-center cursor-pointer leading-tight"
+            >
+              <span>ALG</span>
+              <span>Wiki</span>
+            </button>
+
+            <div 
+              onClick={() => navigate('/profile')}
+              className="flex items-center bg-[#e3effd] rounded-full px-3 md:px-5 py-2 md:py-2.5 space-x-2 cursor-pointer hover:bg-[#d0e5fb] transition-all shadow-sm"
+            >
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#144064] flex items-center justify-center text-white shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                  <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="text-[#144064] font-bold text-xs md:text-sm hidden sm:block">
+                <div>Hồ sơ</div>
+                <div className="text-[10px] font-semibold opacity-80">user : ...</div>
+              </div>
+            </div>
+
+            <button 
+              onClick={() => navigate('/login')}
+              className="flex items-center space-x-1 bg-[#144064] hover:bg-[#0f324f] text-white px-3 md:px-6 py-2.5 md:py-3.5 rounded-full font-bold text-xs md:text-sm shadow-md transition-all cursor-pointer"
+            >
+              <span className="hidden sm:inline">Đăng xuất</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l3 3m0 0l-3 3m3-3H2.25" />
+              </svg>
+            </button>
+          </div>
         </header>
 
+        {/* MENU THẢ XUỐNG DÀNH CHO MOBILE KHI BẤM NÚT 3 GẠCH */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
+            <button onClick={() => { navigate('/Assessment'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#144064] text-white font-bold text-sm text-left">
+              🔍 Bắt đầu khảo sát mới
+            </button>
+            <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+              💬 Đánh giá của người dùng
+            </button>
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+              📂 Xem lại kết quả gần nhất
+            </button>
+          </div>
+        )}
+
         {/* Content Body */}
-        <section className="px-10 py-6 max-w-5xl space-y-8">
+        <section className="px-4 md:px-10 py-6 max-w-5xl space-y-6">
           
-          {/* Welcome Text */}
           <div>
-            <h1 className="text-4xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-2xl md:text-4xl font-black text-gray-900 tracking-tight">
               Chào mừng bạn đã quay lại!
             </h1>
-            <p className="text-gray-500 font-medium mt-1 text-sm">
+            <p className="text-gray-500 font-medium mt-1 text-xs md:text-sm">
               Aellergis mong rằng mỗi ngày trôi qua bạn sẽ trở nên khoẻ mạnh hơn.
             </p>
           </div>
 
-          {/* Card 1: Kiểm tra nguy cơ */}
-          <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0 overflow-hidden p-3">
+          {/* Card 1: Kiểm tra nguy cơ (Chuyển thành flex-col trên mobile) */}
+          <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0 p-3">
                 <img src={image1} alt="Icon 1" className="w-full h-full object-contain" />
               </div>
               <div className="space-y-1">
-                <h2 className="text-xl font-bold text-gray-900">
+                <h2 className="text-lg md:text-xl font-bold text-gray-900">
                   Kiểm tra nguy cơ, đánh giá dị ứng
                 </h2>
                 <p className="text-gray-400 text-xs leading-relaxed">
@@ -143,7 +169,7 @@ export default function Dashboard() {
             </div>
             <button 
               onClick={() => navigate('/Assessment')} 
-              className="bg-[#144064] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md text-sm transition-all shrink-0 cursor-pointer flex items-center space-x-2"
+              className="w-full md:w-auto bg-[#144064] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md text-sm transition-all shrink-0 cursor-pointer flex items-center justify-center space-x-2"
             >
               <span>Bắt đầu ngay!</span>
               <span>→</span>
@@ -151,13 +177,13 @@ export default function Dashboard() {
           </div>
 
           {/* Card 2: Lịch sử kiểm tra */}
-          <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0 overflow-hidden p-3">
+          <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0 p-3">
                 <img src={image2} alt="Icon 2" className="w-full h-full object-contain" />
               </div>
               <div className="space-y-1">
-                <h2 className="text-xl font-bold text-gray-900">
+                <h2 className="text-lg md:text-xl font-bold text-gray-900">
                   Lịch sử kiểm tra
                 </h2>
                 <p className="text-gray-400 text-xs leading-relaxed">
@@ -167,7 +193,7 @@ export default function Dashboard() {
             </div>
             <button 
               onClick={() => navigate('/history')} 
-              className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-600 font-bold py-3.5 px-10 rounded-full text-sm transition-all shrink-0 cursor-pointer flex items-center space-x-2 shadow-xs"
+              className="w-full md:w-auto bg-white border border-gray-200 hover:bg-gray-50 text-gray-600 font-bold py-3.5 px-10 rounded-full text-sm transition-all shrink-0 cursor-pointer flex items-center justify-center space-x-2 shadow-xs"
             >
               <span>Truy cập</span>
               <span>→</span>
