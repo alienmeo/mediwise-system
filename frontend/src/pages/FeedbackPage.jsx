@@ -121,7 +121,7 @@ export default function FeedbackPage() {
 
           <div className="hidden md:block">
             <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-              Cảm ơn bạn đã trải nghiệm MediWise!
+              Cảm ơn bạn đã trải nghiệm Aellergis!
             </h1>
             <p className="text-gray-400 font-medium text-sm mt-1">
               Vui lòng dành ít phút để chia sẻ trải nghiệm của bạn
