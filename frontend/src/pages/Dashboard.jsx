@@ -29,7 +29,7 @@ export default function Dashboard() {
           <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/Assessment')} 
-              className="w-full py-4 px-6 rounded-full bg-[#52aebf] hover:bg-[#0f324f] text-white font-bold text-left transition-all text-sm flex items-center space-x-3 shadow-md cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#418e9c] hover:bg-[#0f324f] text-white font-bold text-left transition-all text-sm flex items-center space-x-3 shadow-md cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 shrink-0">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -39,7 +39,7 @@ export default function Dashboard() {
 
             <button 
               onClick={() => navigate('/feedback')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#52aebf] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#418e9c] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0 opacity-80">
                 <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.107a.75.75 0 01-.725.64h-12.8a.75.75 0 01-.725-.64l-.001-.107v-.003zM16.5 18.375a6.375 6.375 0 0111.419-3.922.75.75 0 01-.118.995l-3.375 2.625a.75.75 0 01-.932 0l-1.688-1.313a.75.75 0 01.932-1.17l1.096.853 2.64-2.052a4.875 4.875 0 00-7.854 2.977.75.75 0 01-.75.75h-.375z" />
@@ -49,7 +49,7 @@ export default function Dashboard() {
 
             <button 
               onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#52aebf] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#418e9c] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 opacity-80">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -63,7 +63,7 @@ export default function Dashboard() {
         <div className="px-3">
           <button 
             onClick={() => navigate(-1)}
-            className="w-12 h-12 rounded-2xl bg-[#52aebf] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
+            className="w-12 h-12 rounded-2xl bg-[#418e9c] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -82,7 +82,7 @@ export default function Dashboard() {
           <div className="flex items-center space-x-3">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2.5 rounded-xl bg-[#e3effd] text-[#52aebf] cursor-pointer"
+              className="md:hidden p-2.5 rounded-xl bg-[#e3effd] text-[#418e9c] cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -101,7 +101,7 @@ export default function Dashboard() {
             {/* ALG Wiki Button */}
             <button 
               onClick={() => navigate('/wiki')}
-              className="bg-[#52aebf] hover:bg-[#0f324f] text-white px-3.5 py-2 md:px-6 md:py-3 rounded-xl font-bold text-xs md:text-sm shadow-md transition-all flex flex-col items-center justify-center cursor-pointer leading-tight"
+              className="bg-[#418e9c] hover:bg-[#0f324f] text-white px-3.5 py-2 md:px-6 md:py-3 rounded-xl font-bold text-xs md:text-sm shadow-md transition-all flex flex-col items-center justify-center cursor-pointer leading-tight"
             >
               <span>ALG</span>
               <span>Wiki</span>
@@ -112,12 +112,12 @@ export default function Dashboard() {
               onClick={() => navigate('/profile')}
               className="flex items-center bg-[#e3effd] rounded-full p-2 md:px-5 md:py-2.5 md:space-x-3 cursor-pointer hover:bg-[#d0e5fb] transition-all shadow-sm"
             >
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#52aebf] flex items-center justify-center text-white shrink-0">
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#418e9c] flex items-center justify-center text-white shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                   <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
                 </svg>
               </div>
-              <div className="text-[#52aebf] font-bold text-sm hidden md:block">
+              <div className="text-[#418e9c] font-bold text-sm hidden md:block">
                 <div>Hồ sơ tài khoản</div>
                 <div className="text-xs font-semibold opacity-80">user : ...</div>
               </div>
@@ -126,7 +126,7 @@ export default function Dashboard() {
             {/* Logout Button */}
             <button 
               onClick={() => navigate('/login')}
-              className="flex items-center space-x-1 bg-[#52aebf] hover:bg-[#0f324f] text-white p-2.5 md:px-6 md:py-3.5 rounded-full font-bold text-xs md:text-sm shadow-md transition-all cursor-pointer"
+              className="flex items-center space-x-1 bg-[#418e9c] hover:bg-[#0f324f] text-white p-2.5 md:px-6 md:py-3.5 rounded-full font-bold text-xs md:text-sm shadow-md transition-all cursor-pointer"
             >
               <span className="hidden md:inline">Đăng xuất</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
@@ -139,13 +139,13 @@ export default function Dashboard() {
         {/* MENU THẢ XUỐNG KHI BẤM NÚT 3 GẠCH TRÊN MOBILE */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
-            <button onClick={() => { navigate('/Assessment'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#52aebf] text-white font-bold text-sm text-left">
+            <button onClick={() => { navigate('/Assessment'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#418e9c] text-white font-bold text-sm text-left">
                Bắt đầu khảo sát mới
             </button>
-            <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#52aebf] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#418e9c] font-bold text-sm text-left">
                Đánh giá của người dùng
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#52aebf] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#418e9c] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
           </div>
@@ -167,7 +167,7 @@ export default function Dashboard() {
           {/* Card 1: Kiểm tra nguy cơ */}
           <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#52aebf] shrink-0 overflow-hidden p-3">
+              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#418e9c] shrink-0 overflow-hidden p-3">
                 <img src={image1} alt="Icon 1" className="w-full h-full object-contain" />
               </div>
               <div className="space-y-1">
@@ -181,7 +181,7 @@ export default function Dashboard() {
             </div>
             <button 
               onClick={() => navigate('/Assessment')} 
-              className="w-full md:w-auto bg-[#52aebf] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md text-sm transition-all shrink-0 cursor-pointer flex items-center justify-center space-x-2"
+              className="w-full md:w-auto bg-[#418e9c] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md text-sm transition-all shrink-0 cursor-pointer flex items-center justify-center space-x-2"
             >
               <span>Bắt đầu ngay!</span>
               <span>→</span>
@@ -191,7 +191,7 @@ export default function Dashboard() {
           {/* Card 2: Lịch sử kiểm tra */}
           <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#52aebf] shrink-0 overflow-hidden p-3">
+              <div className="w-16 h-16 rounded-2xl bg-[#e3effd] flex items-center justify-center text-[#418e9c] shrink-0 overflow-hidden p-3">
                 <img src={image2} alt="Icon 2" className="w-full h-full object-contain" />
               </div>
               <div className="space-y-1">
