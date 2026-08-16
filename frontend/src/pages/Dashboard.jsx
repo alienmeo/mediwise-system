@@ -140,13 +140,13 @@ export default function Dashboard() {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
             <button onClick={() => { navigate('/Assessment'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#144064] text-white font-bold text-sm text-left">
-              🔍 Bắt đầu khảo sát mới
+               Bắt đầu khảo sát mới
             </button>
             <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
-              💬 Đánh giá của người dùng
+               Đánh giá của người dùng
             </button>
             <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
-              📂 Xem lại kết quả gần nhất
+               Xem lại kết quả gần nhất
             </button>
           </div>
         )}

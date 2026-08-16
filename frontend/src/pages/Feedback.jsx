@@ -226,16 +226,16 @@ export default function Feedback() {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
             <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
-              🏠 Về lại trang chủ
+               Về lại trang chủ
             </button>
             <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
-              📂 Xem lại kết quả gần nhất
+               Xem lại kết quả gần nhất
             </button>
             <button onClick={() => { navigate('/FeedbackPage'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#144064] text-white font-bold text-sm text-left">
-              💬 Tự gửi đánh giá
+               Tự gửi đánh giá
             </button>
             <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
-              👤 Hồ sơ cá nhân
+               Hồ sơ cá nhân
             </button>
           </div>
         )}
