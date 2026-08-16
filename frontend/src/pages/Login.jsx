@@ -171,7 +171,7 @@ export default function Login({ isRegisterMode = false }) {
           <div className="pt-2">
             <button 
               type="submit" 
-              className="w-full py-4 rounded-2xl !bg-[#326871] hover:!bg-[#0f324f] text-white font-bold text-base shadow-lg transition-all cursor-pointer disabled:opacity-60" 
+              className="w-full py-4 rounded-2xl !bg-[#326871] hover:!bg-[#1f3f45] text-white font-bold text-base shadow-lg transition-all cursor-pointer disabled:opacity-60" 
               disabled={loading}
             >
               {loading ? 'Đang xử lý...' : isRegister ? 'Đăng Ký Ngay' : 'Đăng Nhập'}

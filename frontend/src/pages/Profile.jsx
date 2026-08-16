@@ -166,7 +166,7 @@ export default function Profile() {
               localStorage.removeItem('user');
               navigate('/login');
             }}
-            className="flex items-center space-x-1.5 bg-[#326871] hover:bg-[#0f324f] text-white px-4 py-2 md:px-6 md:py-3.5 rounded-full font-bold text-xs md:text-sm shadow-md transition-all cursor-pointer"
+            className="flex items-center space-x-1.5 bg-[#326871] hover:bg-[#1f3f45] text-white px-4 py-2 md:px-6 md:py-3.5 rounded-full font-bold text-xs md:text-sm shadow-md transition-all cursor-pointer"
           >
             <span>Đăng xuất</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
@@ -236,7 +236,7 @@ export default function Profile() {
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 sm:flex-none bg-[#326871] hover:bg-[#0f324f] text-white font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer shadow-md"
+                    className="flex-1 sm:flex-none bg-[#326871] hover:bg-[#1f3f45] text-white font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer shadow-md"
                   >
                     Lưu
                   </button>

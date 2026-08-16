@@ -87,7 +87,7 @@ export default function FeedbackPage() {
         <div className="px-3">
           <button 
             onClick={() => navigate(-1)}
-            className="w-12 h-12 rounded-2xl bg-[#326871] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
+            className="w-12 h-12 rounded-2xl bg-[#326871] hover:bg-[#1f3f45] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 016 6v3" />
@@ -135,7 +135,7 @@ export default function FeedbackPage() {
               localStorage.removeItem('mediwise_user');
               navigate('/login');
             }}
-            className="flex items-center space-x-1 text-[#326871] hover:text-[#0f324f] font-semibold text-xs md:text-sm transition-colors cursor-pointer"
+            className="flex items-center space-x-1 text-[#326871] hover:text-[#1f3f45] font-semibold text-xs md:text-sm transition-colors cursor-pointer"
           >
             <span>Đăng xuất</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
@@ -230,7 +230,7 @@ export default function FeedbackPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full md:w-auto flex items-center justify-center space-x-2 bg-[#326871] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md transition-all cursor-pointer text-base disabled:opacity-50"
+              className="w-full md:w-auto flex items-center justify-center space-x-2 bg-[#326871] hover:bg-[#1f3f45] text-white font-bold py-3.5 px-8 rounded-full shadow-md transition-all cursor-pointer text-base disabled:opacity-50"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />

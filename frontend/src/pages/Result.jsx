@@ -17,7 +17,7 @@ export default function Result() {
         <Card className="text-center p-8 max-w-md bg-white rounded-3xl shadow-sm border border-gray-100">
           <p className="text-gray-600 mb-6 font-medium">Không tìm thấy dữ liệu kết quả kiểm tra gần nhất.</p>
           <Button 
-            className="w-full bg-[#326871] hover:bg-[#0f324f] text-white rounded-full py-3 font-semibold shadow-none border-none cursor-pointer"
+            className="w-full bg-[#326871] hover:bg-[#1f3f45] text-white rounded-full py-3 font-semibold shadow-none border-none cursor-pointer"
             onClick={() => navigate('/dashboard')}
           >
             Quay lại trang chính

@@ -142,7 +142,7 @@ export default function Feedback() {
 
             <button 
               onClick={() => navigate('/FeedbackPage')} 
-              className="w-full py-4 px-6 rounded-full bg-[#326871] hover:bg-[#0f324f] text-white font-bold text-left transition-all text-sm flex items-center space-x-3 shadow-md cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#326871] hover:bg-[#1f3f45] text-white font-bold text-left transition-all text-sm flex items-center space-x-3 shadow-md cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0 opacity-80">
                 <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.107a.75.75 0 01-.725.64h-12.8a.75.75 0 01-.725-.64l-.001-.107v-.003zM16.5 18.375a6.375 6.375 0 0111.419-3.922.75.75 0 01-.118.995l-3.375 2.625a.75.75 0 01-.932 0l-1.688-1.313a.75.75 0 01.932-1.17l1.096.853 2.64-2.052a4.875 4.875 0 00-7.854 2.977.75.75 0 01-.75.75h-.375z" />
@@ -166,7 +166,7 @@ export default function Feedback() {
         <div className="px-3">
           <button 
             onClick={() => navigate(-1)}
-            className="w-12 h-12 rounded-2xl bg-[#326871] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
+            className="w-12 h-12 rounded-2xl bg-[#326871] hover:bg-[#1f3f45] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -383,7 +383,7 @@ export default function Feedback() {
               </button>
               <button 
                 onClick={handleSaveEdit}
-                className="px-4 py-2 rounded-xl bg-[#326871] hover:bg-[#0f324f] text-white text-sm font-bold cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-[#326871] hover:bg-[#1f3f45] text-white text-sm font-bold cursor-pointer"
               >
                 Cập nhật
               </button>

@@ -126,7 +126,7 @@ export default function Wiki() {
         <div className="w-full pt-10">
           <button 
             onClick={() => navigate('/dashboard')}
-            className="w-full py-4 px-6 rounded-full bg-[#326871] hover:bg-[#0f324f] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer"
+            className="w-full py-4 px-6 rounded-full bg-[#326871] hover:bg-[#1f3f45] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />

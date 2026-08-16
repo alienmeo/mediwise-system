@@ -136,7 +136,7 @@ const CheckPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 mt-4 bg-[#326871] hover:bg-[#0f324f] text-white rounded-full font-bold text-base shadow-md transition-all cursor-pointer disabled:opacity-50"
+              className="w-full py-4 mt-4 bg-[#326871] hover:bg-[#1f3f45] text-white rounded-full font-bold text-base shadow-md transition-all cursor-pointer disabled:opacity-50"
             >
               {loading ? 'Đang phân tích...' : 'Phân Tích Nguy Cơ'}
             </button>
