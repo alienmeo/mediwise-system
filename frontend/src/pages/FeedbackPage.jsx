@@ -47,7 +47,7 @@ export default function FeedbackPage() {
       navigate('/feedback'); // Chuyển sang trang xem danh sách tổng hợp
     } catch (error) {
       console.error('Lỗi khi gửi đánh giá:', error);
-      alert('Không thể gửi đánh giá. Vui lòng kiểm tra kết nối với Server Backend!');
+      alert('Không thể gửi đánh giá. Vui lòng kiểm tra kết nối');
     } finally {
       setIsSubmitting(false);
     }
@@ -74,12 +74,12 @@ export default function FeedbackPage() {
 
           <div className="relative flex py-2 items-center px-4">
             <div className="flex-grow border-t border-gray-200"></div>
-            <span className="flex-shrink mx-2 text-[#144064] text-xs">♥</span>
+            <span className="flex-shrink mx-2 text-[#326871] text-xs">♥</span>
             <div className="flex-grow border-t border-gray-200"></div>
           </div>
 
           <p className="text-gray-400 text-sm text-center px-6 leading-relaxed">
-            Ý kiến của bạn là cơ sở giúp MediWise ngày càng hoàn thiện.
+            Ý kiến của bạn là cơ sở giúp Aellergis ngày càng hoàn thiện.
           </p>
         </div>
 
@@ -87,7 +87,7 @@ export default function FeedbackPage() {
         <div className="px-3">
           <button 
             onClick={() => navigate(-1)}
-            className="w-12 h-12 rounded-2xl bg-[#144064] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
+            className="w-12 h-12 rounded-2xl bg-[#326871] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 016 6v3" />
@@ -106,7 +106,7 @@ export default function FeedbackPage() {
           <div className="flex items-center space-x-2 overflow-hidden">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#144064] shrink-0 cursor-pointer"
+              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#326871] shrink-0 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -135,7 +135,7 @@ export default function FeedbackPage() {
               localStorage.removeItem('mediwise_user');
               navigate('/login');
             }}
-            className="flex items-center space-x-1 text-[#144064] hover:text-[#0f324f] font-semibold text-xs md:text-sm transition-colors cursor-pointer"
+            className="flex items-center space-x-1 text-[#326871] hover:text-[#0f324f] font-semibold text-xs md:text-sm transition-colors cursor-pointer"
           >
             <span>Đăng xuất</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
@@ -147,7 +147,7 @@ export default function FeedbackPage() {
         {/* Tiêu đề chào mừng trên Mobile */}
         <div className="px-4 pt-4 md:hidden">
           <h1 className="text-xl font-extrabold text-gray-900 tracking-tight">
-            Cảm ơn bạn đã trải nghiệm MediWise!
+            Cảm ơn bạn đã trải nghiệm Aellergis!
           </h1>
           <p className="text-gray-400 font-medium text-xs mt-0.5">
             Vui lòng dành ít phút để chia sẻ trải nghiệm của bạn
@@ -157,16 +157,16 @@ export default function FeedbackPage() {
         {/* MENU THẢ XUỐNG KHI BẤM NÚT 3 GẠCH TRÊN MOBILE */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
-            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
                Về lại trang chủ
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
-            <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
                Xem danh sách đánh giá
             </button>
-            <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
                Hồ sơ cá nhân
             </button>
           </div>
@@ -178,7 +178,7 @@ export default function FeedbackPage() {
             {/* Card Chọn sao */}
             <div className="bg-white rounded-[2rem] md:rounded-[32px] p-6 md:p-8 shadow-sm border border-gray-100 space-y-4 md:space-y-6">
               <h2 className="text-lg md:text-xl font-bold text-gray-900">
-                Bạn hài lòng với MediWise ở mức nào?
+                Bạn hài lòng với Aellergis ở mức nào?
               </h2>
 
               <div className="flex items-center space-x-2 md:space-x-4">
@@ -195,8 +195,8 @@ export default function FeedbackPage() {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       className="w-10 h-10 md:w-12 md:h-12 transition-colors duration-200"
-                      fill={(hoverRating || rating) >= star ? "#144064" : "none"}
-                      stroke="#144064"
+                      fill={(hoverRating || rating) >= star ? "#326871" : "none"}
+                      stroke="#326871"
                       strokeWidth="1.5"
                     >
                       <path
@@ -213,7 +213,7 @@ export default function FeedbackPage() {
             {/* Card Nhập ý kiến */}
             <div className="bg-white rounded-[2rem] md:rounded-[32px] p-6 md:p-8 shadow-sm border border-gray-100 space-y-4">
               <h2 className="text-lg md:text-xl font-bold text-gray-900">
-                Bạn có góp ý hoặc mong muốn MediWise thay đổi điều gì không?
+                Bạn có góp ý hoặc mong muốn Aellergis thay đổi điều gì không?
               </h2>
 
               <textarea
@@ -221,7 +221,7 @@ export default function FeedbackPage() {
                 onChange={(e) => setFeedbackText(e.target.value)}
                 placeholder="Nhập góp ý của bạn tại đây..."
                 rows={4}
-                className="w-full rounded-2xl border border-gray-200 p-4 text-gray-700 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#144064] transition-all resize-none"
+                className="w-full rounded-2xl border border-gray-200 p-4 text-gray-700 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#326871] transition-all resize-none"
               ></textarea>
             </div>
           </div>
@@ -230,7 +230,7 @@ export default function FeedbackPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full md:w-auto flex items-center justify-center space-x-2 bg-[#144064] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md transition-all cursor-pointer text-base disabled:opacity-50"
+              className="w-full md:w-auto flex items-center justify-center space-x-2 bg-[#326871] hover:bg-[#0f324f] text-white font-bold py-3.5 px-8 rounded-full shadow-md transition-all cursor-pointer text-base disabled:opacity-50"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />

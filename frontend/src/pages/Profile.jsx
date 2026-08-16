@@ -111,21 +111,21 @@ export default function Profile() {
           <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/dashboard')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Về lại trang chủ</span>
             </button>
 
             <button 
               onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Xem lại kết quả gần nhất</span>
             </button>
 
             <button 
               onClick={() => navigate('/Feedback')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-center transition-all text-sm flex items-center justify-center cursor-pointer shadow-xs"
             >
               <span>Đánh giá của người dùng</span>
             </button>
@@ -143,7 +143,7 @@ export default function Profile() {
           <div className="flex items-center space-x-2 overflow-hidden">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#144064] shrink-0 cursor-pointer"
+              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#326871] shrink-0 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -166,7 +166,7 @@ export default function Profile() {
               localStorage.removeItem('user');
               navigate('/login');
             }}
-            className="flex items-center space-x-1.5 bg-[#144064] hover:bg-[#0f324f] text-white px-4 py-2 md:px-6 md:py-3.5 rounded-full font-bold text-xs md:text-sm shadow-md transition-all cursor-pointer"
+            className="flex items-center space-x-1.5 bg-[#326871] hover:bg-[#0f324f] text-white px-4 py-2 md:px-6 md:py-3.5 rounded-full font-bold text-xs md:text-sm shadow-md transition-all cursor-pointer"
           >
             <span>Đăng xuất</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
@@ -183,13 +183,13 @@ export default function Profile() {
         {/* MENU THẢ XUỐNG KHI BẤM NÚT 3 GẠCH TRÊN MOBILE */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
-            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
                Về lại trang chủ
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
-            <button onClick={() => { navigate('/Feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/Feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
                Đánh giá của người dùng
             </button>
           </div>
@@ -198,7 +198,7 @@ export default function Profile() {
         <section className="px-4 md:px-10 py-6 max-w-4xl space-y-6 md:space-y-8">
           {/* Card Avatar & Header Info */}
           <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
-            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#e3effd] flex items-center justify-center text-[#144064] shrink-0">
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#e3effd] flex items-center justify-center text-[#326871] shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 md:w-14 md:h-14">
                 <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
               </svg>
@@ -221,7 +221,7 @@ export default function Profile() {
                 <button
                   type="button"
                   onClick={() => setIsEditing(true)}
-                  className="bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer w-full sm:w-auto"
+                  className="bg-[#e3effd] hover:bg-[#d0e5fb] text-[#326871] font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer w-full sm:w-auto"
                 >
                   Chỉnh sửa
                 </button>
@@ -236,7 +236,7 @@ export default function Profile() {
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 sm:flex-none bg-[#144064] hover:bg-[#0f324f] text-white font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer shadow-md"
+                    className="flex-1 sm:flex-none bg-[#326871] hover:bg-[#0f324f] text-white font-bold px-6 py-2 rounded-full text-sm transition-all cursor-pointer shadow-md"
                   >
                     Lưu
                   </button>
@@ -265,7 +265,7 @@ export default function Profile() {
                   value={userInfo.email || ''}
                   onChange={handleChange}
                   placeholder="Thêm email..."
-                  className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:border-[#144064] disabled:text-gray-500 font-medium text-sm"
+                  className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:border-[#326871] disabled:text-gray-500 font-medium text-sm"
                 />
               </div>
 
@@ -278,7 +278,7 @@ export default function Profile() {
                   value={userInfo.fullName || ''}
                   onChange={handleChange}
                   placeholder="Nhập họ và tên..."
-                  className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:border-[#144064] disabled:text-gray-500 font-medium text-sm"
+                  className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:border-[#326871] disabled:text-gray-500 font-medium text-sm"
                 />
               </div>
 
@@ -291,7 +291,7 @@ export default function Profile() {
                   value={userInfo.phone || ''}
                   onChange={handleChange}
                   placeholder="Chưa cập nhật"
-                  className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:border-[#144064] disabled:text-gray-500 font-medium text-sm"
+                  className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:border-[#326871] disabled:text-gray-500 font-medium text-sm"
                 />
               </div>
 
@@ -303,7 +303,7 @@ export default function Profile() {
                   disabled={!isEditing}
                   value={userInfo.dob || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:border-[#144064] disabled:text-gray-500 font-medium text-sm"
+                  className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:border-[#326871] disabled:text-gray-500 font-medium text-sm"
                 />
               </div>
 
@@ -316,7 +316,7 @@ export default function Profile() {
                   value={userInfo.allergyHistory || ''}
                   onChange={handleChange}
                   placeholder="Ghi chú dị ứng thuốc nếu có..."
-                  className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:border-[#144064] disabled:text-gray-500 font-medium text-sm leading-relaxed"
+                  className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:border-[#326871] disabled:text-gray-500 font-medium text-sm leading-relaxed"
                 />
               </div>
             </div>

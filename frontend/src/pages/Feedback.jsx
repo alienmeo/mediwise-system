@@ -122,7 +122,7 @@ export default function Feedback() {
           <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/dashboard')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 shrink-0">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -132,7 +132,7 @@ export default function Feedback() {
 
             <button 
               onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 opacity-80">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -142,7 +142,7 @@ export default function Feedback() {
 
             <button 
               onClick={() => navigate('/FeedbackPage')} 
-              className="w-full py-4 px-6 rounded-full bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-left transition-all text-sm flex items-center space-x-3 shadow-md cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#326871] hover:bg-[#0f324f] text-white font-bold text-left transition-all text-sm flex items-center space-x-3 shadow-md cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0 opacity-80">
                 <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.107a.75.75 0 01-.725.64h-12.8a.75.75 0 01-.725-.64l-.001-.107v-.003zM16.5 18.375a6.375 6.375 0 0111.419-3.922.75.75 0 01-.118.995l-3.375 2.625a.75.75 0 01-.932 0l-1.688-1.313a.75.75 0 01.932-1.17l1.096.853 2.64-2.052a4.875 4.875 0 00-7.854 2.977.75.75 0 01-.75.75h-.375z" />
@@ -152,7 +152,7 @@ export default function Feedback() {
 
             <button 
               onClick={() => navigate('/profile')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#144064] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#e3effd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0 opacity-80">
                 <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
@@ -166,7 +166,7 @@ export default function Feedback() {
         <div className="px-3">
           <button 
             onClick={() => navigate(-1)}
-            className="w-12 h-12 rounded-2xl bg-[#144064] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
+            className="w-12 h-12 rounded-2xl bg-[#326871] hover:bg-[#0f324f] text-white flex items-center justify-center shadow-md transition-all cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -185,7 +185,7 @@ export default function Feedback() {
           <div className="flex items-center space-x-2 overflow-hidden">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#144064] shrink-0 cursor-pointer"
+              className="md:hidden p-2 rounded-lg bg-[#e3effd] text-[#326871] shrink-0 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -198,7 +198,7 @@ export default function Feedback() {
             </div>
           </div>
 
-          <h1 className="text-xl md:text-2xl font-extrabold text-[#144064] tracking-tight hidden md:block">
+          <h1 className="text-xl md:text-2xl font-extrabold text-[#326871] tracking-tight hidden md:block">
             Tổng Hợp Đánh Giá Của Người Dùng
           </h1>
           
@@ -217,7 +217,7 @@ export default function Feedback() {
 
         {/* Tiêu đề riêng cho Mobile hiển thị ngay dưới header */}
         <div className="px-4 pt-4 md:hidden">
-          <h1 className="text-xl font-extrabold text-[#144064] tracking-tight">
+          <h1 className="text-xl font-extrabold text-[#326871] tracking-tight">
             Tổng Hợp Đánh Giá Của Người Dùng
           </h1>
         </div>
@@ -225,16 +225,16 @@ export default function Feedback() {
         {/* MENU THẢ XUỐNG KHI BẤM NÚT 3 GẠCH TRÊN MOBILE */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 p-4 space-y-3 shadow-md">
-            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
                Về lại trang chủ
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
-            <button onClick={() => { navigate('/FeedbackPage'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#144064] text-white font-bold text-sm text-left">
+            <button onClick={() => { navigate('/FeedbackPage'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#326871] text-white font-bold text-sm text-left">
                Tự gửi đánh giá
             </button>
-            <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#144064] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3effd] text-[#326871] font-bold text-sm text-left">
                Hồ sơ cá nhân
             </button>
           </div>
@@ -244,7 +244,7 @@ export default function Feedback() {
           {/* CARD THỐNG KÊ SAO */}
           <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="text-center md:border-r border-gray-100">
-              <span className="text-4xl md:text-5xl font-black text-[#144064]">{avgRating}</span>
+              <span className="text-4xl md:text-5xl font-black text-[#326871]">{avgRating}</span>
               <div className="flex justify-center text-amber-400 my-2">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className={`w-5 h-5 md:w-6 md:h-6 ${i < Math.round(avgRating) ? 'fill-current' : 'text-gray-200'}`} viewBox="0 0 20 20">
@@ -260,7 +260,7 @@ export default function Feedback() {
               <button
                 onClick={() => setFilterRating(0)}
                 className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all cursor-pointer ${
-                  filterRating === 0 ? 'bg-[#144064] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  filterRating === 0 ? 'bg-[#326871] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
                 Tất cả ({feedbacks.length})
@@ -270,7 +270,7 @@ export default function Feedback() {
                   key={star}
                   onClick={() => setFilterRating(star)}
                   className={`px-3 md:px-4 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all cursor-pointer flex items-center space-x-1 ${
-                    filterRating === star ? 'bg-[#144064] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    filterRating === star ? 'bg-[#326871] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
                   <span>{star} sao</span>
@@ -282,7 +282,7 @@ export default function Feedback() {
 
           {/* DANH SÁCH BÌNH LUẬN CỘNG ĐỒNG */}
           <div className="space-y-4">
-            <h3 className="text-lg md:text-xl font-bold text-[#144064]">Tất cả nhận xét từ người dùng</h3>
+            <h3 className="text-lg md:text-xl font-bold text-[#326871]">Tất cả nhận xét từ người dùng</h3>
 
             {loading ? (
               <div className="text-center py-10 text-gray-400 font-medium">Đang tải dữ liệu...</div>
@@ -299,7 +299,7 @@ export default function Feedback() {
                   <div key={item.id} className="bg-white rounded-[2rem] p-5 md:p-6 shadow-xs border border-gray-100 space-y-3">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 rounded-full bg-[#e3effd] text-[#144064] font-bold flex items-center justify-center text-sm shadow-inner shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-[#e3effd] text-[#326871] font-bold flex items-center justify-center text-sm shadow-inner shrink-0">
                           {item.username?.charAt(0).toUpperCase()}
                         </div>
                         <div>
@@ -321,7 +321,7 @@ export default function Feedback() {
                           <div className="flex space-x-2 text-xs font-bold">
                             <button 
                               onClick={() => handleOpenEdit(item)}
-                              className="px-3 py-1 bg-sky-50 text-[#144064] rounded-lg hover:bg-sky-100 transition-all cursor-pointer"
+                              className="px-3 py-1 bg-sky-50 text-[#326871] rounded-lg hover:bg-sky-100 transition-all cursor-pointer"
                             >
                               Sửa
                             </button>
@@ -349,14 +349,14 @@ export default function Feedback() {
       {editingFeedback && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-3xl p-6 w-full max-w-md space-y-4 shadow-2xl">
-            <h3 className="text-xl font-bold text-[#144064]">Chỉnh Sửa Đánh Giá</h3>
+            <h3 className="text-xl font-bold text-[#326871]">Chỉnh Sửa Đánh Giá</h3>
 
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">Số sao:</label>
               <select 
                 value={editRating} 
                 onChange={(e) => setEditRating(Number(e.target.value))}
-                className="w-full p-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#144064] text-sm"
+                className="w-full p-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#326871] text-sm"
               >
                 {[5, 4, 3, 2, 1].map(num => (
                   <option key={num} value={num}>{num} sao</option>
@@ -370,7 +370,7 @@ export default function Feedback() {
                 rows={4}
                 value={editComment} 
                 onChange={(e) => setEditComment(e.target.value)}
-                className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#144064] text-sm"
+                className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#326871] text-sm"
               />
             </div>
 
@@ -383,7 +383,7 @@ export default function Feedback() {
               </button>
               <button 
                 onClick={handleSaveEdit}
-                className="px-4 py-2 rounded-xl bg-[#144064] hover:bg-[#0f324f] text-white text-sm font-bold cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-[#326871] hover:bg-[#0f324f] text-white text-sm font-bold cursor-pointer"
               >
                 Cập nhật
               </button>

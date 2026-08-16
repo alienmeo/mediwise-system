@@ -102,7 +102,7 @@ const CheckPage = () => {
               <select
                 value={selectedFood}
                 onChange={(e) => setSelectedFood(e.target.value)}
-                className="w-full p-4 rounded-2xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#144064] cursor-pointer"
+                className="w-full p-4 rounded-2xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#326871] cursor-pointer"
               >
                 <option value="">-- Chọn thực phẩm --</option>
                 {allergens.map((item) => (
@@ -121,7 +121,7 @@ const CheckPage = () => {
               <select
                 value={selectedDrug}
                 onChange={(e) => setSelectedDrug(e.target.value)}
-                className="w-full p-4 rounded-2xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#144064] cursor-pointer"
+                className="w-full p-4 rounded-2xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#326871] cursor-pointer"
               >
                 <option value="">-- Chọn thuốc --</option>
                 {drugs.map((item) => (
@@ -136,7 +136,7 @@ const CheckPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 mt-4 bg-[#144064] hover:bg-[#0f324f] text-white rounded-full font-bold text-base shadow-md transition-all cursor-pointer disabled:opacity-50"
+              className="w-full py-4 mt-4 bg-[#326871] hover:bg-[#0f324f] text-white rounded-full font-bold text-base shadow-md transition-all cursor-pointer disabled:opacity-50"
             >
               {loading ? 'Đang phân tích...' : 'Phân Tích Nguy Cơ'}
             </button>

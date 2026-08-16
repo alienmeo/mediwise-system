@@ -17,7 +17,7 @@ export default function Result() {
         <Card className="text-center p-8 max-w-md bg-white rounded-3xl shadow-sm border border-gray-100">
           <p className="text-gray-600 mb-6 font-medium">Không tìm thấy dữ liệu kết quả kiểm tra gần nhất.</p>
           <Button 
-            className="w-full bg-[#144064] hover:bg-[#0f324f] text-white rounded-full py-3 font-semibold shadow-none border-none cursor-pointer"
+            className="w-full bg-[#326871] hover:bg-[#0f324f] text-white rounded-full py-3 font-semibold shadow-none border-none cursor-pointer"
             onClick={() => navigate('/dashboard')}
           >
             Quay lại trang chính
@@ -111,7 +111,7 @@ export default function Result() {
         {/* Card Mức độ dị ứng */}
         <div className="flex justify-center mb-6">
           <div className="bg-white rounded-[24px] shadow-sm overflow-hidden text-center w-80 border border-gray-100">
-            <div className="py-2.5 px-4 text-[#144064] text-base font-bold">
+            <div className="py-2.5 px-4 text-[#326871] text-base font-bold">
               Mức độ dị ứng
             </div>
             <div className="bg-[#e3effd]/50 py-3 px-4 border-t border-gray-100 flex items-center justify-center gap-2.5">
@@ -174,7 +174,7 @@ export default function Result() {
               {explanationsList.length > 0 ? (
                 explanationsList.map((exp, idx) => (
                   <p key={idx} className="flex items-start gap-2">
-                    <span className="text-[#144064] font-bold">•</span>
+                    <span className="text-[#326871] font-bold">•</span>
                     <span>{exp}</span>
                   </p>
                 ))
@@ -191,10 +191,10 @@ export default function Result() {
           
           <Link to="/assessment" className="w-full">
             <div className="flex items-center bg-[#d6e4fd] hover:bg-[#c5daf9] rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100 transition-colors">
-              <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white shrink-0 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-[#326871] flex items-center justify-center text-white shrink-0 shadow-sm">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
               </div>
-              <span className="flex-1 text-center text-[#144064] font-bold text-sm sm:text-base pr-4">
+              <span className="flex-1 text-center text-[#326871] font-bold text-sm sm:text-base pr-4">
                 Kiểm tra loại thuốc khác
               </span>
             </div>
@@ -202,10 +202,10 @@ export default function Result() {
 
           <Link to="/dashboard" className="w-full">
             <div className="flex items-center bg-[#d6e4fd] hover:bg-[#c5daf9] rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100 transition-colors">
-              <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white shrink-0 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-[#326871] flex items-center justify-center text-white shrink-0 shadow-sm">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
               </div>
-              <span className="flex-1 text-center text-[#144064] font-bold text-sm sm:text-base pr-4">
+              <span className="flex-1 text-center text-[#326871] font-bold text-sm sm:text-base pr-4">
                 Quay lại trang chính
               </span>
             </div>
@@ -213,10 +213,10 @@ export default function Result() {
 
           <Link to="/feedback" className="w-full">
             <div className="flex items-center bg-[#d6e4fd] hover:bg-[#c5daf9] rounded-full p-1.5 shadow-sm cursor-pointer border border-blue-100 transition-colors">
-              <div className="w-10 h-10 rounded-full bg-[#144064] flex items-center justify-center text-white shrink-0 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-[#326871] flex items-center justify-center text-white shrink-0 shadow-sm">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
               </div>
-              <span className="flex-1 text-center text-[#144064] font-bold text-sm sm:text-base pr-4">
+              <span className="flex-1 text-center text-[#326871] font-bold text-sm sm:text-base pr-4">
                 Đánh giá hệ thống
               </span>
             </div>

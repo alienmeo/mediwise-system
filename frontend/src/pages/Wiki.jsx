@@ -29,7 +29,7 @@ export default function Wiki() {
 
         {/* Lý do hình thành */}
         <section className="space-y-3">
-          <div className="flex items-center space-x-3 text-[#144064]">
+          <div className="flex items-center space-x-3 text-[#326871]">
             <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" />
@@ -44,7 +44,7 @@ export default function Wiki() {
 
         {/* Giá trị cốt lõi */}
         <section className="space-y-4">
-          <div className="flex items-center space-x-3 text-[#144064]">
+          <div className="flex items-center space-x-3 text-[#326871]">
             <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM6.262 6.07a8.25 8.25 0 1010.512-.765.75.75 0 01.818-.213 9.75 9.75 0 11-12.87 1.455.75.75 0 01.76-.793z" clipRule="evenodd" />
@@ -59,7 +59,7 @@ export default function Wiki() {
               <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon Tin cậy" className="w-full h-full object-contain" />
               </div>
-              <span className="font-bold text-[#144064] text-sm">Tin cậy</span>
+              <span className="font-bold text-[#326871] text-sm">Tin cậy</span>
             </div>
 
             {/* Badge 2 */}
@@ -67,7 +67,7 @@ export default function Wiki() {
               <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon Thuận tiện" className="w-full h-full object-contain" />
               </div>
-              <span className="font-bold text-[#144064] text-sm">Thuận tiện</span>
+              <span className="font-bold text-[#326871] text-sm">Thuận tiện</span>
             </div>
 
             {/* Badge 3 */}
@@ -75,14 +75,14 @@ export default function Wiki() {
               <div className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0 overflow-hidden p-0">
                 <img src={image1} alt="Icon An toàn" className="w-full h-full object-contain" />
               </div>
-              <span className="font-bold text-[#144064] text-sm">An toàn</span>
+              <span className="font-bold text-[#326871] text-sm">An toàn</span>
             </div>
           </div>
         </section>
 
         {/* Khái niệm mở rộng (Dị ứng chéo) */}
         <section className="space-y-3">
-          <div className="flex items-center space-x-3 text-[#144064]">
+          <div className="flex items-center space-x-3 text-[#326871]">
             <div className="w-8 h-8 rounded-full bg-[#e3effd] flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" />
@@ -115,7 +115,7 @@ export default function Wiki() {
             <p className="text-xs font-bold text-gray-400 tracking-wider uppercase">
               Người phát triển :
             </p>
-            <div className="text-[#144064] font-bold text-sm tracking-wide space-y-1">
+            <div className="text-[#326871] font-bold text-sm tracking-wide space-y-1">
               <div>LƯƠNG HOÀNG THIÊN THANH</div>
               <div>NGÔ LỮ VÂN ANH</div>
             </div>
@@ -126,7 +126,7 @@ export default function Wiki() {
         <div className="w-full pt-10">
           <button 
             onClick={() => navigate('/dashboard')}
-            className="w-full py-4 px-6 rounded-full bg-[#144064] hover:bg-[#0f324f] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer"
+            className="w-full py-4 px-6 rounded-full bg-[#326871] hover:bg-[#0f324f] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
