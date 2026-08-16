@@ -39,7 +39,7 @@ export default function Dashboard() {
 
             <button 
               onClick={() => navigate('/feedback')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3fbfd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0 opacity-80">
                 <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.107a.75.75 0 01-.725.64h-12.8a.75.75 0 01-.725-.64l-.001-.107v-.003zM16.5 18.375a6.375 6.375 0 0111.419-3.922.75.75 0 01-.118.995l-3.375 2.625a.75.75 0 01-.932 0l-1.688-1.313a.75.75 0 01.932-1.17l1.096.853 2.64-2.052a4.875 4.875 0 00-7.854 2.977.75.75 0 01-.75.75h-.375z" />
@@ -49,7 +49,7 @@ export default function Dashboard() {
 
             <button 
               onClick={() => navigate('/history')} 
-              className="w-full py-4 px-6 rounded-full bg-[#e3fbfd] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
+              className="w-full py-4 px-6 rounded-full bg-[#eaf8fb] hover:bg-[#d0e5fb] text-[#326871] font-bold text-left transition-all text-sm flex items-center space-x-3 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0 opacity-80">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -82,7 +82,7 @@ export default function Dashboard() {
           <div className="flex items-center space-x-3">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2.5 rounded-xl bg-[#e3fbfd] text-[#326871] cursor-pointer"
+              className="md:hidden p-2.5 rounded-xl bg-[#eaf8fb] text-[#326871] cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -110,7 +110,7 @@ export default function Dashboard() {
             {/* Profile Badge */}
             <div 
               onClick={() => navigate('/profile')}
-              className="flex items-center bg-[#e3fbfd] rounded-full p-2 md:px-5 md:py-2.5 md:space-x-3 cursor-pointer hover:bg-[#d0e5fb] transition-all shadow-sm"
+              className="flex items-center bg-[#eaf8fb] rounded-full p-2 md:px-5 md:py-2.5 md:space-x-3 cursor-pointer hover:bg-[#d0e5fb] transition-all shadow-sm"
             >
               <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#326871] flex items-center justify-center text-white shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -142,10 +142,10 @@ export default function Dashboard() {
             <button onClick={() => { navigate('/Assessment'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#326871] text-white font-bold text-sm text-left">
                Bắt đầu khảo sát mới
             </button>
-            <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3fbfd] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/feedback'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Đánh giá của người dùng
             </button>
-            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#e3fbfd] text-[#326871] font-bold text-sm text-left">
+            <button onClick={() => { navigate('/history'); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 rounded-xl bg-[#eaf8fb] text-[#326871] font-bold text-sm text-left">
                Xem lại kết quả gần nhất
             </button>
           </div>
@@ -167,7 +167,7 @@ export default function Dashboard() {
           {/* Card 1: Kiểm tra nguy cơ */}
           <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3fbfd] flex items-center justify-center text-[#326871] shrink-0 overflow-hidden p-3">
+              <div className="w-16 h-16 rounded-2xl bg-[#eaf8fb] flex items-center justify-center text-[#326871] shrink-0 overflow-hidden p-3">
                 <img src={image1} alt="Icon 1" className="w-full h-full object-contain" />
               </div>
               <div className="space-y-1">
@@ -191,7 +191,7 @@ export default function Dashboard() {
           {/* Card 2: Lịch sử kiểm tra */}
           <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#e3fbfd] flex items-center justify-center text-[#326871] shrink-0 overflow-hidden p-3">
+              <div className="w-16 h-16 rounded-2xl bg-[#eaf8fb] flex items-center justify-center text-[#326871] shrink-0 overflow-hidden p-3">
                 <img src={image2} alt="Icon 2" className="w-full h-full object-contain" />
               </div>
               <div className="space-y-1">
