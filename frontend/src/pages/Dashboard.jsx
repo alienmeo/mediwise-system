@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Import các file logo và ảnh icon ở đầu file (chuẩn ES Modules)
+// Import các file logo, ảnh icon và banner ở đầu file (chuẩn ES Modules)
 import logoImg from './logo.png'; 
 import brandTextImg from './title.png'; 
 import image1 from './image1.png';
 import image2 from './image2.png';
+import bannerImg from './banner.png'; // <--- Đã thêm import banner
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -167,6 +168,11 @@ export default function Dashboard() {
             <p className="text-gray-500 font-medium mt-1 text-xs md:text-sm">
               Aellergis mong rằng mỗi ngày trôi qua bạn sẽ trở nên khoẻ mạnh hơn.
             </p>
+          </div>
+
+          {/* Banner hiển thị ngay dưới phần lời chào */}
+          <div className="w-full overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white">
+            <img src={bannerImg} alt="Aellergis Banner" className="w-full h-auto object-cover" />
           </div>
 
           {/* Card 1: Kiểm tra nguy cơ */}
