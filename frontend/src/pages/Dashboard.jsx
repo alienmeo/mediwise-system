@@ -6,14 +6,12 @@ import logoImg from './logo.png';
 import brandTextImg from './title.png'; 
 import image1 from './image1.png';
 import image2 from './image2.png';
-import bannerImg from './banner.png'; // <--- Đã thêm import banner
+import bannerImg from './banner.png';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  // State để điều khiển việc đóng/mở Sidebar trên điện thoại
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Hàm xử lý thông báo khi click vào tính năng lịch sử/kết quả gần nhất
   const handleHistoryClick = () => {
     alert("Tính năng sẽ sớm được cập nhật. Cảm ơn bạn đã tin dùng Aellergis");
   };
@@ -21,17 +19,14 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-[#f4f7fc]">
       
-      {/* 1. SIDEBAR BÊN TRÁI (Ẩn trên mobile, hiện từ màn hình md trở lên) */}
+      {/* 1. SIDEBAR BÊN TRÁI (Ẩn trên mobile) */}
       <aside className="hidden md:flex w-80 bg-white border-r border-gray-100 py-6 px-0 flex-col justify-between shrink-0 shadow-sm overflow-hidden">
         <div className="space-y-12">
-          
-          {/* Brand Logo Header */}
           <div className="flex items-center justify-start cursor-pointer w-full overflow-hidden -ml-4 pl-3" onClick={() => navigate('/dashboard')}>
             <img src={logoImg} alt="Aellergis Logo" className="h-16 w-auto object-contain shrink-0" />
             <img src={brandTextImg} alt="Aellergis" className="h-12 w-auto object-contain max-w-[210px] shrink-0 -ml-3.5" />
           </div>
 
-          {/* Navigation Buttons */}
           <nav className="space-y-4 px-3">
             <button 
               onClick={() => navigate('/Assessment')} 
@@ -65,7 +60,6 @@ export default function Dashboard() {
           </nav>
         </div>
 
-        {/* Nút Back ở góc dưới sidebar */}
         <div className="px-3">
           <button 
             onClick={() => navigate(-1)}
@@ -82,10 +76,10 @@ export default function Dashboard() {
       <main className="flex-1 flex flex-col w-full">
         
         {/* Top Navbar */}
-        <header className="h-20 px-4 md:px-10 flex items-center justify-between border-b md:border-none border-gray-100 bg-white md:bg-transparent">
+        <header className="h-20 px-3 md:px-10 flex items-center justify-between border-b md:border-none border-gray-100 bg-white md:bg-transparent">
           
-          {/* Cụm trái: Nút Menu 3 gạch & Logo thu gọn trên Mobile (Đã chỉnh kích thước nhỏ hơn) */}
-          <div className="flex items-center space-x-2.5">
+          {/* Cụm trái: Nút Menu 3 gạch & Logo thu gọn (đã tinh chỉnh lại kích thước và khoảng cách) */}
+          <div className="flex items-center space-x-1.5 shrink-0">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 rounded-xl bg-[#eaf8fb] text-[#326871] cursor-pointer"
@@ -96,18 +90,18 @@ export default function Dashboard() {
             </button>
 
             <div className="flex items-center md:hidden cursor-pointer" onClick={() => navigate('/dashboard')}>
-              <img src={logoImg} alt="Logo" className="h-7 w-auto object-contain" />
-              <img src={brandTextImg} alt="Aellergis" className="h-5 w-auto object-contain max-w-[90px] -ml-1.5" />
+              <img src={logoImg} alt="Logo" className="h-6 w-auto object-contain" />
+              <img src={brandTextImg} alt="Aellergis" className="h-4 w-auto object-contain max-w-[75px] -ml-1" />
             </div>
           </div>
 
-          {/* Cụm phải: Các nút chức năng */}
-          <div className="flex items-center space-x-2 md:space-x-4">
+          {/* Cụm phải: Các nút chức năng (thu nhỏ padding trên mobile để không bị tràn) */}
+          <div className="flex items-center space-x-1.5 md:space-x-4 shrink-0">
             
             {/* ALG Wiki Button */}
             <button 
               onClick={() => navigate('/wiki')}
-              className="bg-[#326871] hover:bg-[#1f3f45] text-white px-3.5 py-2 md:px-6 md:py-3 rounded-xl font-bold text-xs md:text-sm shadow-md transition-all flex flex-col items-center justify-center cursor-pointer leading-tight"
+              className="bg-[#326871] hover:bg-[#1f3f45] text-white px-2.5 py-1.5 md:px-6 md:py-3 rounded-xl font-bold text-[10px] md:text-sm shadow-md transition-all flex flex-col items-center justify-center cursor-pointer leading-tight"
             >
               <span>ALG</span>
               <span>Wiki</span>
@@ -118,8 +112,8 @@ export default function Dashboard() {
               onClick={() => navigate('/profile')}
               className="flex items-center bg-[#eaf8fb] rounded-full p-2 md:px-5 md:py-2.5 md:space-x-3 cursor-pointer hover:bg-[#c7f2f6] transition-all shadow-sm"
             >
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#326871] flex items-center justify-center text-white shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+              <div className="w-7 h-7 md:w-10 md:h-10 rounded-full bg-[#326871] flex items-center justify-center text-white shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 md:w-5 md:h-5">
                   <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
                 </svg>
               </div>
@@ -160,7 +154,6 @@ export default function Dashboard() {
         {/* Content Body */}
         <section className="px-4 md:px-10 py-6 max-w-5xl space-y-8">
           
-          {/* Welcome Text */}
           <div className="text-center md:text-left">
             <h1 className="text-2xl md:text-4xl font-black text-gray-900 tracking-tight">
               Chào mừng bạn đã quay lại!
@@ -170,12 +163,10 @@ export default function Dashboard() {
             </p>
           </div>
 
-          {/* Banner hiển thị ngay dưới phần lời chào */}
           <div className="w-full overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white">
             <img src={bannerImg} alt="Aellergis Banner" className="w-full h-auto object-cover" />
           </div>
 
-          {/* Card 1: Kiểm tra nguy cơ */}
           <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
               <div className="w-16 h-16 rounded-2xl bg-[#eaf8fb] flex items-center justify-center text-[#326871] shrink-0 overflow-hidden p-3">
@@ -199,7 +190,6 @@ export default function Dashboard() {
             </button>
           </div>
 
-          {/* Card 2: Lịch sử kiểm tra */}
           <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
               <div className="w-16 h-16 rounded-2xl bg-[#eaf8fb] flex items-center justify-center text-[#326871] shrink-0 overflow-hidden p-3">
