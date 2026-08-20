@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import brandTextImg from './title.png'; 
 import wikiLogoImg from './wiki-logo.png'; 
 import image1 from './image1.png'; 
-import nguonImg from './nguon.png'; // Đã thêm import hình nguồn
+import nguonImg from './nguon.png'; 
 
 export default function Wiki() {
   const navigate = useNavigate();
@@ -112,7 +112,7 @@ export default function Wiki() {
             <img src={wikiLogoImg} alt="Aellergis Wiki Logo" className="w-full h-auto object-contain" />
           </div>
 
-          <div className="w-full border-t border-gray-100 pt-6 space-y-4">
+          <div className="w-full border-t border-gray-100 pt-6 space-y-6">
             <div className="space-y-2">
               <p className="text-xs font-bold text-gray-400 tracking-wider uppercase">
                 Người phát triển :
@@ -123,8 +123,8 @@ export default function Wiki() {
               </div>
             </div>
 
-            {/* Hình ảnh nguon.png được thêm vào khoảng trống dưới tên người phát triển */}
-            <div className="w-full max-w-[200px] mx-auto pt-2">
+            {/* Đã tăng kích thước max-w từ [200px] lên [280px] cho fit với khung bên phải */}
+            <div className="w-full max-w-[280px] mx-auto pt-2">
               <img src={nguonImg} alt="Nguồn thông tin" className="w-full h-auto object-contain" />
             </div>
           </div>
