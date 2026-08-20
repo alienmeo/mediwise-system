@@ -123,8 +123,8 @@ export default function Wiki() {
               </div>
             </div>
 
-            {/* Tăng max-w lên [380px] để hình to tràn gần như tối đa chiều ngang cột phải */}
-            <div className="w-full max-w-[380px] mx-auto pt-2">
+            {/* Dùng w-full để ảnh chiếm trọn chiều ngang khung */}
+            <div className="w-full px-2 pt-2">
               <img src={nguonImg} alt="Nguồn thông tin" className="w-full h-auto object-contain" />
             </div>
           </div>
