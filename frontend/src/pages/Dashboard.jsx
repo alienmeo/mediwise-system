@@ -84,20 +84,20 @@ export default function Dashboard() {
         {/* Top Navbar */}
         <header className="h-20 px-4 md:px-10 flex items-center justify-between border-b md:border-none border-gray-100 bg-white md:bg-transparent">
           
-          {/* Cụm trái: Nút Menu 3 gạch & Logo thu gọn trên Mobile */}
-          <div className="flex items-center space-x-3">
+          {/* Cụm trái: Nút Menu 3 gạch & Logo thu gọn trên Mobile (Đã chỉnh kích thước nhỏ hơn) */}
+          <div className="flex items-center space-x-2.5">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2.5 rounded-xl bg-[#eaf8fb] text-[#326871] cursor-pointer"
+              className="md:hidden p-2 rounded-xl bg-[#eaf8fb] text-[#326871] cursor-pointer"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
             </button>
 
             <div className="flex items-center md:hidden cursor-pointer" onClick={() => navigate('/dashboard')}>
-              <img src={logoImg} alt="Logo" className="h-9 w-auto object-contain" />
-              <img src={brandTextImg} alt="Aellergis" className="h-7 w-auto object-contain max-w-[110px] -ml-2" />
+              <img src={logoImg} alt="Logo" className="h-7 w-auto object-contain" />
+              <img src={brandTextImg} alt="Aellergis" className="h-5 w-auto object-contain max-w-[90px] -ml-1.5" />
             </div>
           </div>
 
